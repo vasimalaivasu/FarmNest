@@ -1,0 +1,111 @@
+/* ===================================================================
+   VERDANT HAVEN - RESPONSIVE STYLES
+   Breakpoints: 320px, 576px, 768px, 992px, 1200px, 1440px
+=================================================================== */
+
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background: #ffffff;
+    padding: 18px;
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-top: 14px;
+    border: 1px solid var(--border-color);
+  }
+
+  [data-bs-theme="dark"] .navbar-collapse,
+  body.dark-mode .navbar-collapse {
+    background: #14221b;
+    border-color: #273e31;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .navbar-nav .nav-link {
+    width: 100%;
+    padding: 10px 14px !important;
+  }
+
+  .hero-title {
+    font-size: 2.6rem;
+  }
+
+  .hero-countryside {
+    min-height: auto;
+    padding: 60px 0 80px 0;
+  }
+
+  .dashboard-sidebar {
+    position: fixed;
+    left: -280px;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .dashboard-sidebar.show {
+    left: 0;
+  }
+
+  .property-card.list-view {
+    flex-direction: column;
+  }
+
+  .property-card.list-view .property-thumb {
+    width: 100%;
+    height: 240px;
+  }
+
+  .pricing-card.featured-package {
+    transform: none;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .dashboard-content {
+    padding: 18px 14px;
+  }
+
+  .verdant-table-card {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .stat-card {
+    padding: 16px;
+  }
+
+  .search-widget-card {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.85rem;
+  }
+
+  .btn-verdant,
+  .btn-verdant-outline,
+  .btn-terracotta {
+    width: 100%;
+  }
+
+  .nav-actions .btn-verdant {
+    display: none;
+  }
+}

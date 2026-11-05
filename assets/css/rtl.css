@@ -1,0 +1,64 @@
+/* ===================================================================
+   VERDANT HAVEN - RTL SUPPORT (Right-to-Left)
+   For Arabic, Hebrew and RTL locales
+=================================================================== */
+
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] .sidebar-link i {
+  margin-left: 12px;
+  margin-right: 0;
+}
+
+[dir="rtl"] .sidebar-link .badge {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+[dir="rtl"] .property-badge-group {
+  left: auto;
+  right: 14px;
+}
+
+[dir="rtl"] .property-wishlist-btn {
+  right: auto;
+  left: 14px;
+}
+
+[dir="rtl"] .badge-counter {
+  right: auto;
+  left: -4px;
+}
+
+[dir="rtl"] .verdant-toast {
+  border-left: 1px solid var(--border-color);
+  border-right: 4px solid var(--primary-forest);
+}
+
+[dir="rtl"] #verdant-toast-container {
+  right: auto;
+  left: 24px;
+}
+
+[dir="rtl"] .dashboard-sidebar {
+  border-right: none;
+  border-left: 1px solid var(--border-color);
+}
+
+[dir="rtl"] .pricing-features-list li {
+  text-align: right;
+}
+
+[dir="rtl"] .auth-drawer.offcanvas-start {
+  border-right: none;
+  border-left: 1px solid var(--border-color);
+}
+
+[dir="rtl"] .wishlist-drawer.offcanvas-end {
+  border-left: none;
+  border-right: 1px solid var(--border-color);
+}
+

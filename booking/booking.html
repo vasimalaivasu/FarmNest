@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete Reservation - Verdant Haven</title>
+  <meta name="description" content="Secure reservation checkout for countryside homestays and farmstays.">
+
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/dark-mode.css">
+  <link rel="stylesheet" href="../assets/css/rtl.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body id="booking-checkout-page">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg verdant-navbar">
+    <div class="container-fluid px-xl-5 px-lg-4 px-3">
+      <a class="navbar-brand" href="../index.html">
+        <span class="brand-icon"><i class="bi bi-flower1"></i></span>
+        <span>Verdant Haven</span>
+      </a>
+
+      <div class="d-flex align-items-center order-lg-3 nav-actions">
+        <button class="rtl-toggle-btn" title="Toggle RTL Layout"><i class="bi bi-arrow-left-right"></i></button>
+        <button class="theme-toggle-btn" title="Toggle Dark/Light Mode"><i class="bi bi-moon-stars-fill"></i></button>
+
+        <!-- Auth Container: Initially shows Sign In button only, after login shows Customer Dashboard -->
+        <div id="nav-auth-container" class="nav-auth-area">
+          <button type="button"
+            class="btn btn-verdant btn-sm px-3 d-inline-flex align-items-center gap-1 nav-signin-btn"
+            id="nav-signin-trigger" data-bs-toggle="offcanvas" data-bs-target="#authDrawer" title="Sign In or Register">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Sign In</span>
+          </button>
+        </div>
+
+        <a href="../stays.html" class="btn btn-verdant-outline btn-sm d-none d-sm-inline-flex">
+          <i class="bi bi-arrow-left"></i> Back to Stays
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Checkout Section -->
+  <section class="py-5 bg-warm-cream">
+    <div class="container">
+
+      <div class="mb-4">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb small">
+            <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="../stays.html">Stays</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Reservation Checkout</li>
+          </ol>
+        </nav>
+        <h1 class="font-serif display-6 fw-bold mb-1">Confirm and Pay</h1>
+        <p class="text-muted">Review your dates, customize your countryside stay, and finalize your booking.</p>
+      </div>
+
+      <div class="row g-5">
+
+        <!-- Left: Booking Form -->
+        <div class="col-lg-7">
+
+          <!-- Auth Alert Banner (visible when not logged in) -->
+          <div id="booking-auth-banner" class="alert alert-warning border-warning-subtle d-none flex-wrap align-items-center justify-content-between p-3 rounded-4 mb-4 shadow-sm" style="display: none !important;">
+            <div class="d-flex align-items-center gap-3">
+              <div class="rounded-circle bg-warning text-dark d-flex align-items-center justify-content-center flex-shrink-0" style="width: 44px; height: 44px; font-size: 1.25rem;">
+                <i class="bi bi-person-lock"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-0 text-dark">Please sign in to complete your reservation</h6>
+                <small class="text-muted">You must be logged in to your account before placing your order.</small>
+              </div>
+            </div>
+            <button type="button" class="btn btn-verdant btn-sm px-3 mt-2 mt-sm-0" id="booking-banner-login-btn">
+              <i class="bi bi-box-arrow-in-right me-1"></i> Sign In to Account
+            </button>
+          </div>
+
+          <form id="booking-form">
+
+            <!-- Trip Dates & Guests -->
+            <div class="card border rounded-4 p-4 mb-4 bg-white shadow-sm">
+              <h5 class="font-serif mb-3"><i class="bi bi-calendar-range text-success me-2"></i>Your Stay Dates & Guests
+              </h5>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold">Check-in Date</label>
+                  <input type="date" id="book-checkin" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold">Check-out Date</label>
+                  <input type="date" id="book-checkout" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold">Adults</label>
+                  <select id="book-adults" class="form-select">
+                    <option value="1">1 Adult</option>
+                    <option value="2" selected>2 Adults</option>
+                    <option value="3">3 Adults</option>
+                    <option value="4">4 Adults</option>
+                    <option value="6">6 Adults (Group)</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold">Children</label>
+                  <select id="book-children" class="form-select">
+                    <option value="0" selected>0 Children</option>
+                    <option value="1">1 Child</option>
+                    <option value="2">2 Children</option>
+                    <option value="3">3 Children</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Optional Farm Addons -->
+            <div class="card border rounded-4 p-4 mb-4 bg-white shadow-sm">
+              <h5 class="font-serif mb-3"><i class="bi bi-basket text-success me-2"></i>Curated Farm Addons</h5>
+
+              <div
+                class="form-check p-3 border rounded-3 mb-2 bg-light d-flex align-items-center justify-content-between">
+                <div>
+                  <input class="form-check-input booking-addon-checkbox ms-0 me-2" type="checkbox" id="addon-breakfast"
+                    data-price="35">
+                  <label class="form-check-label fw-semibold" for="addon-breakfast">Farmhouse Breakfast Basket</label>
+                  <small class="text-muted d-block ps-4">Warm hearth sourdough, fresh butter, duck eggs & honey.</small>
+                </div>
+                <span class="fw-bold text-success">+$35</span>
+              </div>
+
+              <div
+                class="form-check p-3 border rounded-3 mb-2 bg-light d-flex align-items-center justify-content-between">
+                <div>
+                  <input class="form-check-input booking-addon-checkbox ms-0 me-2" type="checkbox" id="addon-firewood"
+                    data-price="20">
+                  <label class="form-check-label fw-semibold" for="addon-firewood">Firewood & Campfire S'mores
+                    Bundle</label>
+                  <small class="text-muted d-block ps-4">Hardwood oak bundle, roasting skewers, graham crackers &
+                    chocolates.</small>
+                </div>
+                <span class="fw-bold text-success">+$20</span>
+              </div>
+
+              <div class="form-check p-3 border rounded-3 bg-light d-flex align-items-center justify-content-between">
+                <div>
+                  <input class="form-check-input booking-addon-checkbox ms-0 me-2" type="checkbox" id="addon-animal"
+                    data-price="25">
+                  <label class="form-check-label fw-semibold" for="addon-animal">Morning Farm Animal Feeding
+                    Session</label>
+                  <small class="text-muted d-block ps-4">Private guided sheep & goat petting and egg collection
+                    tour.</small>
+                </div>
+                <span class="fw-bold text-success">+$25</span>
+              </div>
+            </div>
+
+            <!-- Guest Contact Details -->
+            <div class="card border rounded-4 p-4 mb-4 bg-white shadow-sm" id="booking-guest-card">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="font-serif mb-0"><i class="bi bi-person text-success me-2"></i>Lead Guest Information</h5>
+                <span id="guest-card-status-badge"></span>
+              </div>
+
+              <!-- Logged In User Verified Box -->
+              <div id="guest-auth-box" class="d-none align-items-center justify-content-between p-3 bg-success-subtle border border-success-subtle rounded-3 mb-3" style="display: none !important;">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-patch-check-fill text-success fs-4"></i>
+                  <div>
+                    <div class="fw-bold text-success-emphasis" id="auth-guest-name-display">Signed in as: Sarah Jenkins</div>
+                    <small class="text-muted" id="auth-guest-email-display">guest@homestay.com</small>
+                  </div>
+                </div>
+                <span class="badge bg-success">Verified Account</span>
+              </div>
+
+              <!-- Unauthenticated Prompt Box -->
+              <div id="guest-unauth-box" class="p-4 bg-light rounded-3 border text-center mb-3 d-none" style="display: none !important;">
+                <i class="bi bi-shield-lock text-warning fs-2 mb-2 d-block"></i>
+                <h6 class="fw-bold mb-1">Account Login Required</h6>
+                <p class="text-muted small mb-3">Please log in to your Verdant Haven account before placing your order so your stay is linked to your dashboard.</p>
+                <button type="button" class="btn btn-verdant btn-sm px-4 py-2 fw-semibold" id="guest-login-action-btn">
+                  <i class="bi bi-box-arrow-in-right me-1"></i> Sign In / Register to Continue
+                </button>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold">Full Name</label>
+                  <input type="text" id="guest-name" class="form-control" placeholder="Sign in to auto-fill" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold">Email Address (for booking voucher)</label>
+                  <input type="email" id="guest-email" class="form-control" placeholder="Sign in to auto-fill" required readonly>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold">Phone Number</label>
+                  <input type="tel" id="guest-phone" class="form-control" placeholder="+1 (555) 000-0000" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold">Estimated Arrival Time</label>
+                  <select class="form-select">
+                    <option>Standard (3:00 PM - 5:00 PM)</option>
+                    <option>Late Check-in (6:00 PM - 9:00 PM)</option>
+                    <option>Request Early Arrival</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label class="form-label small fw-bold">Special Requests or Dietary Notes (Optional)</label>
+                  <textarea id="special-requests" class="form-control" rows="2"
+                    placeholder="Let your host know about dietary preferences, baby cot needs, or celebrations..."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Payment Method -->
+            <div class="card border rounded-4 p-4 mb-4 bg-white shadow-sm">
+              <h5 class="font-serif mb-3"><i class="bi bi-wallet2 text-success me-2"></i>Select Payment Method</h5>
+
+              <div class="form-check mb-3 p-3 border rounded-3 bg-light">
+                <input class="form-check-input" type="radio" name="paymentMethod" id="pay-paypal" value="PayPal"
+                  checked>
+                <label class="form-check-label fw-bold d-flex align-items-center justify-content-between"
+                  for="pay-paypal">
+                  <span><i class="bi bi-paypal me-2 text-primary"></i> PayPal / Digital Wallet</span>
+                  <span class="badge bg-primary-subtle text-primary">Instant &amp; Secure</span>
+                </label>
+                <small class="text-muted d-block ps-4 mt-1">Complete your transaction quickly through your verified PayPal account or wallet balance.</small>
+              </div>
+
+              <div class="form-check mb-3 p-3 border rounded-3 bg-light">
+                <input class="form-check-input" type="radio" name="paymentMethod" id="pay-arrival"
+                  value="Cash on Arrival">
+                <label class="form-check-label fw-bold d-flex align-items-center justify-content-between"
+                  for="pay-arrival">
+                  <span><i class="bi bi-cash-stack me-2 text-success"></i> Pay Directly at Property on Arrival</span>
+                  <span class="badge bg-success-subtle text-success">Zero Advance Fee</span>
+                </label>
+                <small class="text-muted d-block ps-4 mt-1">Pay your host upon arrival at check-in via cash, contactless POS, or UPI.</small>
+              </div>
+
+              <div class="form-check p-3 border rounded-3 bg-light">
+                <input class="form-check-input" type="radio" name="paymentMethod" id="pay-bank"
+                  value="Bank Transfer">
+                <label class="form-check-label fw-bold d-flex align-items-center justify-content-between"
+                  for="pay-bank">
+                  <span><i class="bi bi-bank me-2 text-secondary"></i> Direct Bank Transfer</span>
+                  <span class="badge bg-secondary-subtle text-secondary">Invoice Billed</span>
+                </label>
+                <small class="text-muted d-block ps-4 mt-1">Receive official banking invoice details upon reservation confirmation.</small>
+              </div>
+
+            </div>
+
+            <button type="submit" id="btn-submit-booking" class="btn btn-verdant w-100 py-3 fs-5 fw-bold shadow-md">
+              <i class="bi bi-lock-fill me-1"></i> Confirm & Complete Reservation
+            </button>
+            <small class="text-muted text-center d-block mt-2">
+              By confirming, you agree to the Verdant Haven Terms of Service & Host Stay Policy.
+            </small>
+
+          </form>
+        </div>
+
+        <!-- Right: Summary Card -->
+        <div class="col-lg-5">
+          <div class="card border rounded-4 p-4 shadow-md bg-white position-sticky" style="top: 95px;">
+
+            <!-- Property Thumbnail & Info -->
+            <div class="d-flex gap-3 mb-4 pb-4 border-bottom">
+              <img id="summary-prop-img" src="" class="rounded-3" style="width: 100px; height: 85px; object-fit: cover;"
+                alt="Property">
+              <div>
+                <h5 id="summary-prop-title" class="font-serif mb-1 fw-bold">Whispering Pines</h5>
+                <p id="summary-prop-loc" class="text-muted small mb-1"></p>
+                <span id="summary-room-name" class="badge bg-light text-dark border">Master Suite</span>
+              </div>
+            </div>
+
+            <!-- Rate Display -->
+            <div class="d-flex justify-content-between mb-3 small">
+              <span class="text-muted">Rate</span>
+              <span id="summary-price-rate" class="fw-bold">$185 / night</span>
+            </div>
+
+            <!-- Coupon Code Form -->
+            <div class="mb-4">
+              <label class="small text-muted text-uppercase fw-bold mb-1">Have a Promotional Code?</label>
+              <div class="input-group">
+                <input type="text" id="coupon-input" class="form-control text-uppercase" placeholder="e.g. VERDANT20">
+                <button type="button" id="apply-coupon-btn" class="btn btn-outline-secondary">Apply</button>
+              </div>
+              <small class="text-muted">Try: <code class="text-success cursor-pointer"
+                  onclick="document.getElementById('coupon-input').value='VERDANT20'">VERDANT20</code> or <code
+                  class="text-success cursor-pointer"
+                  onclick="document.getElementById('coupon-input').value='HARVEST15'">HARVEST15</code></small>
+            </div>
+
+            <!-- Price Breakdown Calculation Table -->
+            <h6 class="font-serif fw-bold mb-3">Price Details</h6>
+            <div class="small">
+              <div class="d-flex justify-content-between mb-2">
+                <span id="summary-nights-label" class="text-muted">3 Nights</span>
+                <span id="summary-subtotal-val" class="fw-bold">$555</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Cleaning & Preparation</span>
+                <span id="summary-cleaning-val" class="fw-bold">$45</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Service & Support Fee</span>
+                <span id="summary-service-val" class="fw-bold">$55</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Local Hospitality Tax (8%)</span>
+                <span id="summary-tax-val" class="fw-bold">$44</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Selected Addons</span>
+                <span id="summary-addons-val" class="fw-bold">$0</span>
+              </div>
+              <div id="summary-discount-row" class="d-flex justify-content-between mb-2 text-danger"
+                style="display: none;">
+                <span>Promotional Discount</span>
+                <span id="summary-discount-val" class="fw-bold">-$0</span>
+              </div>
+
+              <hr class="my-3">
+              <div class="d-flex justify-content-between fs-5 fw-bold text-dark">
+                <span>Total (USD)</span>
+                <span id="summary-total-val" class="text-success">$699</span>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-top small text-muted">
+              <i class="bi bi-shield-lock-fill text-success me-1"></i> SSL 256-Bit Encrypted Checkout Guarantee.
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <!-- Footer -->
+          <footer class="verdant-footer" id="main-footer">
+    <div class="container">
+      <!-- Footer Newsletter & Trust Strip -->
+      <div class="footer-newsletter-box p-4 p-lg-5 rounded-4 mb-5">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-6">
+            <div class="d-flex align-items-center gap-3">
+              <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center flex-shrink-0" style="width: 52px; height: 52px; font-size: 1.4rem;">
+                <i class="bi bi-envelope-paper-heart"></i>
+              </div>
+              <div>
+                <h5 class="text-white fw-bold font-serif mb-1" style="padding-bottom:0;">Join The Verdant Journal</h5>
+                <p class="text-white-50 small mb-0">Receive curated harvest guides, secret farmstay openings, and $30 off your inaugural escape.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <form class="footer-newsletter-form d-flex gap-2">
+              <div class="input-group">
+                <span class="input-group-text bg-transparent border-secondary text-white-50"><i class="bi bi-envelope"></i></span>
+                <input type="email" class="form-control" placeholder="Enter your email address" required>
+                <button class="btn btn-verdant px-4 fw-semibold" type="submit">
+                  <i class="bi bi-send-fill me-1"></i> Subscribe
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row mt-4 pt-3 border-top border-secondary border-opacity-25 text-white-50 small g-3">
+          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+            <i class="bi bi-patch-check-fill text-success fs-6"></i>
+            <span>100% Verified Farmstays</span>
+          </div>
+          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+            <i class="bi bi-shield-lock-fill text-success fs-6"></i>
+            <span>Secure SSL Encrypted Checkout</span>
+          </div>
+          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+            <i class="bi bi-arrow-repeat text-success fs-6"></i>
+            <span>Flexible Free Cancellation</span>
+          </div>
+          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+            <i class="bi bi-headset text-success fs-6"></i>
+            <span>24/7 Guest Concierge</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Navigation Columns -->
+      <div class="row g-4 g-lg-5">
+        <!-- Col 1: Brand & Bio -->
+        <div class="col-lg-4">
+          <a class="navbar-brand text-white mb-3 d-inline-flex align-items-center gap-2" href="../index.html">
+            <span class="brand-icon"><i class="bi bi-flower1"></i></span>
+            <span class="text-white fs-4 fw-bold font-serif">Verdant Haven</span>
+          </a>
+          <p class="text-white-50 pe-lg-3 mb-4" style="line-height: 1.6;">
+            Curating boutique countryside homestays, heritage organic farmstays, and secluded eco-lodges. Dedicated to regenerative rural tourism, farm-to-table living, and authentic countryside hospitality across Europe, the Americas, and Asia.
+          </p>
+          <div class="d-flex flex-column gap-2 mb-4 text-white-50 small">
+            <div><i class="bi bi-geo-alt-fill text-success me-2"></i>Old Mill Lane, Bourton-on-the-Water, GL54 2BY, UK</div>
+            <div><i class="bi bi-telephone-fill text-success me-2"></i><a href="tel:+441451820441" class="text-white-50 text-decoration-none">+44 1451 820 441</a></div>
+            <div><i class="bi bi-envelope-fill text-success me-2"></i><a href="mailto:concierge@verdanthaven.com" class="text-white-50 text-decoration-none">concierge@verdanthaven.com</a></div>
+          </div>
+          <div class="d-flex gap-2">
+            <a href="https://www.instagram.com/accounts/login/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round bg-transparent text-white border-secondary"
+              aria-label="Instagram" title="Instagram Login"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.facebook.com/login/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round bg-transparent text-white border-secondary"
+              aria-label="Facebook" title="Facebook Login"><i class="bi bi-facebook"></i></a>
+            <a href="https://x.com/i/flow/login" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round bg-transparent text-white border-secondary"
+              aria-label="Twitter" title="X (Twitter) Login"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://www.pinterest.com/login/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round bg-transparent text-white border-secondary"
+              aria-label="Pinterest" title="Pinterest Login"><i class="bi bi-pinterest"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2: Explore Stays -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="fw-bold font-serif text-white mb-3">Explore Stays</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="../stays.html">All Stays & Retreats</a></li>
+            <li class="mb-2"><a href="../stays.html?category=Luxury+Farmhouses">Luxury Farmhouses</a></li>
+            <li class="mb-2"><a href="../stays.html?category=Eco-Lodge">Eco Lodges & Sanctuaries</a></li>
+            <li class="mb-2"><a href="../stays.html?category=Mountain+Cabins">Mountain Chalets</a></li>
+            <li class="mb-2"><a href="../stays.html?category=Romantic+Getaways">Romantic Cottages</a></li>
+            <li class="mb-2"><a href="../stays.html?category=Weekend+Retreats">Weekend Escapes</a></li>
+            <li class="mb-2"><a href="../offers.html">Seasonal Packages</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Farm Experiences -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="fw-bold font-serif text-white mb-3">Farm Experiences</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="../activities.html">All 15 Experiences</a></li>
+            <li class="mb-2"><a href="../activities.html?category=Traditional+Cooking">Cooking & Sourdough</a></li>
+            <li class="mb-2"><a href="../activities.html?category=Organic+Farming">Cider & Beekeeping</a></li>
+            <li class="mb-2"><a href="../activities.html?category=Horse+Riding">Horseback Riding</a></li>
+            <li class="mb-2"><a href="../activities.html?category=Campfire+Nights">Campfire Stargazing</a></li>
+            <li class="mb-2"><a href="../activities.html?category=Nature+Walks">Wild Foraging & Walks</a></li>
+            <li class="mb-2"><a href="../activities.html?category=Farm+Animal+Feeding">Animal Care & Alpacas</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Guest Services -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="fw-bold font-serif text-white mb-3">Guest Portal</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="../guest/dashboard.html">Customer Dashboard</a></li>
+            <li class="mb-2"><a href="../guest/bookings.html">My Reservations</a></li>
+            <li class="mb-2"><a href="../guest/wishlist.html" class="footer-wishlist-trigger" data-drawer="wishlist">Saved Wishlist</a></li>
+            <li class="mb-2"><a href="../auth/login.html" class="footer-auth-trigger" data-auth-tab="signin">Sign In to Account</a></li>
+            <li class="mb-2"><a href="../auth/register.html" class="footer-auth-trigger" data-auth-tab="signup">Register an Account</a></li>
+            <li class="mb-2"><a href="../faq.html">Help & Support</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 5: Company & Legal -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="fw-bold font-serif text-white mb-3">Company & Trust</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="../about.html">Our Story & Heritage</a></li>
+            <li class="mb-2"><a href="../blog/blog.html">Journal & Stories</a></li>
+            <li class="mb-2"><a href="../contact.html">Contact Concierge</a></li>
+            <li class="mb-2"><a href="../faq.html">Booking FAQs</a></li>
+            <li class="mb-2"><a href="../privacy.html">Privacy Policy</a></li>
+            <li class="mb-2"><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center py-4 mt-5 border-top border-secondary border-opacity-25 small">
+        <div class="text-white-50 mb-2 mb-md-0">
+          &copy; 2026 Verdant Haven Hospitality Group Ltd. All rights reserved. Registered Sustainable Eco-Tourism Provider.
+        </div>
+        <div class="d-flex align-items-center gap-2 my-2 my-md-0">
+          <span class="text-white-50 d-none d-sm-inline me-1">Accepted Payments:</span>
+          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-credit-card-2-front me-1"></i>Visa</span>
+          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-credit-card me-1"></i>Mastercard</span>
+          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-paypal me-1"></i>PayPal</span>
+          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-apple me-1"></i>Apple Pay</span>
+        </div>
+        <div class="d-flex gap-3 mt-2 mt-lg-0">
+          <a href="../privacy.html" class="text-white-50 text-decoration-none hover-white">Privacy Policy</a>
+          <span class="text-secondary">&bull;</span>
+          <a href="../terms.html" class="text-white-50 text-decoration-none hover-white">Terms of Service</a>
+          <span class="text-secondary">&bull;</span>
+          <a href="../faq.html" class="text-white-50 text-decoration-none hover-white">FAQ</a>
+          <span class="text-secondary">&bull;</span>
+          <a href="../contact.html" class="text-white-50 text-decoration-none hover-white">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/storage.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/booking.js"></script>
+</body>
+
+</html>

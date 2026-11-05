@@ -1,0 +1,6 @@
+# Verdant Haven - Server Entrypoint
+# Default to index.html as the primary landing page
+DirectoryIndex index.html index-2.html
+
+# Fallback 404 to Homepage 1
+ErrorDocument 404 /index.html

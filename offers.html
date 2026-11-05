@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special Packages & Seasonal Offers - Verdant Haven</title>
+  <meta name="description"
+    content="Explore curated countryside stay packages, romantic weekend escapes, and farm harvest experience bundles.">
+
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/dark-mode.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg verdant-navbar">
+    <div class="container-fluid px-xl-5 px-lg-4 px-3">
+      <a class="navbar-brand" href="index.html">
+        <span class="brand-icon"><i class="bi bi-flower1"></i></span>
+        <span>Verdant Haven</span>
+      </a>
+
+      <div class="d-flex align-items-center order-lg-3 nav-actions">
+        <button class="rtl-toggle-btn" title="Toggle RTL Layout"><i class="bi bi-arrow-left-right"></i></button>
+        <button class="theme-toggle-btn" title="Toggle Dark/Light Mode"><i class="bi bi-moon-stars-fill"></i></button>
+        <a href="#wishlistDrawer" class="wishlist-nav-btn" data-bs-toggle="offcanvas" data-bs-target="#wishlistDrawer"
+          title="Saved Stays">
+          <i class="bi bi-heart"></i>
+          <span class="badge-counter wishlist-counter" style="display: none;">0</span>
+        </a>
+
+        <!-- Auth Container: Initially shows Sign In button only, after login shows Customer Dashboard -->
+        <div id="nav-auth-container" class="nav-auth-area">
+          <button type="button"
+            class="btn btn-verdant btn-sm px-3 d-inline-flex align-items-center gap-1 nav-signin-btn"
+            id="nav-signin-trigger" data-bs-toggle="offcanvas" data-bs-target="#authDrawer" title="Sign In or Register">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Sign In</span>
+          </button>
+        </div>
+
+          <a href="stays.html"
+            class="btn btn-verdant btn-sm px-3 d-none d-sm-inline-flex align-items-center gap-1 nav-book-btn">
+            <i class="bi bi-calendar-check"></i> <span>Book Your Stay</span>
+          </a>
+
+          <button class="navbar-toggler border-0 shadow-none ms-1" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarMain">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      </div>
+
+      <div class="collapse navbar-collapse order-lg-2" id="navbarMain">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Home
+            </a>
+            <ul class="dropdown-menu shadow-sm">
+              <li><a class="dropdown-item" href="index.html"><i class="bi bi-house-door me-2 text-success"></i>Home 1
+                  – Classic Countryside</a></li>
+              <li><a class="dropdown-item" href="index-2.html"><i class="bi bi-tree me-2 text-success"></i>Home 2 –
+                  Eco Luxury Retreats</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="stays.html">Stays & Farmhouses</a></li>
+          <li class="nav-item"><a class="nav-link" href="activities.html">Farm Activities</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="blog/blog.html">Stories</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="py-5 bg-warm-cream border-bottom">
+    <div class="container py-3 text-center max-w-700 mx-auto">
+      <span class="section-subtitle">Curated Bundles & Discounts</span>
+      <h1 class="section-title mb-3">Countryside Packages & Special Offers</h1>
+      <p class="text-muted">Save significantly by bundling peaceful accommodation with farm-fresh organic breakfasts,
+        artisanal workshops, and guided outdoor experiences.</p>
+    </div>
+  </section>
+
+  <!-- Packages Grid -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4 align-items-stretch">
+
+        <!-- Package 1: Weekend Escape -->
+        <div class="col-md-6 col-lg-3">
+          <div class="pricing-card">
+            <h4 class="font-serif mb-1">Weekend Escape</h4>
+            <p class="text-muted small mb-0">The perfect quick countryside break to refresh your spirit.</p>
+            <div class="pricing-price">
+              $165 <span>/ 1 night</span>
+            </div>
+            <ul class="pricing-features-list">
+              <li><i class="bi bi-check-circle-fill"></i> 1 Night Cozy Farmhouse Stay</li>
+              <li><i class="bi bi-check-circle-fill"></i> Farm-to-Table Breakfast for 2</li>
+              <li><i class="bi bi-check-circle-fill"></i> Welcome Cider or Wine</li>
+              <li><i class="bi bi-check-circle-fill"></i> Orchard & Garden Access</li>
+              <li><i class="bi bi-check-circle-fill"></i> Campfire & S'mores Kit</li>
+            </ul>
+            <a href="booking/booking.html?id=prop-1&checkin=2026-11-20&checkout=2026-11-21"
+              class="btn btn-verdant-outline w-100 mt-auto">Book Weekend Escape</a>
+          </div>
+        </div>
+
+        <!-- Package 2: Countryside Retreat (Featured) -->
+        <div class="col-md-6 col-lg-3">
+          <div class="pricing-card featured-package">
+            <span class="pricing-badge">Most Popular</span>
+            <h4 class="font-serif mb-1">Countryside Retreat</h4>
+            <p class="text-muted small mb-0">Unplug for two serene nights amidst forests and rolling meadows.</p>
+            <div class="pricing-price">
+              $295 <span>/ 2 nights</span>
+            </div>
+            <ul class="pricing-features-list">
+              <li><i class="bi bi-check-circle-fill"></i> 2 Nights Farmhouse Accommodation</li>
+              <li><i class="bi bi-check-circle-fill"></i> Daily Fresh Farm Breakfast for 2</li>
+              <li><i class="bi bi-check-circle-fill"></i> Choice of 1 Farmstay Experience</li>
+              <li><i class="bi bi-check-circle-fill"></i> Hearth Firewood Bundle Included</li>
+              <li><i class="bi bi-check-circle-fill"></i> Countryside Trail Bicycle Rental</li>
+              <li><i class="bi bi-check-circle-fill"></i> Late 2:00 PM Check-out</li>
+            </ul>
+            <a href="booking/booking.html?id=prop-2&checkin=2026-11-20&checkout=2026-11-22"
+              class="btn btn-verdant w-100 mt-auto">Book Retreat</a>
+          </div>
+        </div>
+
+        <!-- Package 3: Farm Experience -->
+        <div class="col-md-6 col-lg-3">
+          <div class="pricing-card">
+            <h4 class="font-serif mb-1">Farm & Harvest</h4>
+            <p class="text-muted small mb-0">Immerse in authentic rural living, milking, cooking and picking.</p>
+            <div class="pricing-price">
+              $350 <span>/ 2 nights</span>
+            </div>
+            <ul class="pricing-features-list">
+              <li><i class="bi bi-check-circle-fill"></i> 2 Nights Farmhouse Suite</li>
+              <li><i class="bi bi-check-circle-fill"></i> All Daily Organic Farm Meals</li>
+              <li><i class="bi bi-check-circle-fill"></i> Organic Farm Tour & Honey Extraction</li>
+              <li><i class="bi bi-check-circle-fill"></i> Traditional Cooking or Cheese Class</li>
+              <li><i class="bi bi-check-circle-fill"></i> Farm Produce Basket to take home</li>
+            </ul>
+            <a href="booking/booking.html?id=prop-5&checkin=2026-11-20&checkout=2026-11-22"
+              class="btn btn-verdant-outline w-100 mt-auto">Book Farm Experience</a>
+          </div>
+        </div>
+
+        <!-- Package 4: Premium Nature Escape -->
+        <div class="col-md-6 col-lg-3">
+          <div class="pricing-card">
+            <h4 class="font-serif mb-1">Premium Nature & Wellness</h4>
+            <p class="text-muted small mb-0">Luxury estate suites, private hot tubs, spa massages and private chef.</p>
+            <div class="pricing-price">
+              $620 <span>/ 3 nights</span>
+            </div>
+            <ul class="pricing-features-list">
+              <li><i class="bi bi-check-circle-fill"></i> 3 Nights Luxury Vineyard/Manor Estate</li>
+              <li><i class="bi bi-check-circle-fill"></i> Private Hot Tub & Sauna Access</li>
+              <li><i class="bi bi-check-circle-fill"></i> 4-Course Private Host Wine Dinner</li>
+              <li><i class="bi bi-check-circle-fill"></i> Daily Sunrise Yoga & Forest Bathing</li>
+              <li><i class="bi bi-check-circle-fill"></i> VIP Wine & Artisan Honey Gift Box</li>
+            </ul>
+            <a href="booking/booking.html?id=prop-3&checkin=2026-11-20&checkout=2026-11-23"
+              class="btn btn-verdant-outline w-100 mt-auto">Book Premium Escape</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Active Promotional Coupon Cards -->
+  <section class="py-5 bg-warm-cream border-top">
+    <div class="container">
+      <div class="text-center max-w-700 mx-auto mb-5">
+        <span class="section-subtitle">Promotional Vouchers</span>
+        <h2 class="section-title">Active Discount Codes</h2>
+        <p class="text-muted">Click any promo coupon code below to copy it for instant deduction at checkout.</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Coupon 1 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card border rounded-4 p-4 text-center bg-white shadow-sm position-relative">
+            <span class="badge bg-danger position-absolute top-0 end-0 m-3">20% Off</span>
+            <div class="display-6 text-success fw-bold font-monospace mb-2">VERDANT20</div>
+            <h6 class="fw-bold mb-1">Autumn Countryside Sale</h6>
+            <p class="text-muted small mb-3">20% discount on any 3+ night countryside farmstay reservation.</p>
+            <button class="btn btn-outline-secondary btn-sm copy-coupon-btn"
+              onclick="navigator.clipboard.writeText('VERDANT20'); showToast('Coupon VERDANT20 copied to clipboard!', 'success', 'Coupon');">
+              <i class="bi bi-copy me-1"></i> Copy Code
+            </button>
+          </div>
+        </div>
+
+        <!-- Coupon 2 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card border rounded-4 p-4 text-center bg-white shadow-sm position-relative">
+            <span class="badge bg-success position-absolute top-0 end-0 m-3">15% Off</span>
+            <div class="display-6 text-success fw-bold font-monospace mb-2">HARVEST15</div>
+            <h6 class="fw-bold mb-1">Harvest Packages</h6>
+            <p class="text-muted small mb-3">15% off any Farm & Harvest Experience package bundle.</p>
+            <button class="btn btn-outline-secondary btn-sm copy-coupon-btn"
+              onclick="navigator.clipboard.writeText('HARVEST15'); showToast('Coupon HARVEST15 copied to clipboard!', 'success', 'Coupon');">
+              <i class="bi bi-copy me-1"></i> Copy Code
+            </button>
+          </div>
+        </div>
+
+        <!-- Coupon 3 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card border rounded-4 p-4 text-center bg-white shadow-sm position-relative">
+            <span class="badge bg-primary position-absolute top-0 end-0 m-3">10% Off</span>
+            <div class="display-6 text-success fw-bold font-monospace mb-2">NATURE10</div>
+            <h6 class="fw-bold mb-1">First-Time Guests</h6>
+            <p class="text-muted small mb-3">Welcome 10% voucher for first-time countryside travelers.</p>
+            <button class="btn btn-outline-secondary btn-sm copy-coupon-btn"
+              onclick="navigator.clipboard.writeText('NATURE10'); showToast('Coupon NATURE10 copied to clipboard!', 'success', 'Coupon');">
+              <i class="bi bi-copy me-1"></i> Copy Code
+            </button>
+          </div>
+        </div>
+
+        <!-- Coupon 4 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card border rounded-4 p-4 text-center bg-white shadow-sm position-relative">
+            <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-3">$50 Off</span>
+            <div class="display-6 text-success fw-bold font-monospace mb-2">RUSTIC50</div>
+            <h6 class="fw-bold mb-1">Extended Stays</h6>
+            <p class="text-muted small mb-3">$50 flat deduction on bookings with subtotal greater than $300.</p>
+            <button class="btn btn-outline-secondary btn-sm copy-coupon-btn"
+              onclick="navigator.clipboard.writeText('RUSTIC50'); showToast('Coupon RUSTIC50 copied to clipboard!', 'success', 'Coupon');">
+              <i class="bi bi-copy me-1"></i> Copy Code
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <!-- Footer -->
+          <footer class="verdant-footer" id="main-footer">
+    <div class="container">
+      <!-- Footer Newsletter & Trust Strip -->
+      <div class="footer-newsletter-box p-4 p-lg-5 rounded-4 mb-5">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-6">
+            <div class="d-flex align-items-center gap-3">
+              <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center flex-shrink-0" style="width: 52px; height: 52px; font-size: 1.4rem;">
+                <i class="bi bi-envelope-paper-heart"></i>
+              </div>
+              <div>
+                <h5 class="text-white fw-bold font-serif mb-1" style="padding-bottom:0;">Join The Verdant Journal</h5>
+                <p class="text-white-50 small mb-0">Receive curated harvest guides, secret farmstay openings, and $30 off your inaugural escape.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <form class="footer-newsletter-form d-flex gap-2">
+              <div class="input-group">
+                <span class="input-group-text bg-transparent border-secondary text-white-50"><i class="bi bi-envelope"></i></span>
+                <input type="email" class="form-control" placeholder="Enter your email address" required>
+                <button class="btn btn-verdant px-4 fw-semibold" type="submit">
+                  <i class="bi bi-send-fill me-1"></i> Subscribe
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row mt-4 pt-3 border-top border-secondary border-opacity-25 text-white-50 small g-3">
+          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+            <i class="bi bi-patch-check-fill text-success fs-6"></i>
+            <span>100% Verified Farmstays</span>
+          </div>
+          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+            <i class="bi bi-shield-lock-fill text-success fs-6"></i>
+            <span>Secure SSL Encrypted Checkout</span>
+          </div>
+          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+            <i class="bi bi-arrow-repeat text-success fs-6"></i>
+            <span>Flexible Free Cancellation</span>
+          </div>
+          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+            <i class="bi bi-headset text-success fs-6"></i>
+            <span>24/7 Guest Concierge</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Navigation Columns -->
+      <div class="row g-4 g-lg-5">
+        <!-- Col 1: Brand & Bio -->
+        <div class="col-lg-4">
+          <a class="navbar-brand text-white mb-3 d-inline-flex align-items-center gap-2" href="index.html">
+            <span class="brand-icon"><i class="bi bi-flower1"></i></span>
+            <span class="text-white fs-4 fw-bold font-serif">Verdant Haven</span>
+          </a>
+          <p class="text-white-50 pe-lg-3 mb-4" style="line-height: 1.6;">
+            Curating boutique countryside homestays, heritage organic farmstays, and secluded eco-lodges. Dedicated to regenerative rural tourism, farm-to-table living, and authentic countryside hospitality across Europe, the Americas, and Asia.
+          </p>
+          <div class="d-flex flex-column gap-2 mb-4 text-white-50 small">
+            <div><i class="bi bi-geo-alt-fill text-success me-2"></i>Old Mill Lane, Bourton-on-the-Water, GL54 2BY, UK</div>
+            <div><i class="bi bi-telephone-fill text-success me-2"></i><a href="tel:+441451820441" class="text-white-50 text-decoration-none">+44 1451 820 441</a></div>
+            <div><i class="bi bi-envelope-fill text-success me-2"></i><a href="mailto:concierge@verdanthaven.com" class="text-white-50 text-decoration-none">concierge@verdanthaven.com</a></div>
+          </div>
+          <div class="d-flex gap-2">
+            <a href="https://www.instagram.com/accounts/login/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round bg-transparent text-white border-secondary"
+              aria-label="Instagram" title="Instagram Login"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.facebook.com/login/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round bg-transparent text-white border-secondary"
+              aria-label="Facebook" title="Facebook Login"><i class="bi bi-facebook"></i></a>
+            <a href="https://x.com/i/flow/login" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round bg-transparent text-white border-secondary"
+              aria-label="Twitter" title="X (Twitter) Login"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://www.pinterest.com/login/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round bg-transparent text-white border-secondary"
+              aria-label="Pinterest" title="Pinterest Login"><i class="bi bi-pinterest"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2: Explore Stays -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="fw-bold font-serif text-white mb-3">Explore Stays</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="stays.html">All Stays & Retreats</a></li>
+            <li class="mb-2"><a href="stays.html?category=Luxury+Farmhouses">Luxury Farmhouses</a></li>
+            <li class="mb-2"><a href="stays.html?category=Eco-Lodge">Eco Lodges & Sanctuaries</a></li>
+            <li class="mb-2"><a href="stays.html?category=Mountain+Cabins">Mountain Chalets</a></li>
+            <li class="mb-2"><a href="stays.html?category=Romantic+Getaways">Romantic Cottages</a></li>
+            <li class="mb-2"><a href="stays.html?category=Weekend+Retreats">Weekend Escapes</a></li>
+            <li class="mb-2"><a href="offers.html">Seasonal Packages</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Farm Experiences -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="fw-bold font-serif text-white mb-3">Farm Experiences</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="activities.html">All 15 Experiences</a></li>
+            <li class="mb-2"><a href="activities.html?category=Traditional+Cooking">Cooking & Sourdough</a></li>
+            <li class="mb-2"><a href="activities.html?category=Organic+Farming">Cider & Beekeeping</a></li>
+            <li class="mb-2"><a href="activities.html?category=Horse+Riding">Horseback Riding</a></li>
+            <li class="mb-2"><a href="activities.html?category=Campfire+Nights">Campfire Stargazing</a></li>
+            <li class="mb-2"><a href="activities.html?category=Nature+Walks">Wild Foraging & Walks</a></li>
+            <li class="mb-2"><a href="activities.html?category=Farm+Animal+Feeding">Animal Care & Alpacas</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Guest Services -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="fw-bold font-serif text-white mb-3">Guest Portal</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="guest/dashboard.html">Customer Dashboard</a></li>
+            <li class="mb-2"><a href="guest/bookings.html">My Reservations</a></li>
+            <li class="mb-2"><a href="guest/wishlist.html" class="footer-wishlist-trigger" data-drawer="wishlist">Saved Wishlist</a></li>
+            <li class="mb-2"><a href="auth/login.html" class="footer-auth-trigger" data-auth-tab="signin">Sign In to Account</a></li>
+            <li class="mb-2"><a href="auth/register.html" class="footer-auth-trigger" data-auth-tab="signup">Register an Account</a></li>
+            <li class="mb-2"><a href="faq.html">Help & Support</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 5: Company & Legal -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="fw-bold font-serif text-white mb-3">Company & Trust</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="about.html">Our Story & Heritage</a></li>
+            <li class="mb-2"><a href="blog/blog.html">Journal & Stories</a></li>
+            <li class="mb-2"><a href="contact.html">Contact Concierge</a></li>
+            <li class="mb-2"><a href="faq.html">Booking FAQs</a></li>
+            <li class="mb-2"><a href="privacy.html">Privacy Policy</a></li>
+            <li class="mb-2"><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center py-4 mt-5 border-top border-secondary border-opacity-25 small">
+        <div class="text-white-50 mb-2 mb-md-0">
+          &copy; 2026 Verdant Haven Hospitality Group Ltd. All rights reserved. Registered Sustainable Eco-Tourism Provider.
+        </div>
+        <div class="d-flex align-items-center gap-2 my-2 my-md-0">
+          <span class="text-white-50 d-none d-sm-inline me-1">Accepted Payments:</span>
+          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-credit-card-2-front me-1"></i>Visa</span>
+          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-credit-card me-1"></i>Mastercard</span>
+          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-paypal me-1"></i>PayPal</span>
+          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-apple me-1"></i>Apple Pay</span>
+        </div>
+        <div class="d-flex gap-3 mt-2 mt-lg-0">
+          <a href="privacy.html" class="text-white-50 text-decoration-none hover-white">Privacy Policy</a>
+          <span class="text-secondary">&bull;</span>
+          <a href="terms.html" class="text-white-50 text-decoration-none hover-white">Terms of Service</a>
+          <span class="text-secondary">&bull;</span>
+          <a href="faq.html" class="text-white-50 text-decoration-none hover-white">FAQ</a>
+          <span class="text-secondary">&bull;</span>
+          <a href="contact.html" class="text-white-50 text-decoration-none hover-white">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>

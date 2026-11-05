@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verdant Haven - Eco Luxury Retreats & Nature Sanctuaries (Home 2)</title>
+  <meta name="description"
+    content="Discover curated organic farmstays, off-grid eco lodges, mountain glass chalets, and agritourism escapes designed for deep peace and restorative luxury.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <!-- Template Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/dark-mode.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg verdant-navbar">
+    <div class="container-fluid px-xl-5 px-lg-4 px-3">
+      <a class="navbar-brand" href="index.html">
+        <span class="brand-icon"><i class="bi bi-flower1"></i></span>
+        <span>Verdant Haven</span>
+      </a>
+
+      <div class="d-flex align-items-center order-lg-3 nav-actions">
+        <!-- RTL Switcher -->
+        <button class="rtl-toggle-btn" title="Toggle RTL Layout" aria-label="Toggle RTL">
+          <i class="bi bi-arrow-left-right"></i>
+        </button>
+
+        <!-- Dark Mode Switcher -->
+        <button class="theme-toggle-btn" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Mode">
+          <i class="bi bi-moon-stars-fill"></i>
+        </button>
+
+        <!-- Wishlist -->
+        <a href="#wishlistDrawer" class="wishlist-nav-btn" data-bs-toggle="offcanvas" data-bs-target="#wishlistDrawer"
+          title="Saved Stays" aria-label="Saved Stays">
+          <i class="bi bi-heart"></i>
+          <span class="badge-counter wishlist-counter" style="display: none;">0</span>
+        </a>
+
+        <!-- Auth Container: Initially shows Sign In button only, after login shows Customer Dashboard -->
+        <div id="nav-auth-container" class="nav-auth-area">
+          <button type="button"
+            class="btn btn-verdant btn-sm px-3 d-inline-flex align-items-center gap-1 nav-signin-btn"
+            id="nav-signin-trigger" data-bs-toggle="offcanvas" data-bs-target="#authDrawer" title="Sign In or Register">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Sign In</span>
+          </button>
+        </div>
+
+          <a href="stays.html"
+            class="btn btn-verdant btn-sm px-3 d-none d-sm-inline-flex align-items-center gap-1 nav-book-btn">
+            <i class="bi bi-calendar-check"></i> <span>Book Your Stay</span>
+          </a>
+
+          <button class="navbar-toggler border-0 shadow-none ms-1" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      </div>
+
+      <div class="collapse navbar-collapse order-lg-2" id="navbarMain">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Home
+            </a>
+            <ul class="dropdown-menu shadow-sm">
+              <li><a class="dropdown-item" href="index.html"><i class="bi bi-house-door me-2 text-success"></i>Home 1
+                  –
+                  Classic Countryside</a></li>
+              <li><a class="dropdown-item active fw-bold" href="index-2.html"><i
+                    class="bi bi-tree me-2 text-success"></i>Home 2 – Eco Luxury Retreats</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="stays.html">Stays & Farmhouses</a></li>
+          <li class="nav-item"><a class="nav-link" href="activities.html">Farm Activities</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="blog/blog.html">Stories</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section 2: Eco Luxury & Agritourism Sanctuary -->
+  <section class="hero-countryside position-relative"
+    style="background-image: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1920&auto=format&fit=crop&q=80'); min-height: 85vh;">
+    <div class="hero-overlay"
+      style="background: linear-gradient(180deg, rgba(15, 31, 23, 0.45) 0%, rgba(15, 31, 23, 0.82) 100%);"></div>
+    <div class="container hero-content py-5">
+      <div class="row align-items-center">
+        <div class="col-lg-10 col-xl-9">
+          <div class="hero-pill mb-3">
+            <i class="bi bi-tree-fill text-warning me-1"></i> Sustainable Agritourism & Nature Havens
+          </div>
+          <h1 class="hero-title display-3 fw-bold mb-3">Breathe In Nature.<br>Rediscover Stillness.</h1>
+          <p class="hero-lead mb-4" style="max-width: 680px; font-size: 1.25rem;">
+            Discover hand-built stone chalets, organic vineyard estates, solar-powered eco lodges, and restorative rural
+            sanctuaries curated for deep peace and effortless luxury.
+          </p>
+
+          <!-- Quick Destination Chips -->
+          <div class="d-flex flex-wrap gap-2 mb-4">
+            <span class="text-white-50 small align-self-center me-1">Popular Havens:</span>
+            <a href="stays.html?location=Cotswolds"
+              class="badge rounded-pill text-bg-light text-decoration-none px-3 py-2 fw-normal">🌾 Cotswolds Barns</a>
+            <a href="stays.html?location=Tuscany"
+              class="badge rounded-pill text-bg-light text-decoration-none px-3 py-2 fw-normal">🍇 Tuscan Vineyards</a>
+            <a href="stays.html?location=Black+Forest"
+              class="badge rounded-pill text-bg-light text-decoration-none px-3 py-2 fw-normal">🌲 Black Forest
+              Lodges</a>
+            <a href="stays.html?location=Vermont"
+              class="badge rounded-pill text-bg-light text-decoration-none px-3 py-2 fw-normal">🏔️ Vermont Chalets</a>
+          </div>
+
+          <div class="d-flex flex-wrap gap-3">
+            <a href="stays.html" class="btn btn-verdant px-4 py-3 fs-6">
+              <i class="bi bi-compass"></i> Explore Eco Stays
+            </a>
+            <a href="#customizer-section" class="btn btn-outline-light px-4 py-3 fs-6">
+              <i class="bi bi-sliders2"></i> Custom Stay Planner
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Live Search Widget -->
+      <div class="row mt-5">
+        <div class="col-12">
+          <div class="search-widget-card shadow-lg p-4 rounded-4"
+            style="background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(12px);">
+            <form id="hero2-search-form" action="stays.html" method="GET">
+              <div class="row g-3 align-items-center">
+                <!-- Location -->
+                <div class="col-md-6 col-lg-3">
+                  <div class="search-field-box bg-warm-cream border rounded-3 p-2 px-3">
+                    <label class="search-label small text-muted text-uppercase fw-bold mb-1"><i
+                        class="bi bi-geo-alt-fill text-success"></i> Destination</label>
+                    <select name="location" class="form-select border-0 p-0 bg-transparent fw-semibold shadow-none">
+                      <option value="">Any Countryside Region</option>
+                      <option value="Cotswolds">Cotswolds, United Kingdom</option>
+                      <option value="Tuscany">Tuscany, Italy</option>
+                      <option value="Black Forest">Black Forest, Germany</option>
+                      <option value="Vermont">Stowe, Vermont, USA</option>
+                      <option value="Provence">Provence, France</option>
+                      <option value="Wayanad">Wayanad, India</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Check-in -->
+                <div class="col-sm-6 col-md-3 col-lg-2">
+                  <div class="search-field-box bg-warm-cream border rounded-3 p-2 px-3">
+                    <label class="search-label small text-muted text-uppercase fw-bold mb-1"><i
+                        class="bi bi-calendar-event text-success"></i> Check-in</label>
+                    <input type="date" id="hero2-checkin" name="checkin"
+                      class="form-control border-0 p-0 bg-transparent fw-semibold shadow-none">
+                  </div>
+                </div>
+
+                <!-- Check-out -->
+                <div class="col-sm-6 col-md-3 col-lg-2">
+                  <div class="search-field-box bg-warm-cream border rounded-3 p-2 px-3">
+                    <label class="search-label small text-muted text-uppercase fw-bold mb-1"><i
+                        class="bi bi-calendar-check text-success"></i> Check-out</label>
+                    <input type="date" id="hero2-checkout" name="checkout"
+                      class="form-control border-0 p-0 bg-transparent fw-semibold shadow-none">
+                  </div>
+                </div>
+
+                <!-- Guests -->
+                <div class="col-sm-6 col-md-3 col-lg-2">
+                  <div class="search-field-box bg-warm-cream border rounded-3 p-2 px-3">
+                    <label class="search-label small text-muted text-uppercase fw-bold mb-1"><i
+                        class="bi bi-people-fill text-success"></i> Guests</label>
+                    <select name="guests" class="form-select border-0 p-0 bg-transparent fw-semibold shadow-none">
+                      <option value="2" selected>2 Guests</option>
+                      <option value="4">4 Guests</option>
+                      <option value="6">6+ Guests (Family)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Category -->
+                <div class="col-sm-6 col-md-3 col-lg-2">
+                  <div class="search-field-box bg-warm-cream border rounded-3 p-2 px-3">
+                    <label class="search-label small text-muted text-uppercase fw-bold mb-1"><i
+                        class="bi bi-house-door text-success"></i> Retreat Type</label>
+                    <select name="category" class="form-select border-0 p-0 bg-transparent fw-semibold shadow-none">
+                      <option value="">All Retreats</option>
+                      <option value="Eco Lodges">Eco Lodges</option>
+                      <option value="Farmhouses">Farmhouses</option>
+                      <option value="Mountain Cottages">Mountain Chalets</option>
+                      <option value="Luxury Farmstays">Vineyard Estates</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Search Button -->
+                <div class="col-md-6 col-lg-1">
+                  <button type="submit"
+                    class="btn btn-verdant w-100 py-3 d-flex align-items-center justify-content-center shadow-sm"
+                    title="Search Countryside Stays">
+                    <i class="bi bi-search fs-5"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Key Guarantees Strip -->
+  <section class="py-4 border-bottom bg-warm-cream">
+    <div class="container">
+      <div class="row g-3 text-center">
+        <div class="col-6 col-md-3">
+          <div class="d-flex align-items-center justify-content-center gap-2">
+            <i class="bi bi-tree-fill text-success fs-4"></i>
+            <div class="text-start">
+              <div class="fw-bold fs-6">45+ Acres</div>
+              <small class="text-muted">Average private estate size</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="d-flex align-items-center justify-content-center gap-2">
+            <i class="bi bi-egg-fried text-success fs-4"></i>
+            <div class="text-start">
+              <div class="fw-bold fs-6">100% Organic</div>
+              <small class="text-muted">Hearth-to-table breakfast</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="d-flex align-items-center justify-content-center gap-2">
+            <i class="bi bi-stars text-success fs-4"></i>
+            <div class="text-start">
+              <div class="fw-bold fs-6">Zero Light Smog</div>
+              <small class="text-muted">Certified dark sky viewing</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="d-flex align-items-center justify-content-center gap-2">
+            <i class="bi bi-shield-check text-success fs-4"></i>
+            <div class="text-start">
+              <div class="fw-bold fs-6">Verified Hosts</div>
+              <small class="text-muted">Inspected for authentic warmth</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Curated Agritourism Retreat Categories -->
+  <section class="py-5 bg-white">
+    <div class="container py-4">
+      <div class="d-flex flex-wrap justify-content-between align-items-end mb-5">
+        <div>
+          <span class="section-subtitle">Nature Architecture</span>
+          <h2 class="section-title mb-0">Explore Distinct Countryside Living</h2>
+        </div>
+        <a href="stays.html" class="btn btn-verdant-outline btn-sm mt-3 mt-sm-0">View All Categories &rarr;</a>
+      </div>
+
+      <div class="row g-4">
+        <!-- Category 1 -->
+        <div class="col-md-6 col-lg-4">
+          <a href="stays.html?category=Eco+Lodges" class="text-decoration-none">
+            <div class="card border rounded-4 overflow-hidden shadow-sm h-100 group-hover position-relative">
+              <img src="assets/images/willow-creek.jpg"
+                style="height: 260px; object-fit: cover;" class="card-img-top" alt="Solar-Powered Eco Lodges">
+              <div class="card-body p-4 bg-white">
+                <span class="badge bg-success-subtle text-success mb-2 px-3 py-1 rounded-pill">Off-Grid Serenity</span>
+                <h4 class="font-serif text-dark mb-1">Solar-Powered Eco Lodges</h4>
+                <p class="text-muted small mb-0">Streamside Scandinavian cabins built with recycled cedar, natural reed
+                  insulation, and private wood-fired hot tubs.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Category 2 -->
+        <div class="col-md-6 col-lg-4">
+          <a href="stays.html?category=Farmhouses" class="text-decoration-none">
+            <div class="card border rounded-4 overflow-hidden shadow-sm h-100 group-hover position-relative">
+              <img src="assets/images/whispering-pines.jpg"
+                style="height: 260px; object-fit: cover;" class="card-img-top" alt="Historic Working Farmsteads">
+              <div class="card-body p-4 bg-white">
+                <span class="badge bg-warning-subtle text-dark mb-2 px-3 py-1 rounded-pill">Living Traditions</span>
+                <h4 class="font-serif text-dark mb-1">Working Organic Farmsteads</h4>
+                <p class="text-muted small mb-0">Collect morning eggs, churn butter, press fresh apple cider, and wake
+                  up to the gentle chime of pasture bells.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Category 3 -->
+        <div class="col-md-6 col-lg-4">
+          <a href="stays.html?category=Luxury+Farmstays" class="text-decoration-none">
+            <div class="card border rounded-4 overflow-hidden shadow-sm h-100 group-hover position-relative">
+              <img src="assets/images/golden-valley.jpg"
+                style="height: 260px; object-fit: cover;" class="card-img-top" alt="Vineyard Estates">
+              <div class="card-body p-4 bg-white">
+                <span class="badge bg-danger-subtle text-danger mb-2 px-3 py-1 rounded-pill">Wine & Gastronomy</span>
+                <h4 class="font-serif text-dark mb-1">Century-Old Vineyard Villas</h4>
+                <p class="text-muted small mb-0">Terraced Sangiovese vineyards, private wine cellars, stone pizza ovens,
+                  and infinity pools perched above golden valleys.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Customizer Section: Build Your Countryside Escape -->
+  <section id="customizer-section" class="py-5 bg-warm-cream border-top border-bottom">
+    <div class="container py-4">
+      <div class="text-center max-w-700 mx-auto mb-5">
+        <span class="section-subtitle">Bespoke Agritourism</span>
+        <h2 class="section-title">Craft Your Custom Countryside Escape</h2>
+        <p class="text-muted">Tailor your stay with handpicked organic meals and guided artisan workshops. See instant
+          pricing and reserve seamlessly.</p>
+      </div>
+
+      <div class="card border rounded-4 shadow-md overflow-hidden bg-white max-w-900 mx-auto">
+        <div class="card-body p-4 p-md-5">
+          <form id="escape-planner-form"
+            onsubmit="event.preventDefault(); showToast('Your custom countryside escape has been prepared! Directing to booking...', 'success', 'Package Configured'); setTimeout(() => window.location.href='booking/booking.html?id=prop-1', 1200);">
+            <div class="row g-4">
+              <!-- Step 1: Accommodation -->
+              <div class="col-md-4">
+                <label class="form-label fw-bold"><i class="bi bi-house-door-fill text-success me-1"></i> 1. Select
+                  Retreat</label>
+                <div class="form-check p-3 border rounded-3 mb-2 bg-warm-cream">
+                  <input class="form-check-input planner-radio" type="radio" name="planAccom" id="accom1" value="185"
+                    checked>
+                  <label class="form-check-label ms-1" for="accom1">
+                    <strong class="d-block">Cotswold Farmhouse</strong>
+                    <small class="text-muted">$185 / night</small>
+                  </label>
+                </div>
+                <div class="form-check p-3 border rounded-3 mb-2 bg-warm-cream">
+                  <input class="form-check-input planner-radio" type="radio" name="planAccom" id="accom2" value="215">
+                  <label class="form-check-label ms-1" for="accom2">
+                    <strong class="d-block">Mountain Glass Chalet</strong>
+                    <small class="text-muted">$215 / night</small>
+                  </label>
+                </div>
+                <div class="form-check p-3 border rounded-3 bg-warm-cream">
+                  <input class="form-check-input planner-radio" type="radio" name="planAccom" id="accom3" value="295">
+                  <label class="form-check-label ms-1" for="accom3">
+                    <strong class="d-block">Tuscan Vineyard Villa</strong>
+                    <small class="text-muted">$295 / night</small>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Step 2: Dining Package -->
+              <div class="col-md-4">
+                <label class="form-label fw-bold"><i class="bi bi-egg-fried text-success me-1"></i> 2. Dining
+                  Add-on</label>
+                <div class="form-check p-3 border rounded-3 mb-2 bg-warm-cream">
+                  <input class="form-check-input planner-radio" type="radio" name="planDining" id="dining1" value="0"
+                    checked>
+                  <label class="form-check-label ms-1" for="dining1">
+                    <strong class="d-block">Room Only</strong>
+                    <small class="text-muted">Self-catering kitchen</small>
+                  </label>
+                </div>
+                <div class="form-check p-3 border rounded-3 mb-2 bg-warm-cream">
+                  <input class="form-check-input planner-radio" type="radio" name="planDining" id="dining2" value="35">
+                  <label class="form-check-label ms-1" for="dining2">
+                    <strong class="d-block">Organic Farm Breakfast</strong>
+                    <small class="text-muted">+$35 / day (2 guests)</small>
+                  </label>
+                </div>
+                <div class="form-check p-3 border rounded-3 bg-warm-cream">
+                  <input class="form-check-input planner-radio" type="radio" name="planDining" id="dining3" value="85">
+                  <label class="form-check-label ms-1" for="dining3">
+                    <strong class="d-block">Full Farm-to-Table Board</strong>
+                    <small class="text-muted">+$85 / day (All meals)</small>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Step 3: Activity Experience -->
+              <div class="col-md-4">
+                <label class="form-label fw-bold"><i class="bi bi-compass-fill text-success me-1"></i> 3. Guided
+                  Activity</label>
+                <div class="form-check p-3 border rounded-3 mb-2 bg-warm-cream">
+                  <input class="form-check-input planner-check" type="checkbox" id="actCheck1" value="65">
+                  <label class="form-check-label ms-1" for="actCheck1">
+                    <strong class="d-block">Goat Cheese Workshop</strong>
+                    <small class="text-muted">+$65 / session</small>
+                  </label>
+                </div>
+                <div class="form-check p-3 border rounded-3 mb-2 bg-warm-cream">
+                  <input class="form-check-input planner-check" type="checkbox" id="actCheck2" value="110">
+                  <label class="form-check-label ms-1" for="actCheck2">
+                    <strong class="d-block">Sunset Horseback Ride</strong>
+                    <small class="text-muted">+$110 / session</small>
+                  </label>
+                </div>
+                <div class="form-check p-3 border rounded-3 bg-warm-cream">
+                  <input class="form-check-input planner-check" type="checkbox" id="actCheck3" value="35">
+                  <label class="form-check-label ms-1" for="actCheck3">
+                    <strong class="d-block">Campfire Stargazing</strong>
+                    <small class="text-muted">+$35 / session</small>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Cost Calculator Summary Bar -->
+              <div class="col-12 border-top pt-4 mt-3">
+                <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                  <div>
+                    <span class="text-muted small d-block">Estimated 2-Night Custom Package Total:</span>
+                    <span class="display-6 fw-bold text-success font-serif" id="planner-total-price">$405</span>
+                    <small class="text-muted ms-2">(Taxes & cleaning included)</small>
+                  </div>
+                  <button type="submit" class="btn btn-verdant px-5 py-3 fw-bold shadow-sm">
+                    <i class="bi bi-calendar-check me-1"></i> Reserve This Custom Escape
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Eco Stays Collection with Perfect Center Labels & Non-overlapping Wishlist -->
+  <section class="py-5 bg-white">
+    <div class="container py-4">
+      <div class="d-flex flex-wrap justify-content-between align-items-end mb-5">
+        <div>
+          <span class="section-subtitle">Sanctuaries of Peace</span>
+          <h2 class="section-title mb-0">Featured Agritourism Havens</h2>
+        </div>
+        <a href="stays.html" class="btn btn-verdant-outline btn-sm mt-3 mt-sm-0">View All 12+ Stays &rarr;</a>
+      </div>
+
+      <div class="row g-4">
+        <!-- Stay 1 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="property-card h-100">
+            <div class="property-thumb">
+              <img src="assets/images/whispering-pines.jpg"
+                alt="Whispering Pines Farmhouse" loading="lazy">
+              <div class="property-badge-group">
+                <span class="badge-category">Farmhouses</span>
+              </div>
+              <button class="property-wishlist-btn" data-property-id="prop-1" title="Save to Wishlist"
+                aria-label="Save to Wishlist">
+                <i class="bi bi-heart"></i>
+              </button>
+            </div>
+            <div class="property-body">
+              <div class="property-location"><i class="bi bi-geo-alt-fill text-danger"></i> Cotswolds, United Kingdom
+              </div>
+              <h5 class="property-title"><a href="stay-details.html?id=prop-1">Whispering Pines Farmhouse</a></h5>
+              <div class="property-features">
+                <div class="property-feature-item"><i class="bi bi-people"></i> 6 Guests</div>
+                <div class="property-feature-item"><i class="bi bi-door-open"></i> 3 Beds</div>
+                <div class="property-feature-item"><i class="bi bi-droplet"></i> 2 Baths</div>
+              </div>
+              <p class="text-muted small mb-3">Rustic stone farmhouse surrounded by 45 acres of organic cider orchards
+                and pine woods.</p>
+              <div class="property-footer">
+                <div class="property-price">$185 <span>/ night</span></div>
+                <div class="property-rating"><i class="bi bi-star-fill text-warning"></i> 4.96 <span
+                    class="text-muted fw-normal">(48)</span></div>
+              </div>
+              <div class="d-flex gap-2 mt-3 pt-2 border-top">
+                <a href="stay-details.html?id=prop-1" class="btn btn-verdant-outline btn-sm flex-grow-1">View
+                  Details</a>
+                <a href="booking/booking.html?id=prop-1" class="btn btn-verdant btn-sm flex-grow-1">Book Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stay 2 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="property-card h-100">
+            <div class="property-thumb">
+              <img src="assets/images/willow-creek.jpg"
+                alt="Willow Creek Eco Lodge" loading="lazy">
+              <div class="property-badge-group">
+                <span class="badge-category">Eco Lodges</span>
+              </div>
+              <button class="property-wishlist-btn" data-property-id="prop-2" title="Save to Wishlist"
+                aria-label="Save to Wishlist">
+                <i class="bi bi-heart"></i>
+              </button>
+            </div>
+            <div class="property-body">
+              <div class="property-location"><i class="bi bi-geo-alt-fill text-danger"></i> Black Forest, Germany</div>
+              <h5 class="property-title"><a href="stay-details.html?id=prop-2">Willow Creek Eco Lodge</a></h5>
+              <div class="property-features">
+                <div class="property-feature-item"><i class="bi bi-people"></i> 4 Guests</div>
+                <div class="property-feature-item"><i class="bi bi-door-open"></i> 2 Beds</div>
+                <div class="property-feature-item"><i class="bi bi-droplet"></i> 1 Bath</div>
+              </div>
+              <p class="text-muted small mb-3">Off-grid solar sanctuary on the banks of a sparkling trout stream with a
+                cedar hot tub.</p>
+              <div class="property-footer">
+                <div class="property-price">$160 <span>/ night</span></div>
+                <div class="property-rating"><i class="bi bi-star-fill text-warning"></i> 4.92 <span
+                    class="text-muted fw-normal">(36)</span></div>
+              </div>
+              <div class="d-flex gap-2 mt-3 pt-2 border-top">
+                <a href="stay-details.html?id=prop-2" class="btn btn-verdant-outline btn-sm flex-grow-1">View
+                  Details</a>
+                <a href="booking/booking.html?id=prop-2" class="btn btn-verdant btn-sm flex-grow-1">Book Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stay 3 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="property-card h-100">
+            <div class="property-thumb">
+              <img src="assets/images/cedar-ridge.jpg"
+                alt="Cedar Ridge Mountain Cottage" loading="lazy">
+              <div class="property-badge-group">
+                <span class="badge-category">Mountain Cottages</span>
+              </div>
+              <button class="property-wishlist-btn" data-property-id="prop-4" title="Save to Wishlist"
+                aria-label="Save to Wishlist">
+                <i class="bi bi-heart"></i>
+              </button>
+            </div>
+            <div class="property-body">
+              <div class="property-location"><i class="bi bi-geo-alt-fill text-danger"></i> Stowe, Vermont, USA</div>
+              <h5 class="property-title"><a href="stay-details.html?id=prop-4">Cedar Ridge Mountain Cottage</a></h5>
+              <div class="property-features">
+                <div class="property-feature-item"><i class="bi bi-people"></i> 5 Guests</div>
+                <div class="property-feature-item"><i class="bi bi-door-open"></i> 2 Beds</div>
+                <div class="property-feature-item"><i class="bi bi-droplet"></i> 2 Baths</div>
+              </div>
+              <p class="text-muted small mb-3">Panoramic alpine chalet with outdoor cedar hot tub overlooking misty pine
+                ridges.</p>
+              <div class="property-footer">
+                <div class="property-price">$215 <span>/ night</span></div>
+                <div class="property-rating"><i class="bi bi-star-fill text-warning"></i> 4.95 <span
+                    class="text-muted fw-normal">(52)</span></div>
+              </div>
+              <div class="d-flex gap-2 mt-3 pt-2 border-top">
+                <a href="stay-details.html?id=prop-4" class="btn btn-verdant-outline btn-sm flex-grow-1">View
+                  Details</a>
+                <a href="booking/booking.html?id=prop-4" class="btn btn-verdant btn-sm flex-grow-1">Book Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Agritourism Experience: Farm-to-Table Living -->
+  <section class="py-5 bg-warm-cream">
+    <div class="container py-4">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <span class="section-subtitle">Real Rural Connection</span>
+          <h2 class="section-title mb-3">Where City Fatigue Dissolves Into Stillness</h2>
+          <p class="text-muted mb-4 lead">
+            Verdant Haven is more than comfortable bedding. It is waking to wild mint morning breezes, tasting sourdough
+            straight from wood-fired ovens, and learning ancient farming arts from master hosts.
+          </p>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <div class="p-3 bg-white rounded-3 border">
+                <i class="bi bi-sun text-warning fs-3 mb-2 d-block"></i>
+                <h6 class="fw-bold mb-1">Morning Sourdough</h6>
+                <small class="text-muted">Learn wild-yeast baking beside master bakers.</small>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="p-3 bg-white rounded-3 border">
+                <i class="bi bi-water text-primary fs-3 mb-2 d-block"></i>
+                <h6 class="fw-bold mb-1">Clean Spring Water</h6>
+                <small class="text-muted">Pristine glacial streams & wood-fired hot tubs.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="position-relative">
+            <img src="https://images.unsplash.com/photo-1500076656116-558758c991c1?w=800&auto=format&fit=crop&q=80"
+              class="rounded-4 shadow-lg w-100" alt="Countryside Agritourism">
+            <div
+              class="position-absolute bottom-0 start-0 m-4 p-3 bg-white rounded-3 shadow-md border d-none d-sm-block">
+              <span class="badge bg-success mb-1">Eco Tourism Standard</span>
+              <div class="fw-bold text-dark font-serif">100% Sustainable Practices</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter & Subscription -->
+  <section class="py-5 bg-white border-top">
+    <div class="container py-4 text-center">
+      <div class="max-w-700 mx-auto">
+        <span class="section-subtitle">Secret Countryside Escapes</span>
+        <h2 class="section-title">Join Our Agritourism Journal</h2>
+        <p class="text-muted mb-4">Receive invitations to private seasonal harvest festivals, secret countryside
+          chalets, and 15% welcome vouchers.</p>
+        <form class="row g-2 justify-content-center"
+          onsubmit="event.preventDefault(); showToast('Thank you for subscribing! Your 15% agritourism voucher has been dispatched.', 'success', 'Subscribed'); this.reset();">
+          <div class="col-sm-8 col-md-6">
+            <input type="email" class="form-control py-3" placeholder="Enter your email address..." required>
+          </div>
+          <div class="col-sm-4 col-md-3">
+            <button type="submit" class="btn btn-verdant w-100 py-3">Subscribe</button>
+          </div>
+        </form>
+        <small class="text-muted d-block mt-3"><i class="bi bi-lock me-1"></i> Strictly respectful of your inbox. No
+          spam, ever.</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+          <footer class="verdant-footer" id="main-footer">
+    <div class="container">
+      <!-- Footer Newsletter & Trust Strip -->
+      <div class="footer-newsletter-box p-4 p-lg-5 rounded-4 mb-5">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-6">
+            <div class="d-flex align-items-center gap-3">
+              <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center flex-shrink-0" style="width: 52px; height: 52px; font-size: 1.4rem;">
+                <i class="bi bi-envelope-paper-heart"></i>
+              </div>
+              <div>
+                <h5 class="text-white fw-bold font-serif mb-1" style="padding-bottom:0;">Join The Verdant Journal</h5>
+                <p class="text-white-50 small mb-0">Receive curated harvest guides, secret farmstay openings, and $30 off your inaugural escape.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <form class="footer-newsletter-form d-flex gap-2">
+              <div class="input-group">
+                <span class="input-group-text bg-transparent border-secondary text-white-50"><i class="bi bi-envelope"></i></span>
+                <input type="email" class="form-control" placeholder="Enter your email address" required>
+                <button class="btn btn-verdant px-4 fw-semibold" type="submit">
+                  <i class="bi bi-send-fill me-1"></i> Subscribe
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row mt-4 pt-3 border-top border-secondary border-opacity-25 text-white-50 small g-3">
+          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+            <i class="bi bi-patch-check-fill text-success fs-6"></i>
+            <span>100% Verified Farmstays</span>
+          </div>
+          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+            <i class="bi bi-shield-lock-fill text-success fs-6"></i>
+            <span>Secure SSL Encrypted Checkout</span>
+          </div>
+          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+            <i class="bi bi-arrow-repeat text-success fs-6"></i>
+            <span>Flexible Free Cancellation</span>
+          </div>
+          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+            <i class="bi bi-headset text-success fs-6"></i>
+            <span>24/7 Guest Concierge</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Navigation Columns -->
+      <div class="row g-4 g-lg-5">
+        <!-- Col 1: Brand & Bio -->
+        <div class="col-lg-4">
+          <a class="navbar-brand text-white mb-3 d-inline-flex align-items-center gap-2" href="index.html">
+            <span class="brand-icon"><i class="bi bi-flower1"></i></span>
+            <span class="text-white fs-4 fw-bold font-serif">Verdant Haven</span>
+          </a>
+          <p class="text-white-50 pe-lg-3 mb-4" style="line-height: 1.6;">
+            Curating boutique countryside homestays, heritage organic farmstays, and secluded eco-lodges. Dedicated to regenerative rural tourism, farm-to-table living, and authentic countryside hospitality across Europe, the Americas, and Asia.
+          </p>
+          <div class="d-flex flex-column gap-2 mb-4 text-white-50 small">
+            <div><i class="bi bi-geo-alt-fill text-success me-2"></i>Old Mill Lane, Bourton-on-the-Water, GL54 2BY, UK</div>
+            <div><i class="bi bi-telephone-fill text-success me-2"></i><a href="tel:+441451820441" class="text-white-50 text-decoration-none">+44 1451 820 441</a></div>
+            <div><i class="bi bi-envelope-fill text-success me-2"></i><a href="mailto:concierge@verdanthaven.com" class="text-white-50 text-decoration-none">concierge@verdanthaven.com</a></div>
+          </div>
+          <div class="d-flex gap-2">
+            <a href="https://www.instagram.com/accounts/login/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round bg-transparent text-white border-secondary"
+              aria-label="Instagram" title="Instagram Login"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.facebook.com/login/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round bg-transparent text-white border-secondary"
+              aria-label="Facebook" title="Facebook Login"><i class="bi bi-facebook"></i></a>
+            <a href="https://x.com/i/flow/login" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round bg-transparent text-white border-secondary"
+              aria-label="Twitter" title="X (Twitter) Login"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://www.pinterest.com/login/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round bg-transparent text-white border-secondary"
+              aria-label="Pinterest" title="Pinterest Login"><i class="bi bi-pinterest"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2: Explore Stays -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="fw-bold font-serif text-white mb-3">Explore Stays</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="stays.html">All Stays & Retreats</a></li>
+            <li class="mb-2"><a href="stays.html?category=Luxury+Farmhouses">Luxury Farmhouses</a></li>
+            <li class="mb-2"><a href="stays.html?category=Eco-Lodge">Eco Lodges & Sanctuaries</a></li>
+            <li class="mb-2"><a href="stays.html?category=Mountain+Cabins">Mountain Chalets</a></li>
+            <li class="mb-2"><a href="stays.html?category=Romantic+Getaways">Romantic Cottages</a></li>
+            <li class="mb-2"><a href="stays.html?category=Weekend+Retreats">Weekend Escapes</a></li>
+            <li class="mb-2"><a href="offers.html">Seasonal Packages</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Farm Experiences -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="fw-bold font-serif text-white mb-3">Farm Experiences</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="activities.html">All 15 Experiences</a></li>
+            <li class="mb-2"><a href="activities.html?category=Traditional+Cooking">Cooking & Sourdough</a></li>
+            <li class="mb-2"><a href="activities.html?category=Organic+Farming">Cider & Beekeeping</a></li>
+            <li class="mb-2"><a href="activities.html?category=Horse+Riding">Horseback Riding</a></li>
+            <li class="mb-2"><a href="activities.html?category=Campfire+Nights">Campfire Stargazing</a></li>
+            <li class="mb-2"><a href="activities.html?category=Nature+Walks">Wild Foraging & Walks</a></li>
+            <li class="mb-2"><a href="activities.html?category=Farm+Animal+Feeding">Animal Care & Alpacas</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Guest Services -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="fw-bold font-serif text-white mb-3">Guest Portal</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="guest/dashboard.html">Customer Dashboard</a></li>
+            <li class="mb-2"><a href="guest/bookings.html">My Reservations</a></li>
+            <li class="mb-2"><a href="guest/wishlist.html" class="footer-wishlist-trigger" data-drawer="wishlist">Saved Wishlist</a></li>
+            <li class="mb-2"><a href="auth/login.html" class="footer-auth-trigger" data-auth-tab="signin">Sign In to Account</a></li>
+            <li class="mb-2"><a href="auth/register.html" class="footer-auth-trigger" data-auth-tab="signup">Register an Account</a></li>
+            <li class="mb-2"><a href="faq.html">Help & Support</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 5: Company & Legal -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="fw-bold font-serif text-white mb-3">Company & Trust</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="about.html">Our Story & Heritage</a></li>
+            <li class="mb-2"><a href="blog/blog.html">Journal & Stories</a></li>
+            <li class="mb-2"><a href="contact.html">Contact Concierge</a></li>
+            <li class="mb-2"><a href="faq.html">Booking FAQs</a></li>
+            <li class="mb-2"><a href="privacy.html">Privacy Policy</a></li>
+            <li class="mb-2"><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center py-4 mt-5 border-top border-secondary border-opacity-25 small">
+        <div class="text-white-50 mb-2 mb-md-0">
+          &copy; 2026 Verdant Haven Hospitality Group Ltd. All rights reserved. Registered Sustainable Eco-Tourism Provider.
+        </div>
+        <div class="d-flex align-items-center gap-2 my-2 my-md-0">
+          <span class="text-white-50 d-none d-sm-inline me-1">Accepted Payments:</span>
+          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-credit-card-2-front me-1"></i>Visa</span>
+          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-credit-card me-1"></i>Mastercard</span>
+          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-paypal me-1"></i>PayPal</span>
+          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-apple me-1"></i>Apple Pay</span>
+        </div>
+        <div class="d-flex gap-3 mt-2 mt-lg-0">
+          <a href="privacy.html" class="text-white-50 text-decoration-none hover-white">Privacy Policy</a>
+          <span class="text-secondary">&bull;</span>
+          <a href="terms.html" class="text-white-50 text-decoration-none hover-white">Terms of Service</a>
+          <span class="text-secondary">&bull;</span>
+          <a href="faq.html" class="text-white-50 text-decoration-none hover-white">FAQ</a>
+          <span class="text-secondary">&bull;</span>
+          <a href="contact.html" class="text-white-50 text-decoration-none hover-white">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Template Scripts -->
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- Dynamic Cost Planner Script for Home 2 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('escape-planner-form');
+      const totalDisplay = document.getElementById('planner-total-price');
+      if (!form || !totalDisplay) return;
+
+      function calculateCustomPrice() {
+        let accomRate = 185;
+        const selectedAccom = form.querySelector('input[name="planAccom"]:checked');
+        if (selectedAccom) accomRate = parseFloat(selectedAccom.value);
+
+        let diningRate = 0;
+        const selectedDining = form.querySelector('input[name="planDining"]:checked');
+        if (selectedDining) diningRate = parseFloat(selectedDining.value);
+
+        let activitiesRate = 0;
+        form.querySelectorAll('.planner-check:checked').forEach(chk => {
+          activitiesRate += parseFloat(chk.value);
+        });
+
+        // 2 Nights Stay calculation
+        const nights = 2;
+        const subtotal = (accomRate * nights) + (diningRate * nights) + activitiesRate;
+        const taxes = Math.round(subtotal * 0.08);
+        const total = subtotal + taxes;
+
+        totalDisplay.textContent = `$${total}`;
+      }
+
+      form.querySelectorAll('input').forEach(input => {
+        input.addEventListener('change', calculateCustomPrice);
+      });
+
+      calculateCustomPrice();
+    });
+  </script>
+</body>
+
+</html>

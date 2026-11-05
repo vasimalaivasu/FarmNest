@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frequently Asked Questions - Verdant Haven</title>
+  <meta name="description"
+    content="Find answers regarding booking, cancellations, farm animals, amenities, check-in, and activities.">
+
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/dark-mode.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg verdant-navbar">
+    <div class="container-fluid px-xl-5 px-lg-4 px-3">
+      <a class="navbar-brand" href="index.html">
+        <span class="brand-icon"><i class="bi bi-flower1"></i></span>
+        <span>Verdant Haven</span>
+      </a>
+
+      <div class="d-flex align-items-center order-lg-3 nav-actions">
+        <button class="rtl-toggle-btn" title="Toggle RTL Layout"><i class="bi bi-arrow-left-right"></i></button>
+        <button class="theme-toggle-btn" title="Toggle Dark/Light Mode"><i class="bi bi-moon-stars-fill"></i></button>
+        <a href="#wishlistDrawer" class="wishlist-nav-btn" data-bs-toggle="offcanvas" data-bs-target="#wishlistDrawer"
+          title="Saved Stays">
+          <i class="bi bi-heart"></i>
+          <span class="badge-counter wishlist-counter" style="display: none;">0</span>
+        </a>
+
+        <!-- Auth Container: Initially shows Sign In button only, after login shows Customer Dashboard -->
+        <div id="nav-auth-container" class="nav-auth-area">
+          <button type="button"
+            class="btn btn-verdant btn-sm px-3 d-inline-flex align-items-center gap-1 nav-signin-btn"
+            id="nav-signin-trigger" data-bs-toggle="offcanvas" data-bs-target="#authDrawer" title="Sign In or Register">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Sign In</span>
+          </button>
+        </div>
+
+          <a href="stays.html"
+            class="btn btn-verdant btn-sm px-3 d-none d-sm-inline-flex align-items-center gap-1 nav-book-btn">
+            <i class="bi bi-calendar-check"></i> <span>Book Your Stay</span>
+          </a>
+
+          <button class="navbar-toggler border-0 shadow-none ms-1" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarMain">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      </div>
+
+      <div class="collapse navbar-collapse order-lg-2" id="navbarMain">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Home
+            </a>
+            <ul class="dropdown-menu shadow-sm">
+              <li><a class="dropdown-item" href="index.html"><i class="bi bi-house-door me-2 text-success"></i>Home 1
+                  – Classic Countryside</a></li>
+              <li><a class="dropdown-item" href="index-2.html"><i class="bi bi-tree me-2 text-success"></i>Home 2 –
+                  Eco Luxury Retreats</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="stays.html">Stays & Farmhouses</a></li>
+          <li class="nav-item"><a class="nav-link" href="activities.html">Farm Activities</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="blog/blog.html">Stories</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="py-5 bg-warm-cream border-bottom">
+    <div class="container py-3 text-center max-w-700 mx-auto">
+      <span class="section-subtitle">Help Center & Policies</span>
+      <h1 class="section-title mb-2">Frequently Asked Questions</h1>
+      <p class="text-muted">Everything you need to know about preparing for your stay, checking in, packing, and
+        participating in farm life.</p>
+    </div>
+  </section>
+
+  <!-- Accordion FAQs -->
+  <section class="py-5">
+    <div class="container max-w-800 mx-auto">
+
+      <div class="accordion verdant-accordion" id="faqAccordion">
+
+        <!-- FAQ 1 -->
+        <div class="accordion-item mb-3 border rounded-3 overflow-hidden shadow-sm">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              What should I pack for a countryside farmstay?
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body text-muted">
+              We recommend comfortable waterproof walking boots or wellies, weather-appropriate layers, a warm sweater
+              for evening campfires, and casual clothes that can tolerate light farm dust. All luxury linens, plush
+              towels, organic soaps, and kitchen essentials are provided by your host.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="accordion-item mb-3 border rounded-3 overflow-hidden shadow-sm">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo">
+              Are farm animals safe for children and toddlers?
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body text-muted">
+              Yes! All properties featuring animals have gentle, habituated livestock like Pygmy goats, sheep,
+              free-range ducks, and rescue horses. Animal feeding and petting sessions are always accompanied by your
+              host to guarantee a safe and joyful educational experience for children of all ages.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="accordion-item mb-3 border rounded-3 overflow-hidden shadow-sm">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseThree">
+              What is the cancellation and refund policy?
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body text-muted">
+              Most stays offer 100% full refund up to 7 days before check-in. Cancellation requests made directly
+              through your Guest Dashboard are processed immediately. Exact policies vary by property and are clearly
+              outlined on each property page and during checkout.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="accordion-item mb-3 border rounded-3 overflow-hidden shadow-sm">
+          <h2 class="accordion-header" id="headingFour">
+            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseFour">
+              Can I bring my pet or dog?
+            </button>
+          </h2>
+          <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body text-muted">
+              Many of our homestays and cottages are warmly pet-friendly (look for the "Pet Friendly" badge and filter
+              on the Stays page). We ask that dogs be kept on a lead around working livestock and sheep pastures for
+              safety.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="accordion-item mb-3 border rounded-3 overflow-hidden shadow-sm">
+          <h2 class="accordion-header" id="headingFive">
+            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseFive">
+              Is high-speed Wi-Fi available for remote work?
+            </button>
+          </h2>
+          <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body text-muted">
+              Yes, over 95% of our homestays offer fiber-optic or high-speed satellite Wi-Fi (Starlink) suitable for
+              Zoom video calls, streaming, and remote work retreats. Properties marked "Off-Grid Eco Lodge" have
+              designated digital-detox areas or limited solar-powered connectivity, as detailed in their descriptions.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 6 -->
+        <div class="accordion-item mb-3 border rounded-3 overflow-hidden shadow-sm">
+          <h2 class="accordion-header" id="headingSix">
+            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseSix">
+              How does the demo authentication and booking work?
+            </button>
+          </h2>
+          <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body text-muted">
+              This template uses browser LocalStorage for a fully operational frontend demo experience. You can log in
+              using pre-configured demo credentials (one-click buttons available on the login page for Guest, Admin, or
+              Host), make reservations with instant calculation and promo discounts, and view bookings update in real
+              time across the dashboards!
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <!-- Footer -->
+          <footer class="verdant-footer" id="main-footer">
+    <div class="container">
+      <!-- Footer Newsletter & Trust Strip -->
+      <div class="footer-newsletter-box p-4 p-lg-5 rounded-4 mb-5">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-6">
+            <div class="d-flex align-items-center gap-3">
+              <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center flex-shrink-0" style="width: 52px; height: 52px; font-size: 1.4rem;">
+                <i class="bi bi-envelope-paper-heart"></i>
+              </div>
+              <div>
+                <h5 class="text-white fw-bold font-serif mb-1" style="padding-bottom:0;">Join The Verdant Journal</h5>
+                <p class="text-white-50 small mb-0">Receive curated harvest guides, secret farmstay openings, and $30 off your inaugural escape.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <form class="footer-newsletter-form d-flex gap-2">
+              <div class="input-group">
+                <span class="input-group-text bg-transparent border-secondary text-white-50"><i class="bi bi-envelope"></i></span>
+                <input type="email" class="form-control" placeholder="Enter your email address" required>
+                <button class="btn btn-verdant px-4 fw-semibold" type="submit">
+                  <i class="bi bi-send-fill me-1"></i> Subscribe
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row mt-4 pt-3 border-top border-secondary border-opacity-25 text-white-50 small g-3">
+          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+            <i class="bi bi-patch-check-fill text-success fs-6"></i>
+            <span>100% Verified Farmstays</span>
+          </div>
+          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+            <i class="bi bi-shield-lock-fill text-success fs-6"></i>
+            <span>Secure SSL Encrypted Checkout</span>
+          </div>
+          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+            <i class="bi bi-arrow-repeat text-success fs-6"></i>
+            <span>Flexible Free Cancellation</span>
+          </div>
+          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+            <i class="bi bi-headset text-success fs-6"></i>
+            <span>24/7 Guest Concierge</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Navigation Columns -->
+      <div class="row g-4 g-lg-5">
+        <!-- Col 1: Brand & Bio -->
+        <div class="col-lg-4">
+          <a class="navbar-brand text-white mb-3 d-inline-flex align-items-center gap-2" href="index.html">
+            <span class="brand-icon"><i class="bi bi-flower1"></i></span>
+            <span class="text-white fs-4 fw-bold font-serif">Verdant Haven</span>
+          </a>
+          <p class="text-white-50 pe-lg-3 mb-4" style="line-height: 1.6;">
+            Curating boutique countryside homestays, heritage organic farmstays, and secluded eco-lodges. Dedicated to regenerative rural tourism, farm-to-table living, and authentic countryside hospitality across Europe, the Americas, and Asia.
+          </p>
+          <div class="d-flex flex-column gap-2 mb-4 text-white-50 small">
+            <div><i class="bi bi-geo-alt-fill text-success me-2"></i>Old Mill Lane, Bourton-on-the-Water, GL54 2BY, UK</div>
+            <div><i class="bi bi-telephone-fill text-success me-2"></i><a href="tel:+441451820441" class="text-white-50 text-decoration-none">+44 1451 820 441</a></div>
+            <div><i class="bi bi-envelope-fill text-success me-2"></i><a href="mailto:concierge@verdanthaven.com" class="text-white-50 text-decoration-none">concierge@verdanthaven.com</a></div>
+          </div>
+          <div class="d-flex gap-2">
+            <a href="https://www.instagram.com/accounts/login/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round bg-transparent text-white border-secondary"
+              aria-label="Instagram" title="Instagram Login"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.facebook.com/login/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round bg-transparent text-white border-secondary"
+              aria-label="Facebook" title="Facebook Login"><i class="bi bi-facebook"></i></a>
+            <a href="https://x.com/i/flow/login" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round bg-transparent text-white border-secondary"
+              aria-label="Twitter" title="X (Twitter) Login"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://www.pinterest.com/login/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round bg-transparent text-white border-secondary"
+              aria-label="Pinterest" title="Pinterest Login"><i class="bi bi-pinterest"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2: Explore Stays -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="fw-bold font-serif text-white mb-3">Explore Stays</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="stays.html">All Stays & Retreats</a></li>
+            <li class="mb-2"><a href="stays.html?category=Luxury+Farmhouses">Luxury Farmhouses</a></li>
+            <li class="mb-2"><a href="stays.html?category=Eco-Lodge">Eco Lodges & Sanctuaries</a></li>
+            <li class="mb-2"><a href="stays.html?category=Mountain+Cabins">Mountain Chalets</a></li>
+            <li class="mb-2"><a href="stays.html?category=Romantic+Getaways">Romantic Cottages</a></li>
+            <li class="mb-2"><a href="stays.html?category=Weekend+Retreats">Weekend Escapes</a></li>
+            <li class="mb-2"><a href="offers.html">Seasonal Packages</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Farm Experiences -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="fw-bold font-serif text-white mb-3">Farm Experiences</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="activities.html">All 15 Experiences</a></li>
+            <li class="mb-2"><a href="activities.html?category=Traditional+Cooking">Cooking & Sourdough</a></li>
+            <li class="mb-2"><a href="activities.html?category=Organic+Farming">Cider & Beekeeping</a></li>
+            <li class="mb-2"><a href="activities.html?category=Horse+Riding">Horseback Riding</a></li>
+            <li class="mb-2"><a href="activities.html?category=Campfire+Nights">Campfire Stargazing</a></li>
+            <li class="mb-2"><a href="activities.html?category=Nature+Walks">Wild Foraging & Walks</a></li>
+            <li class="mb-2"><a href="activities.html?category=Farm+Animal+Feeding">Animal Care & Alpacas</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Guest Services -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="fw-bold font-serif text-white mb-3">Guest Portal</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="guest/dashboard.html">Customer Dashboard</a></li>
+            <li class="mb-2"><a href="guest/bookings.html">My Reservations</a></li>
+            <li class="mb-2"><a href="guest/wishlist.html" class="footer-wishlist-trigger" data-drawer="wishlist">Saved Wishlist</a></li>
+            <li class="mb-2"><a href="auth/login.html" class="footer-auth-trigger" data-auth-tab="signin">Sign In to Account</a></li>
+            <li class="mb-2"><a href="auth/register.html" class="footer-auth-trigger" data-auth-tab="signup">Register an Account</a></li>
+            <li class="mb-2"><a href="faq.html">Help & Support</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 5: Company & Legal -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="fw-bold font-serif text-white mb-3">Company & Trust</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="about.html">Our Story & Heritage</a></li>
+            <li class="mb-2"><a href="blog/blog.html">Journal & Stories</a></li>
+            <li class="mb-2"><a href="contact.html">Contact Concierge</a></li>
+            <li class="mb-2"><a href="faq.html">Booking FAQs</a></li>
+            <li class="mb-2"><a href="privacy.html">Privacy Policy</a></li>
+            <li class="mb-2"><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center py-4 mt-5 border-top border-secondary border-opacity-25 small">
+        <div class="text-white-50 mb-2 mb-md-0">
+          &copy; 2026 Verdant Haven Hospitality Group Ltd. All rights reserved. Registered Sustainable Eco-Tourism Provider.
+        </div>
+        <div class="d-flex align-items-center gap-2 my-2 my-md-0">
+          <span class="text-white-50 d-none d-sm-inline me-1">Accepted Payments:</span>
+          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-credit-card-2-front me-1"></i>Visa</span>
+          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-credit-card me-1"></i>Mastercard</span>
+          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-paypal me-1"></i>PayPal</span>
+          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-apple me-1"></i>Apple Pay</span>
+        </div>
+        <div class="d-flex gap-3 mt-2 mt-lg-0">
+          <a href="privacy.html" class="text-white-50 text-decoration-none hover-white">Privacy Policy</a>
+          <span class="text-secondary">&bull;</span>
+          <a href="terms.html" class="text-white-50 text-decoration-none hover-white">Terms of Service</a>
+          <span class="text-secondary">&bull;</span>
+          <a href="faq.html" class="text-white-50 text-decoration-none hover-white">FAQ</a>
+          <span class="text-secondary">&bull;</span>
+          <a href="contact.html" class="text-white-50 text-decoration-none hover-white">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>
