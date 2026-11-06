@@ -113,21 +113,99 @@ function applyRTL(dir) {
 function initNavbar() {
   const navbar = document.querySelector('.verdant-navbar');
   if (navbar) {
+    if (window.scrollY > 40) {
+      navbar.classList.add('scrolled');
+    }
     window.addEventListener('scroll', () => {
       if (window.scrollY > 40) {
         navbar.classList.add('scrolled');
       } else {
         navbar.classList.remove('scrolled');
       }
-    });
+    }, { passive: true });
   }
 
-  // Mobile menu close on link click
-  document.querySelectorAll('.navbar-collapse .nav-link').forEach(link => {
+  // Mobile menu close on in-page hash links ONLY (e.g. href="#explore")
+  // Real multi-page navigation links (index.html, index-2.html, stays.html, etc.) must navigate naturally without being aborted by a collapsing animation
+  document.querySelectorAll('.navbar-collapse a[href^="#"]:not([href="#"]):not([data-bs-toggle])').forEach(link => {
     link.addEventListener('click', () => {
-      const bsCollapse = bootstrap.Collapse.getInstance(document.querySelector('.navbar-collapse'));
-      if (bsCollapse) bsCollapse.hide();
+      const collapseEl = document.querySelector('.navbar-collapse');
+      if (collapseEl && collapseEl.classList.contains('show') && typeof bootstrap !== 'undefined' && bootstrap.Collapse) {
+        const bsCollapse = bootstrap.Collapse.getInstance(collapseEl);
+        if (bsCollapse) bsCollapse.hide();
+      }
     });
+  });
+
+  // Navbar dropdown toggle (ensures dropdown opens reliably on mobile, tablet, and desktop)
+  document.querySelectorAll('.verdant-navbar .dropdown-toggle').forEach(toggleBtn => {
+    toggleBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const parentDropdown = toggleBtn.closest('.dropdown');
+      const menu = parentDropdown ? parentDropdown.querySelector('.dropdown-menu') : null;
+      if (!menu) return;
+
+      const isShown = menu.classList.contains('show');
+
+      // Close any other open dropdowns in navbar
+      document.querySelectorAll('.verdant-navbar .dropdown-menu.show').forEach(m => {
+        if (m !== menu) m.classList.remove('show');
+      });
+      document.querySelectorAll('.verdant-navbar .dropdown.show').forEach(d => {
+        if (d !== parentDropdown) d.classList.remove('show');
+      });
+      document.querySelectorAll('.verdant-navbar .dropdown-toggle.show, .verdant-navbar .dropdown-toggle[aria-expanded="true"]').forEach(btn => {
+        if (btn !== toggleBtn) {
+          btn.classList.remove('show');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      if (isShown) {
+        menu.classList.remove('show');
+        toggleBtn.classList.remove('show');
+        if (parentDropdown) parentDropdown.classList.remove('show');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      } else {
+        menu.classList.add('show');
+        toggleBtn.classList.add('show');
+        if (parentDropdown) parentDropdown.classList.add('show');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // Desktop hover auto-dismiss when cursor leaves dropdown
+  document.querySelectorAll('.verdant-navbar .dropdown').forEach(dropdownEl => {
+    dropdownEl.addEventListener('mouseleave', () => {
+      if (window.innerWidth >= 992) {
+        const menu = dropdownEl.querySelector('.dropdown-menu');
+        const toggleBtn = dropdownEl.querySelector('.dropdown-toggle');
+        if (menu) menu.classList.remove('show');
+        dropdownEl.classList.remove('show');
+        if (toggleBtn) {
+          toggleBtn.classList.remove('show');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        }
+      }
+    });
+  });
+
+  // Close dropdown menu when clicking anywhere outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.verdant-navbar .dropdown')) {
+      document.querySelectorAll('.verdant-navbar .dropdown-menu.show').forEach(m => {
+        m.classList.remove('show');
+      });
+      document.querySelectorAll('.verdant-navbar .dropdown.show').forEach(d => {
+        d.classList.remove('show');
+      });
+      document.querySelectorAll('.verdant-navbar .dropdown-toggle[aria-expanded="true"], .verdant-navbar .dropdown-toggle.show').forEach(btn => {
+        btn.classList.remove('show');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    }
   });
 }
 
@@ -521,22 +599,24 @@ function renderAuthDrawer(activeTab = 'signin') {
 }
 
 function handleDrawerSocialAuth(provider) {
-  if (provider === 'Google') {
-    window.open('https://accounts.google.com/signin', '_blank', 'noopener,noreferrer');
-  } else if (provider === 'Apple') {
-    window.open('https://appleid.apple.com/sign-in', '_blank', 'noopener,noreferrer');
-  }
   if (!window.VerdantDB) return;
-  const email = provider === 'Google' ? 'elena.rostova@gmail.com' : 's.jenkins@privaterelay.appleid.com';
-  const name = provider === 'Google' ? 'Elena Rostova' : 'Sarah Jenkins';
+  const inputEmail = prompt(`Please enter your ${provider} account email address to continue:`);
+  if (!inputEmail) return;
+  const cleanEmail = inputEmail.trim().toLowerCase();
+  if (!cleanEmail.includes('@') || !cleanEmail.includes('.')) {
+    showToast('Please enter a valid email address.', 'warning', 'Social Sign-In');
+    return;
+  }
 
-  let user = VerdantDB.getUsers().find(u => u.email.toLowerCase() === email.toLowerCase());
+  let user = VerdantDB.getUsers().find(u => u.email.toLowerCase() === cleanEmail);
   if (!user) {
+    const defaultName = cleanEmail.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    const regName = prompt(`Enter your full name for this account:`, defaultName) || defaultName;
     const regRes = VerdantDB.register({
-      name: name,
-      email: email,
-      phone: '+1 (555) 234-5678',
-      password: 'SocialUser@2026',
+      name: regName,
+      email: cleanEmail,
+      phone: '',
+      password: 'SocialUser@' + Math.floor(1000 + Math.random() * 9000),
       role: 'guest',
       avatar: null
     });
@@ -545,7 +625,7 @@ function handleDrawerSocialAuth(provider) {
     VerdantDB.setCurrentUser(user);
   }
 
-  showToast(`Signed in with ${provider} successfully!`, 'success', 'Connected');
+  showToast(`Signed in as ${user.name}!`, 'success', 'Connected');
   initNavbarAuth();
   renderAuthDrawer();
   closeAuthDrawer();

@@ -234,6 +234,31 @@ body.dark-mode .navbar-nav .nav-link.active {
   color: #74c69d !important;
 }
 
+[data-bs-theme="dark"] .navbar-toggler,
+body.dark-mode .navbar-toggler {
+  background: #14221b !important;
+  border-color: #273e31 !important;
+  color: #f1f5f9 !important;
+}
+
+[data-bs-theme="dark"] .navbar-toggler .navbar-toggler-icon,
+body.dark-mode .navbar-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23f1f5f9' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2.2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+[data-bs-theme="dark"] .navbar-toggler:hover,
+[data-bs-theme="dark"] .navbar-toggler[aria-expanded="true"],
+body.dark-mode .navbar-toggler:hover,
+body.dark-mode .navbar-toggler[aria-expanded="true"] {
+  background: #1b4332 !important;
+  border-color: #52b788 !important;
+}
+
+[data-bs-theme="dark"] .nav-item-split .dropdown-toggle-split,
+body.dark-mode .nav-item-split .dropdown-toggle-split {
+  color: #cbd5e1 !important;
+}
+
 
 /* Dropdowns in dark mode */
 [data-bs-theme="dark"] .dropdown-menu,
@@ -519,4 +544,40 @@ body.dark-mode .property-wishlist-btn:hover {
   [data-bs-theme="dark"] .nav-account-chevron,
   body.dark-mode .nav-account-chevron {
     color: #a3b8ab !important;
+  }
+
+  /* Escape Planner Customizer in Dark Mode */
+  [data-bs-theme="dark"] #escape-planner-form .form-check,
+  body.dark-mode #escape-planner-form .form-check {
+    background-color: #16261e !important;
+    border-color: #273e31 !important;
+    color: #f1f5f9 !important;
+  }
+
+  [data-bs-theme="dark"] #escape-planner-form .form-check:hover,
+  body.dark-mode #escape-planner-form .form-check:hover {
+    background-color: #1f3629 !important;
+    border-color: #52b788 !important;
+  }
+
+  [data-bs-theme="dark"] #escape-planner-form .form-check:has(:checked),
+  body.dark-mode #escape-planner-form .form-check:has(:checked) {
+    background-color: rgba(82, 183, 136, 0.15) !important;
+    border-color: #52b788 !important;
+    box-shadow: 0 0 0 1px #52b788;
+  }
+
+  /* Popular Haven Chips in Dark Mode */
+  [data-bs-theme="dark"] .haven-chip,
+  body.dark-mode .haven-chip {
+    background-color: rgba(22, 38, 30, 0.85) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: #e2e8f0 !important;
+  }
+
+  [data-bs-theme="dark"] .haven-chip:hover,
+  body.dark-mode .haven-chip:hover {
+    background-color: rgba(45, 106, 79, 0.95) !important;
+    border-color: #52b788 !important;
+    color: #ffffff !important;
   }

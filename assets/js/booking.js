@@ -384,8 +384,9 @@ function initBookingConfirmation() {
   const params = new URLSearchParams(window.location.search);
   const bookingId = params.get('id');
 
-  const bookings = VerdantDB.getBookings();
-  const booking = bookings.find(b => b.id === bookingId) || bookings[0];
+  const user = window.VerdantDB ? VerdantDB.getCurrentUser() : null;
+  const bookings = user ? VerdantDB.getUserBookings(user.email) : VerdantDB.getBookings();
+  const booking = bookingId ? bookings.find(b => b.id === bookingId) : (bookings.length > 0 ? bookings[0] : null);
 
   if (!booking) return;
 

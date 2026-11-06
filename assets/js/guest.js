@@ -45,13 +45,14 @@ function initGuestAuthProtection() {
 }
 
 function initGuestTopbarUser() {
-  const user = VerdantDB.getCurrentUser() || { name: 'Sarah Jenkins', email: 'guest@homestay.com' };
+  const user = VerdantDB.getCurrentUser();
+  if (!user) return;
   const avatarUrl = window.VerdantDB ? VerdantDB.getUserAvatar(user, 120) : '';
-  document.querySelectorAll('.current-user-name').forEach(el => el.textContent = user.name);
-  document.querySelectorAll('.current-user-email').forEach(el => el.textContent = user.email);
+  document.querySelectorAll('.current-user-name').forEach(el => el.textContent = user.name || 'Guest Member');
+  document.querySelectorAll('.current-user-email').forEach(el => el.textContent = user.email || '');
   document.querySelectorAll('.current-user-avatar').forEach(img => {
     img.src = avatarUrl;
-    img.alt = user.name;
+    img.alt = user.name || 'Guest Member';
   });
 
   // Logout buttons
@@ -61,8 +62,8 @@ function initGuestTopbarUser() {
       VerdantDB.logout();
       showToast('Logged out successfully', 'info', 'Session');
       setTimeout(() => {
-        window.location.href = '../auth/login.html';
-      }, 500);
+        window.location.href = '../index.html';
+      }, 400);
     });
   });
 }
@@ -72,7 +73,8 @@ function initGuestTopbarUser() {
 =================================================================== */
 function initGuestDashboardOverview() {
   const user = VerdantDB.getCurrentUser();
-  const bookings = VerdantDB.getBookings(); // or filter by user.email
+  if (!user) return;
+  const bookings = VerdantDB.getUserBookings(user.email);
   const wishlist = VerdantDB.getWishlist();
 
   const upcoming = bookings.filter(b => b.bookingStatus === 'Upcoming' || b.bookingStatus === 'Checked In');
@@ -135,29 +137,40 @@ function initGuestDashboardOverview() {
   // Recent Bookings Table
   const tableBody = document.getElementById('dash-recent-bookings-tbody');
   if (tableBody) {
-    tableBody.innerHTML = bookings.slice(0, 5).map(b => `
-      <tr>
-        <td><strong>#${b.id}</strong></td>
-        <td>
-          <div class="d-flex align-items-center gap-2">
-            <img src="${b.propertyImage}" class="rounded-2" style="width: 44px; height: 38px; object-fit: cover;">
-            <div>
-              <div class="fw-bold">${b.propertyName}</div>
-              <small class="text-muted">${b.roomType}</small>
+    if (bookings.length === 0) {
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="7" class="text-center py-4 text-muted">
+            <i class="bi bi-calendar-x d-block fs-3 mb-2 text-muted"></i>
+            No countryside reservations made yet. <a href="../stays.html" class="text-success fw-bold">Book your first stay</a>
+          </td>
+        </tr>
+      `;
+    } else {
+      tableBody.innerHTML = bookings.slice(0, 5).map(b => `
+        <tr>
+          <td><strong>#${b.id}</strong></td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <img src="${(window.VerdantDB && VerdantDB.resolveImagePath) ? VerdantDB.resolveImagePath(b.propertyImage) : b.propertyImage}" class="rounded-2" style="width: 44px; height: 38px; object-fit: cover;">
+              <div>
+                <div class="fw-bold">${b.propertyName}</div>
+                <small class="text-muted">${b.roomType}</small>
+              </div>
             </div>
-          </div>
-        </td>
-        <td>${b.checkIn}</td>
-        <td>${b.nights} Nts</td>
-        <td><strong>$${b.totalAmount}</strong></td>
-        <td>${getStatusBadge(b.bookingStatus)}</td>
-        <td>
-          <a href="booking-details.html?id=${b.id}" class="btn btn-sm btn-outline-secondary py-1 px-2" title="View Details">
-            <i class="bi bi-eye"></i>
-          </a>
-        </td>
-      </tr>
-    `).join('');
+          </td>
+          <td>${b.checkIn}</td>
+          <td>${b.nights} Nts</td>
+          <td><strong>$${b.totalAmount}</strong></td>
+          <td>${getStatusBadge(b.bookingStatus)}</td>
+          <td>
+            <a href="booking-details.html?id=${b.id}" class="btn btn-sm btn-outline-secondary py-1 px-2" title="View Details">
+              <i class="bi bi-eye"></i>
+            </a>
+          </td>
+        </tr>
+      `).join('');
+    }
   }
 }
 
@@ -170,7 +183,8 @@ function initGuestBookingsPage() {
   let currentFilter = 'all';
 
   function renderList() {
-    let bookings = VerdantDB.getBookings();
+    const user = VerdantDB.getCurrentUser();
+    let bookings = user ? VerdantDB.getUserBookings(user.email) : [];
     if (currentFilter !== 'all') {
       bookings = bookings.filter(b => b.bookingStatus.toLowerCase() === currentFilter.toLowerCase());
     }
@@ -192,7 +206,7 @@ function initGuestBookingsPage() {
         <div class="card-body p-4">
           <div class="row align-items-center">
             <div class="col-md-2 mb-3 mb-md-0">
-              <img src="${b.propertyImage}" class="rounded-3 w-100" style="height: 95px; object-fit: cover;" alt="${b.propertyName}">
+              <img src="${(window.VerdantDB && VerdantDB.resolveImagePath) ? VerdantDB.resolveImagePath(b.propertyImage) : b.propertyImage}" class="rounded-3 w-100" style="height: 95px; object-fit: cover;" alt="${b.propertyName}">
             </div>
             <div class="col-md-4 mb-3 mb-md-0">
               <div class="d-flex align-items-center gap-2 mb-1">
@@ -255,9 +269,24 @@ window.openCancelModal = function (id) {
 function initGuestBookingDetailsPage() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
-  const booking = VerdantDB.getBooking(id) || VerdantDB.getBookings()[0];
+  const user = VerdantDB.getCurrentUser();
+  const userBookings = user ? VerdantDB.getUserBookings(user.email) : [];
+  const booking = userBookings.find(b => b.id === id) || (id ? VerdantDB.getBooking(id) : null);
 
-  if (!booking) return;
+  if (!booking) {
+    const main = document.querySelector('.dashboard-content');
+    if (main) {
+      main.innerHTML = `
+        <div class="card p-5 text-center border rounded-4 bg-white shadow-sm my-4">
+          <i class="bi bi-calendar-x text-muted fs-1 mb-2"></i>
+          <h4 class="font-serif">Reservation Not Found</h4>
+          <p class="text-muted">This booking does not exist or does not belong to your account.</p>
+          <a href="bookings.html" class="btn btn-verdant btn-sm mx-auto px-4 py-2 mt-2">Back to My Reservations</a>
+        </div>
+      `;
+    }
+    return;
+  }
 
   const setT = (elemId, text) => {
     const el = document.getElementById(elemId);
@@ -363,7 +392,8 @@ function initGuestWishlistPage() {
           </div>
         </div>
       </div>
-    `).join('');
+      `;
+    }).join('');
   }
 
   renderWishlist();
@@ -383,7 +413,19 @@ function initGuestPaymentsPage() {
   const tbody = document.getElementById('guest-payments-tbody');
   if (!tbody) return;
 
-  const bookings = VerdantDB.getBookings();
+  const user = VerdantDB.getCurrentUser();
+  const bookings = user ? VerdantDB.getUserBookings(user.email) : [];
+
+  if (bookings.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="8" class="text-center py-4 text-muted">
+          No payment transactions found for your account.
+        </td>
+      </tr>
+    `;
+    return;
+  }
 
   tbody.innerHTML = bookings.map((b, idx) => `
     <tr>
@@ -425,7 +467,7 @@ function initGuestProfilePage() {
   if (emailInput) emailInput.value = user.email || '';
   if (phoneInput) phoneInput.value = user.phone || '';
   if (addressInput) addressInput.value = user.address || '';
-  if (countryInput) countryInput.value = user.country || 'United States';
+  if (countryInput) countryInput.value = user.country || '';
   if (langInput) langInput.value = user.language || 'English';
 
   const form = document.getElementById('profile-form');
@@ -480,9 +522,10 @@ function initGuestNotificationsPage() {
   const markAllBtn = document.getElementById('mark-all-read-btn');
 
   function renderNotifications() {
-    const list = VerdantDB.getNotifications();
+    const user = VerdantDB.getCurrentUser();
+    const list = user ? VerdantDB.getUserNotifications(user.email) : [];
     if (list.length === 0) {
-      container.innerHTML = `<div class="p-5 text-center text-muted">No notifications yet.</div>`;
+      container.innerHTML = `<div class="p-5 text-center text-muted">No notifications yet for your account.</div>`;
       return;
     }
 
@@ -499,7 +542,10 @@ function initGuestNotificationsPage() {
 
   if (markAllBtn) {
     markAllBtn.addEventListener('click', () => {
-      VerdantDB.markAllNotificationsRead();
+      const user = VerdantDB.getCurrentUser();
+      if (user) {
+        VerdantDB.markUserNotificationsRead(user.email);
+      }
       renderNotifications();
       showToast('All notifications marked as read', 'info', 'Notifications');
     });

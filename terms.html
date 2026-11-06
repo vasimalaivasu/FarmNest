@@ -22,7 +22,7 @@
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg verdant-navbar">
+  <nav class="navbar navbar-expand-lg verdant-navbar sticky-top">
     <div class="container-fluid px-xl-5 px-lg-4 px-3">
       <a class="navbar-brand" href="index.html">
         <span class="brand-icon"><i class="bi bi-flower1"></i></span>
@@ -61,14 +61,28 @@
 
       <div class="collapse navbar-collapse order-lg-2" id="navbarMain">
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <!-- Desktop: Home Dropdown (visible only on desktop >= 992px) -->
+          <li class="nav-item dropdown d-none d-lg-block">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
               Home
             </a>
             <ul class="dropdown-menu shadow-sm">
-              <li><a class="dropdown-item" href="index.html"><i class="bi bi-house-door me-2 text-success"></i>Home 1 – Classic Countryside</a></li>
-              <li><a class="dropdown-item" href="index-2.html"><i class="bi bi-tree me-2 text-success"></i>Home 2 – Eco Luxury Retreats</a></li>
+              <li><a class="dropdown-item" href="index.html"><i
+                    class="bi bi-house-door me-2 text-success"></i>Home 1 &ndash; Classic Countryside</a></li>
+              <li><a class="dropdown-item" href="index-2.html"><i
+                    class="bi bi-tree me-2 text-success"></i>Home 2 &ndash; Eco Luxury Retreats</a></li>
             </ul>
+          </li>
+          <!-- Mobile / Tablet (Hamburger drawer): Listed directly in navbar -->
+          <li class="nav-item d-lg-none">
+            <a class="nav-link" href="index.html">
+              <i class="bi bi-house-door me-2 text-success"></i>Home 1 &ndash; Classic Countryside
+            </a>
+          </li>
+          <li class="nav-item d-lg-none">
+            <a class="nav-link" href="index-2.html">
+              <i class="bi bi-tree me-2 text-success"></i>Home 2 &ndash; Eco Luxury Retreats
+            </a>
           </li>
           <li class="nav-item"><a class="nav-link" href="stays.html">Stays & Farmhouses</a></li>
           <li class="nav-item"><a class="nav-link" href="activities.html">Farm Activities</a></li>
@@ -106,8 +120,8 @@
     <div class="container">
       <div class="row g-5">
         <div class="col-lg-8">
-          <div class="bg-white p-4 p-md-5 rounded-4 border shadow-sm mb-4">
-            <div class="d-flex align-items-center justify-content-between pb-3 mb-4 border-bottom">
+          <div class="bg-white p-3 p-sm-4 p-md-5 rounded-4 border shadow-sm mb-4 legal-doc-card">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 pb-3 mb-4 border-bottom legal-doc-header">
               <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill">
                 <i class="bi bi-file-earmark-text me-1"></i> Official Hospitality Agreement
               </span>
@@ -152,7 +166,7 @@
         </div>
 
         <div class="col-lg-4">
-          <div class="card border rounded-4 p-4 bg-white shadow-sm mb-4 sticky-top" style="top: 100px;">
+          <div class="card border rounded-4 p-3 p-sm-4 bg-white shadow-sm mb-4 sticky-top" style="top: 100px;">
             <h5 class="font-serif fw-bold mb-3">Legal & Trust Links</h5>
             <ul class="list-unstyled mb-4">
               <li class="mb-2"><a href="terms.html" class="fw-bold text-success text-decoration-none"><i class="bi bi-chevron-right me-1"></i> Terms of Service & Booking</a></li>
@@ -173,19 +187,19 @@
   </section>
 
   <!-- Professional Verdant Footer -->
-          <footer class="verdant-footer" id="main-footer">
+                <footer class="verdant-footer" id="main-footer">
     <div class="container">
-      <!-- Footer Newsletter & Trust Strip -->
-      <div class="footer-newsletter-box p-4 p-lg-5 rounded-4 mb-5">
-        <div class="row align-items-center g-4">
+      <!-- Concise Newsletter Bar -->
+      <div class="footer-newsletter-box p-3 p-md-4 rounded-4 mb-4">
+        <div class="row align-items-center g-3">
           <div class="col-lg-6">
             <div class="d-flex align-items-center gap-3">
-              <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center flex-shrink-0" style="width: 52px; height: 52px; font-size: 1.4rem;">
+              <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center flex-shrink-0" style="width: 44px; height: 44px; font-size: 1.2rem;">
                 <i class="bi bi-envelope-paper-heart"></i>
               </div>
               <div>
-                <h5 class="text-white fw-bold font-serif mb-1" style="padding-bottom:0;">Join The Verdant Journal</h5>
-                <p class="text-white-50 small mb-0">Receive curated harvest guides, secret farmstay openings, and $30 off your inaugural escape.</p>
+                <h6 class="text-white fw-bold font-serif mb-0">Join The Verdant Journal</h6>
+                <p class="text-white-50 small mb-0">Seasonal harvest guides, secret farmstay openings, and $30 welcome voucher.</p>
               </div>
             </div>
           </div>
@@ -194,46 +208,28 @@
               <div class="input-group">
                 <span class="input-group-text bg-transparent border-secondary text-white-50"><i class="bi bi-envelope"></i></span>
                 <input type="email" class="form-control" placeholder="Enter your email address" required>
-                <button class="btn btn-verdant px-4 fw-semibold" type="submit">
+                <button class="btn btn-verdant px-3 fw-semibold" type="submit">
                   <i class="bi bi-send-fill me-1"></i> Subscribe
                 </button>
               </div>
             </form>
           </div>
         </div>
-        <div class="row mt-4 pt-3 border-top border-secondary border-opacity-25 text-white-50 small g-3">
-          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
-            <i class="bi bi-patch-check-fill text-success fs-6"></i>
-            <span>100% Verified Farmstays</span>
-          </div>
-          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
-            <i class="bi bi-shield-lock-fill text-success fs-6"></i>
-            <span>Secure SSL Encrypted Checkout</span>
-          </div>
-          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
-            <i class="bi bi-arrow-repeat text-success fs-6"></i>
-            <span>Flexible Free Cancellation</span>
-          </div>
-          <div class="col-6 col-md-3 d-flex align-items-center gap-2">
-            <i class="bi bi-headset text-success fs-6"></i>
-            <span>24/7 Guest Concierge</span>
-          </div>
-        </div>
       </div>
 
       <!-- Main Navigation Columns -->
-      <div class="row g-4 g-lg-5">
-        <!-- Col 1: Brand & Bio -->
-        <div class="col-lg-4">
-          <a class="navbar-brand text-white mb-3 d-inline-flex align-items-center gap-2" href="index.html">
+      <div class="row g-4">
+        <!-- Col 1: Brand & Contact -->
+        <div class="col-lg-4 col-md-12">
+          <a class="navbar-brand text-white mb-2 d-inline-flex align-items-center gap-2" href="index.html">
             <span class="brand-icon"><i class="bi bi-flower1"></i></span>
-            <span class="text-white fs-4 fw-bold font-serif">Verdant Haven</span>
+            <span class="text-white fs-5 fw-bold font-serif">Verdant Haven</span>
           </a>
-          <p class="text-white-50 pe-lg-3 mb-4" style="line-height: 1.6;">
-            Curating boutique countryside homestays, heritage organic farmstays, and secluded eco-lodges. Dedicated to regenerative rural tourism, farm-to-table living, and authentic countryside hospitality across Europe, the Americas, and Asia.
+          <p class="text-white-50 small mb-3" style="line-height: 1.5; max-width: 360px;">
+            Boutique countryside homestays, heritage organic farmstays, and secluded eco-lodges dedicated to regenerative rural tourism.
           </p>
-          <div class="d-flex flex-column gap-2 mb-4 text-white-50 small">
-            <div><i class="bi bi-geo-alt-fill text-success me-2"></i>Old Mill Lane, Bourton-on-the-Water, GL54 2BY, UK</div>
+          <div class="d-flex flex-column gap-1 mb-3 text-white-50 small">
+            <div><i class="bi bi-geo-alt-fill text-success me-2"></i>Bourton-on-the-Water, GL54 2BY, United Kingdom</div>
             <div><i class="bi bi-telephone-fill text-success me-2"></i><a href="tel:+441451820441" class="text-white-50 text-decoration-none">+44 1451 820 441</a></div>
             <div><i class="bi bi-envelope-fill text-success me-2"></i><a href="mailto:concierge@verdanthaven.com" class="text-white-50 text-decoration-none">concierge@verdanthaven.com</a></div>
           </div>
@@ -250,52 +246,38 @@
         </div>
 
         <!-- Col 2: Explore Stays -->
-        <div class="col-6 col-md-3 col-lg-2">
-          <h5 class="fw-bold font-serif text-white mb-3">Explore Stays</h5>
-          <ul class="list-unstyled footer-links">
+        <div class="col-6 col-md-4 col-lg-2 offset-lg-1">
+          <h6 class="fw-bold font-serif text-white mb-3">Explore Stays</h6>
+          <ul class="list-unstyled footer-links small">
             <li class="mb-2"><a href="stays.html">All Stays & Retreats</a></li>
             <li class="mb-2"><a href="stays.html?category=Luxury+Farmhouses">Luxury Farmhouses</a></li>
             <li class="mb-2"><a href="stays.html?category=Eco-Lodge">Eco Lodges & Sanctuaries</a></li>
             <li class="mb-2"><a href="stays.html?category=Mountain+Cabins">Mountain Chalets</a></li>
             <li class="mb-2"><a href="stays.html?category=Romantic+Getaways">Romantic Cottages</a></li>
-            <li class="mb-2"><a href="stays.html?category=Weekend+Retreats">Weekend Escapes</a></li>
             <li class="mb-2"><a href="offers.html">Seasonal Packages</a></li>
           </ul>
         </div>
 
         <!-- Col 3: Farm Experiences -->
-        <div class="col-6 col-md-3 col-lg-2">
-          <h5 class="fw-bold font-serif text-white mb-3">Farm Experiences</h5>
-          <ul class="list-unstyled footer-links">
+        <div class="col-6 col-md-4 col-lg-2">
+          <h6 class="fw-bold font-serif text-white mb-3">Farm Experiences</h6>
+          <ul class="list-unstyled footer-links small">
             <li class="mb-2"><a href="activities.html">All 15 Experiences</a></li>
             <li class="mb-2"><a href="activities.html?category=Traditional+Cooking">Cooking & Sourdough</a></li>
             <li class="mb-2"><a href="activities.html?category=Organic+Farming">Cider & Beekeeping</a></li>
             <li class="mb-2"><a href="activities.html?category=Horse+Riding">Horseback Riding</a></li>
             <li class="mb-2"><a href="activities.html?category=Campfire+Nights">Campfire Stargazing</a></li>
             <li class="mb-2"><a href="activities.html?category=Nature+Walks">Wild Foraging & Walks</a></li>
-            <li class="mb-2"><a href="activities.html?category=Farm+Animal+Feeding">Animal Care & Alpacas</a></li>
           </ul>
         </div>
 
-        <!-- Col 4: Guest Services -->
-        <div class="col-6 col-md-3 col-lg-2">
-          <h5 class="fw-bold font-serif text-white mb-3">Guest Portal</h5>
-          <ul class="list-unstyled footer-links">
-            <li class="mb-2"><a href="guest/dashboard.html">Customer Dashboard</a></li>
-            <li class="mb-2"><a href="guest/bookings.html">My Reservations</a></li>
-            <li class="mb-2"><a href="guest/wishlist.html" class="footer-wishlist-trigger" data-drawer="wishlist">Saved Wishlist</a></li>
-            <li class="mb-2"><a href="auth/login.html" class="footer-auth-trigger" data-auth-tab="signin">Sign In to Account</a></li>
-            <li class="mb-2"><a href="auth/register.html" class="footer-auth-trigger" data-auth-tab="signup">Register an Account</a></li>
-            <li class="mb-2"><a href="faq.html">Help & Support</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 5: Company & Legal -->
-        <div class="col-6 col-md-3 col-lg-2">
-          <h5 class="fw-bold font-serif text-white mb-3">Company & Trust</h5>
-          <ul class="list-unstyled footer-links">
+        <!-- Col 4: Right Side - Company & Quick Links -->
+        <div class="col-6 col-md-4 col-lg-3">
+          <h6 class="fw-bold font-serif text-white mb-3">Company & Stories</h6>
+          <ul class="list-unstyled footer-links small">
             <li class="mb-2"><a href="about.html">Our Story & Heritage</a></li>
             <li class="mb-2"><a href="blog/blog.html">Journal & Stories</a></li>
+            <li class="mb-2"><a href="offers.html">Special Offers & Rates</a></li>
             <li class="mb-2"><a href="contact.html">Contact Concierge</a></li>
             <li class="mb-2"><a href="faq.html">Booking FAQs</a></li>
             <li class="mb-2"><a href="privacy.html">Privacy Policy</a></li>
@@ -304,26 +286,23 @@
         </div>
       </div>
 
-      <!-- Bottom Bar -->
-      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center py-4 mt-5 border-top border-secondary border-opacity-25 small">
-        <div class="text-white-50 mb-2 mb-md-0">
-          &copy; 2026 Verdant Haven Hospitality Group Ltd. All rights reserved. Registered Sustainable Eco-Tourism Provider.
-        </div>
-        <div class="d-flex align-items-center gap-2 my-2 my-md-0">
-          <span class="text-white-50 d-none d-sm-inline me-1">Accepted Payments:</span>
-          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-credit-card-2-front me-1"></i>Visa</span>
-          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-credit-card me-1"></i>Mastercard</span>
-          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-paypal me-1"></i>PayPal</span>
-          <span class="badge bg-dark-subtle text-white-50 border border-secondary border-opacity-25 px-2 py-1"><i class="bi bi-apple me-1"></i>Apple Pay</span>
-        </div>
-        <div class="d-flex gap-3 mt-2 mt-lg-0">
-          <a href="privacy.html" class="text-white-50 text-decoration-none hover-white">Privacy Policy</a>
-          <span class="text-secondary">&bull;</span>
-          <a href="terms.html" class="text-white-50 text-decoration-none hover-white">Terms of Service</a>
-          <span class="text-secondary">&bull;</span>
-          <a href="faq.html" class="text-white-50 text-decoration-none hover-white">FAQ</a>
-          <span class="text-secondary">&bull;</span>
-          <a href="contact.html" class="text-white-50 text-decoration-none hover-white">Contact</a>
+      <!-- Bottom Bar: Left side Copyright, Right side Privacy Policy, Terms & FAQ -->
+      <div class="footer-bottom mt-4 pt-3 border-top border-secondary border-opacity-25 small">
+        <div class="row align-items-center gy-2">
+          <div class="col-md-6 text-center text-md-start text-white-50">
+            &copy; 2026 Verdant Haven Hospitality Group Ltd. All rights reserved.
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <div class="d-inline-flex flex-wrap justify-content-center justify-content-md-end gap-3">
+              <a href="privacy.html" class="text-white-50 text-decoration-none hover-white">Privacy Policy</a>
+              <span class="text-secondary">&bull;</span>
+              <a href="terms.html" class="text-white-50 text-decoration-none hover-white">Terms of Service</a>
+              <span class="text-secondary">&bull;</span>
+              <a href="faq.html" class="text-white-50 text-decoration-none hover-white">FAQ</a>
+              <span class="text-secondary">&bull;</span>
+              <a href="contact.html" class="text-white-50 text-decoration-none hover-white">Contact</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

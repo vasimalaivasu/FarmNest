@@ -65,18 +65,19 @@
     <!-- Main Content Area -->
     <main class="dashboard-main">
 
-      <!-- Topbar -->
+            <!-- Topbar -->
       <header class="dashboard-topbar">
-        <div class="d-flex align-items-center gap-2">
-          <button class="btn btn-sm btn-light border d-lg-none" onclick="toggleDashboardSidebar()"><i
+        <div class="d-flex align-items-center gap-2 dashboard-topbar-left min-w-0">
+          <button class="btn btn-sm btn-light border d-lg-none dashboard-sidebar-toggle" onclick="toggleDashboardSidebar()" aria-label="Toggle Navigation"><i
               class="bi bi-list fs-5"></i></button>
-          <h5 class="mb-0 font-serif fw-bold">Guest Dashboard</h5>
+          <h5 class="mb-0 font-serif fw-bold dashboard-topbar-title text-truncate">
+            <span class="d-none d-sm-inline">Guest </span>Dashboard
+          </h5>
         </div>
-
-        <div class="d-flex align-items-center gap-2">
-          <button class="rtl-toggle-btn" title="Toggle RTL"><i class="bi bi-arrow-left-right"></i></button>
+        <div class="d-flex align-items-center gap-2 dashboard-topbar-right flex-shrink-0">
+          <button class="rtl-toggle-btn d-none d-sm-inline-flex" title="Toggle RTL"><i class="bi bi-arrow-left-right"></i></button>
           <button class="theme-toggle-btn" title="Toggle Theme"><i class="bi bi-moon-stars-fill"></i></button>
-          <a href="../stays.html" class="btn btn-verdant btn-sm"><i class="bi bi-search me-1"></i> Book a Stay</a>
+          <a href="../stays.html" class="btn btn-verdant btn-sm dashboard-action-btn"><i class="bi bi-search me-1"></i> <span class="d-none d-xs-inline">Book a Stay</span></a>
         </div>
       </header>
 
@@ -85,8 +86,8 @@
 
         <!-- Welcome Banner -->
         <div class="mb-4">
-          <h2 class="font-serif mb-1">Hello, <span class="current-user-name">Sarah</span> 👋</h2>
-          <p class="text-muted small">Welcome back to your countryside haven. Manage your upcoming reservations and view
+          <h2 class="font-serif mb-1">Hello, <span class="current-user-name">Guest</span> 👋</h2>
+          <p class="text-muted small">Welcome to your countryside haven. Manage your reservations and view
             travel receipts.</p>
         </div>
 
@@ -97,7 +98,7 @@
               <div class="stat-icon green"><i class="bi bi-calendar-check"></i></div>
               <div>
                 <div class="stat-label">Total Stays</div>
-                <div class="stat-value" id="dash-total-bookings">5</div>
+                <div class="stat-value" id="dash-total-bookings">0</div>
               </div>
             </div>
           </div>
@@ -107,7 +108,7 @@
               <div class="stat-icon terracotta"><i class="bi bi-clock-history"></i></div>
               <div>
                 <div class="stat-label">Upcoming</div>
-                <div class="stat-value" id="dash-upcoming-bookings">1</div>
+                <div class="stat-value" id="dash-upcoming-bookings">0</div>
               </div>
             </div>
           </div>
@@ -117,7 +118,7 @@
               <div class="stat-icon sand"><i class="bi bi-check2-all"></i></div>
               <div>
                 <div class="stat-label">Completed</div>
-                <div class="stat-value" id="dash-completed-bookings">3</div>
+                <div class="stat-value" id="dash-completed-bookings">0</div>
               </div>
             </div>
           </div>
@@ -127,7 +128,7 @@
               <div class="stat-icon blue"><i class="bi bi-x-circle"></i></div>
               <div>
                 <div class="stat-label">Cancelled</div>
-                <div class="stat-value" id="dash-cancelled-bookings">1</div>
+                <div class="stat-value" id="dash-cancelled-bookings">0</div>
               </div>
             </div>
           </div>
@@ -137,7 +138,7 @@
               <div class="stat-icon green"><i class="bi bi-cash-stack"></i></div>
               <div>
                 <div class="stat-label">Spent</div>
-                <div class="stat-value" id="dash-total-spent">$2,104</div>
+                <div class="stat-value" id="dash-total-spent">$0</div>
               </div>
             </div>
           </div>
@@ -147,7 +148,7 @@
               <div class="stat-icon terracotta"><i class="bi bi-heart"></i></div>
               <div>
                 <div class="stat-label">Wishlist</div>
-                <div class="stat-value" id="dash-wishlist-count">3</div>
+                <div class="stat-value" id="dash-wishlist-count">0</div>
               </div>
             </div>
           </div>

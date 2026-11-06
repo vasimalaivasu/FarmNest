@@ -1540,44 +1540,7 @@ const INITIAL_DATABASE = {
 
   wishlist: [],
 
-  notifications: [
-    {
-      id: "notif-1",
-      userId: "user-guest",
-      title: "Reservation Confirmed: Whispering Pines",
-      message: "Your upcoming stay at Whispering Pines Farmhouse (Nov 20 - Nov 24) is confirmed. Hosts Arthur & Martha are excited to welcome you!",
-      type: "booking",
-      date: "2026-11-01T14:35:00Z",
-      read: false
-    },
-    {
-      id: "notif-2",
-      userId: "user-guest",
-      title: "Autumn Flash Sale: 20% Off",
-      message: "Use code VERDANT20 to save 20% on any countryside farmstay booked before November 30.",
-      type: "offer",
-      date: "2026-10-28T09:00:00Z",
-      read: true
-    },
-    {
-      id: "notif-3",
-      userId: "user-guest",
-      title: "Payment Receipt Available",
-      message: "Your receipt for booking #VH-80291 ($913.00) is ready to download.",
-      type: "payment",
-      date: "2026-11-01T14:33:00Z",
-      read: false
-    },
-    {
-      id: "notif-4",
-      userId: "user-admin",
-      title: "New Booking Created: #VH-81004",
-      message: "Emma Watson made a new reservation for Blue River Riverside Cabin ($694.00).",
-      type: "system",
-      date: "2026-11-02T16:45:00Z",
-      read: false
-    }
-  ]
+  notifications: []
 };
 
 // Global DB Wrapper API
@@ -1651,6 +1614,44 @@ const VerdantDB = {
           });
         }
 
+        // Purge all legacy demo accounts from stored users
+        if (Array.isArray(db.users)) {
+          const prevCount = db.users.length;
+          db.users = db.users.filter(u => {
+            const e = (u.email || '').toLowerCase();
+            return e !== 'guest@homestay.com' &&
+                   e !== 'admin@homestay.com' &&
+                   e !== 'host@homestay.com' &&
+                   e !== 'sarah.jenkins@gmail.com' &&
+                   e !== 's.jenkins@privaterelay.appleid.com' &&
+                   e !== 'elena.rostova@gmail.com';
+          });
+          if (db.users.length !== prevCount) updated = true;
+        }
+
+        // Purge legacy demo bookings
+        if (Array.isArray(db.bookings)) {
+          const prevCount = db.bookings.length;
+          db.bookings = db.bookings.filter(b => {
+            const e = (b.guestEmail || '').toLowerCase();
+            return e !== 'guest@homestay.com' &&
+                   e !== 'mthorne@example.com' &&
+                   e !== 'emma.w@example.com' &&
+                   b.guestName !== 'Sarah Jenkins';
+          });
+          if (db.bookings.length !== prevCount) updated = true;
+        }
+
+        // Purge legacy demo notifications
+        if (Array.isArray(db.notifications)) {
+          const prevCount = db.notifications.length;
+          db.notifications = db.notifications.filter(n => {
+            const uid = (n.userId || '').toLowerCase();
+            return uid !== 'user-guest' && uid !== 'user-admin' && uid !== 'guest@homestay.com';
+          });
+          if (db.notifications.length !== prevCount) updated = true;
+        }
+
         // Clean up any legacy stranger avatars from database
         if (Array.isArray(db.users)) {
           db.users.forEach(u => {
@@ -1666,11 +1667,22 @@ const VerdantDB = {
         }
       }
 
-      // Clean up any legacy stranger avatar from current session user
+      // Clear session if logged in as a demo user
       const cur = this.getCurrentUser();
-      if (cur && cur.avatar && (cur.avatar.includes('photo-1534528741775-53994a69daeb') || cur.avatar.includes('photo-1544005313-94ddf0286df2'))) {
-        cur.avatar = null;
-        this.setCurrentUser(cur);
+      if (cur) {
+        const curEmail = (cur.email || '').toLowerCase();
+        if (curEmail === 'guest@homestay.com' ||
+            curEmail === 'admin@homestay.com' ||
+            curEmail === 'host@homestay.com' ||
+            curEmail === 'sarah.jenkins@gmail.com' ||
+            curEmail === 's.jenkins@privaterelay.appleid.com' ||
+            curEmail === 'elena.rostova@gmail.com' ||
+            cur.name === 'Sarah Jenkins') {
+          this.logout();
+        } else if (cur.avatar && (cur.avatar.includes('photo-1534528741775-53994a69daeb') || cur.avatar.includes('photo-1544005313-94ddf0286df2'))) {
+          cur.avatar = null;
+          this.setCurrentUser(cur);
+        }
       }
       // Initially, visitors are guests until they log in (no auto-session)
     } catch (e) {
@@ -1928,6 +1940,15 @@ const VerdantDB = {
     return this.getDB().notifications || [];
   },
 
+  getUserNotifications(emailOrId) {
+    if (!emailOrId) return [];
+    const clean = String(emailOrId).trim().toLowerCase();
+    return this.getNotifications().filter(n => {
+      const u = (n.userId || '').toLowerCase();
+      return u === clean;
+    });
+  },
+
   markNotificationRead(id) {
     const db = this.getDB();
     const notif = db.notifications.find(n => n.id === id);
@@ -1935,6 +1956,19 @@ const VerdantDB = {
       notif.read = true;
       this.saveDB(db);
     }
+    return true;
+  },
+
+  markUserNotificationsRead(emailOrId) {
+    const db = this.getDB();
+    if (!emailOrId) return false;
+    const clean = String(emailOrId).trim().toLowerCase();
+    (db.notifications || []).forEach(n => {
+      if ((n.userId || '').toLowerCase() === clean) {
+        n.read = true;
+      }
+    });
+    this.saveDB(db);
     return true;
   },
 

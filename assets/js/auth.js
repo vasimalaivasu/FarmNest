@@ -102,30 +102,38 @@ function initSocialAuthHandlers() {
   document.querySelectorAll('.google-auth-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      window.open('https://accounts.google.com/signin', '_blank', 'noopener,noreferrer');
-      simulateSocialAuth('Google', 'sarah.jenkins@gmail.com', 'Sarah Jenkins');
+      handleSocialSignInPrompt('Google');
     });
   });
 
   document.querySelectorAll('.apple-auth-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      window.open('https://appleid.apple.com/sign-in', '_blank', 'noopener,noreferrer');
-      simulateSocialAuth('Apple', 's.jenkins@privaterelay.appleid.com', 'Sarah J.');
+      handleSocialSignInPrompt('Apple');
     });
   });
 }
 
-function simulateSocialAuth(provider, email, name) {
-  let user = VerdantDB.getUsers().find(u => u.email.toLowerCase() === email.toLowerCase());
+function handleSocialSignInPrompt(provider) {
+  if (!window.VerdantDB) return;
+  const inputEmail = prompt(`Please enter your ${provider} account email address to continue:`);
+  if (!inputEmail) return;
+  const cleanEmail = inputEmail.trim().toLowerCase();
+  if (!cleanEmail.includes('@') || !cleanEmail.includes('.')) {
+    showToast('Please enter a valid email address.', 'warning', 'Social Sign-In');
+    return;
+  }
+
+  let user = VerdantDB.getUsers().find(u => u.email.toLowerCase() === cleanEmail);
   if (!user) {
+    const defaultName = cleanEmail.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    const regName = prompt(`Enter your full name for this account:`, defaultName) || defaultName;
     const regRes = VerdantDB.register({
-      name: name,
-      email: email,
-      phone: '+1 (555) 234-5678',
-      password: 'SocialUser@2026',
+      name: regName,
+      email: cleanEmail,
+      phone: '',
+      password: 'SocialUser@' + Math.floor(1000 + Math.random() * 9000),
       role: 'guest',
-      country: 'United States',
       avatar: null
     });
     user = regRes.user;
@@ -139,14 +147,14 @@ function simulateSocialAuth(provider, email, name) {
       VerdantDB.toggleWishlist(pendingWishlist);
     }
     sessionStorage.removeItem('verdant_pending_wishlist');
-    showToast(`Signed in with ${provider}! Saved stay to your wishlist.`, 'success', 'Connected');
+    showToast(`Signed in as ${user.name}! Saved stay to your wishlist.`, 'success', 'Connected');
     setTimeout(() => {
       window.location.href = '../guest/wishlist.html';
     }, 450);
     return;
   }
 
-  showToast(`Signed in with ${provider} successfully! Redirecting...`, 'success', 'Connected');
+  showToast(`Signed in as ${user.name}! Redirecting to customer dashboard...`, 'success', 'Connected');
   setTimeout(() => {
     window.location.href = '../guest/dashboard.html';
   }, 500);
