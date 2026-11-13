@@ -1746,6 +1746,7 @@ body.dark-mode .verdant-navbar.scrolled {
   margin-bottom: 16px;
   position: relative;
   padding-bottom: 8px;
+  display: inline-block;
 }
 
 .verdant-footer h5::after,
@@ -1885,8 +1886,7 @@ body.dark-mode .verdant-navbar.scrolled {
 /* ===================================================================
    FORM CONTROLS & MODALS
 =================================================================== */
-.form-control,
-.form-select {
+.form-control {
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-color);
   padding: 10px 14px;
@@ -1894,6 +1894,21 @@ body.dark-mode .verdant-navbar.scrolled {
   background-color: var(--bg-surface);
   color: var(--text-dark);
   transition: all var(--transition-fast);
+}
+
+.form-select {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  padding: 10px 38px 10px 14px !important;
+  font-size: 14px;
+  background-color: var(--bg-surface);
+  color: var(--text-dark);
+  background-position: right 14px center !important;
+  background-size: 14px 10px !important;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 .form-control:focus,
@@ -2037,6 +2052,13 @@ body.dark-mode .verdant-navbar.scrolled {
     transition: all var(--transition-fast) !important;
   }
 
+  .guest-profile-actions .btn i {
+    font-size: 15px !important;
+    line-height: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
   .guest-profile-actions .btn:hover {
     transform: translateY(-1px) !important;
   }
@@ -2055,7 +2077,7 @@ body.dark-mode .verdant-navbar.scrolled {
 
   .guest-profile-actions .btn-verdant-outline,
   .guest-profile-actions .btn-outline-success {
-    background-color: transparent !important;
+    background-color: #ffffff !important;
     color: var(--primary-forest, #1b4332) !important;
     border: 1.5px solid var(--primary-forest, #1b4332) !important;
   }

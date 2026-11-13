@@ -8,6 +8,129 @@
   text-align: right;
 }
 
+/* ===================================================================
+   UNICODE BIDI & PUNCTUATION STABILIZATION
+   Prevents neutral characters (full stops, exclamation points, colons)
+   from jumping to the front of sentences in RTL mode.
+=================================================================== */
+[dir="rtl"] body,
+[dir="rtl"] p,
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6,
+[dir="rtl"] li,
+[dir="rtl"] a,
+[dir="rtl"] span,
+[dir="rtl"] small,
+[dir="rtl"] strong,
+[dir="rtl"] em,
+[dir="rtl"] label,
+[dir="rtl"] blockquote,
+[dir="rtl"] dt,
+[dir="rtl"] dd,
+[dir="rtl"] th,
+[dir="rtl"] td,
+[dir="rtl"] .lead,
+[dir="rtl"] .form-label,
+[dir="rtl"] .form-text,
+[dir="rtl"] .form-control,
+[dir="rtl"] .form-select,
+[dir="rtl"] .card-title,
+[dir="rtl"] .card-text,
+[dir="rtl"] .section-title,
+[dir="rtl"] .section-subtitle,
+[dir="rtl"] .hero-title,
+[dir="rtl"] .hero-subtitle,
+[dir="rtl"] .footer-text,
+[dir="rtl"] .footer-desc,
+[dir="rtl"] .testimonial-text,
+[dir="rtl"] .review-text,
+[dir="rtl"] .stat-label,
+[dir="rtl"] .stat-value,
+[dir="rtl"] .badge,
+[dir="rtl"] .alert,
+[dir="rtl"] .accordion-button,
+[dir="rtl"] .accordion-body {
+  unicode-bidi: plaintext;
+  text-align: right !important;
+}
+
+/* Stabilize buttons, actions & trailing arrows in RTL */
+[dir="rtl"] button,
+[dir="rtl"] .btn,
+[dir="rtl"] [type="button"],
+[dir="rtl"] [type="submit"],
+[dir="rtl"] [type="reset"],
+[dir="rtl"] .btn * {
+  unicode-bidi: plaintext;
+}
+
+[dir="rtl"] .card,
+[dir="rtl"] form,
+[dir="rtl"] .contact-form,
+[dir="rtl"] #contact-form {
+  text-align: right;
+}
+
+/* Respect explicit center alignment */
+[dir="rtl"] .text-center,
+[dir="rtl"] .text-center p,
+[dir="rtl"] .text-center h1,
+[dir="rtl"] .text-center h2,
+[dir="rtl"] .text-center h3,
+[dir="rtl"] .text-center h4,
+[dir="rtl"] .text-center h5,
+[dir="rtl"] .text-center h6,
+[dir="rtl"] .text-center span,
+[dir="rtl"] .text-center small,
+[dir="rtl"] .text-center .lead,
+[dir="rtl"] .text-center .section-title,
+[dir="rtl"] .text-center .section-subtitle,
+[dir="rtl"] .hero-content.text-center,
+[dir="rtl"] .hero-content.text-center * {
+  text-align: center !important;
+}
+
+/* Respect explicit left / right alignments in RTL */
+[dir="rtl"] .text-start,
+[dir="rtl"] .text-start * {
+  text-align: right !important;
+}
+
+[dir="rtl"] .text-end,
+[dir="rtl"] .text-end * {
+  text-align: left !important;
+}
+
+/* Form elements RTL text alignment & select chevron mirroring */
+[dir="rtl"] input,
+[dir="rtl"] textarea {
+  text-align: right;
+  direction: rtl;
+  unicode-bidi: plaintext;
+}
+
+[dir="rtl"] select,
+[dir="rtl"] .form-select {
+  text-align: right !important;
+  direction: rtl !important;
+  unicode-bidi: plaintext;
+  padding: 10px 14px 10px 38px !important;
+  background-position: left 14px center !important;
+  background-size: 14px 10px !important;
+  cursor: pointer;
+}
+
+/* Breadcrumbs in RTL */
+[dir="rtl"] .breadcrumb-item + .breadcrumb-item::before {
+  float: right;
+  padding-left: var(--bs-breadcrumb-item-padding-x, 0.5rem);
+  padding-right: 0;
+}
+
 [dir="rtl"] .sidebar-link i {
   margin-left: 12px;
   margin-right: 0;
@@ -60,5 +183,31 @@
 [dir="rtl"] .wishlist-drawer.offcanvas-end {
   border-left: none;
   border-right: 1px solid var(--border-color);
+}
+
+/* Footer section title accent underlines (underscores) in RTL */
+[dir="rtl"] .verdant-footer h5,
+[dir="rtl"] .verdant-footer h6,
+[dir="rtl"] .verdant-footer .footer-title,
+[dir="rtl"] .verdant-footer .footer-heading {
+  text-align: right;
+  display: inline-block;
+}
+
+[dir="rtl"] .verdant-footer h5::after,
+[dir="rtl"] .verdant-footer h6::after,
+[dir="rtl"] .verdant-footer .footer-title::after,
+[dir="rtl"] .verdant-footer .footer-heading::after {
+  left: auto !important;
+  right: 0 !important;
+}
+
+[dir="rtl"] .text-center .verdant-footer h5::after,
+[dir="rtl"] .text-center .verdant-footer h6::after,
+[dir="rtl"] .text-center .verdant-footer .footer-title::after,
+[dir="rtl"] .text-center.footer-title::after {
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(50%) !important;
 }
 

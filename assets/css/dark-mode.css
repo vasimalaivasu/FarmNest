@@ -489,6 +489,38 @@ body.dark-mode .property-wishlist-btn:hover {
     color: #fff !important;
   }
 
+  /* Guest Profile Alert in dark mode */
+  [data-bs-theme="dark"] .guest-profile-alert,
+  body.dark-mode .guest-profile-alert {
+    background-color: rgba(245, 158, 11, 0.12) !important;
+    border-color: rgba(245, 158, 11, 0.3) !important;
+  }
+
+  [data-bs-theme="dark"] .guest-profile-actions .btn-verdant,
+  body.dark-mode .guest-profile-actions .btn-verdant {
+    background-color: #2d6a4f !important;
+    border-color: #2d6a4f !important;
+    color: #ffffff !important;
+  }
+
+  [data-bs-theme="dark"] .guest-profile-actions .btn-verdant-outline,
+  [data-bs-theme="dark"] .guest-profile-actions .btn-outline-success,
+  body.dark-mode .guest-profile-actions .btn-verdant-outline,
+  body.dark-mode .guest-profile-actions .btn-outline-success {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    border-color: #52b788 !important;
+    color: #74c69d !important;
+  }
+
+  [data-bs-theme="dark"] .guest-profile-actions .btn-verdant-outline:hover,
+  [data-bs-theme="dark"] .guest-profile-actions .btn-outline-success:hover,
+  body.dark-mode .guest-profile-actions .btn-verdant-outline:hover,
+  body.dark-mode .guest-profile-actions .btn-outline-success:hover {
+    background-color: #2d6a4f !important;
+    border-color: #2d6a4f !important;
+    color: #ffffff !important;
+  }
+
   /* Stat Icons in dark mode */
   [data-bs-theme="dark"] .stat-icon.green,
   body.dark-mode .stat-icon.green {
