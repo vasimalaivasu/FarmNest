@@ -1,6 +1,8 @@
 /**
  * Verdant Haven - Guest Dashboard Module
  * Handles Guest Overview, Bookings, Details, Wishlist, Payments, Profile & Notifications
+ * Supports both Authenticated Member Mode and Unauthenticated Guest Demo Mode with Zero Values
+ * Connects directly to the Left-to-Right Auth Drawer (offcanvas-start)
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -36,24 +38,65 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Global delegated click listener for any dashboard auth drawer triggers
+document.addEventListener('click', (e) => {
+  const trigger = e.target.closest('[data-auth-drawer]');
+  if (trigger) {
+    e.preventDefault();
+    const tab = trigger.getAttribute('data-auth-drawer') || 'signin';
+    if (typeof window.openAuthDrawer === 'function') {
+      window.openAuthDrawer(tab);
+    }
+  }
+});
+
+/**
+ * Authentication Guard / Preview Mode Initializer
+ * Allows unauthenticated guests to explore dashboard features in demo mode.
+ */
 function initGuestAuthProtection() {
-  const user = VerdantDB.getCurrentUser();
-  if (!user) {
-    // Unauthenticated access to customer dashboard redirects to Sign In
-    window.location.href = '../auth/login.html';
+  // Demo mode is explicitly permitted for unauthenticated visitors.
+  // Actions requiring account values/persistence will trigger requireAuthRedirect().
+}
+
+/**
+ * Helper to notify and open the left-to-right sliding auth drawer
+ */
+function requireAuthRedirect(featureName, tab = 'signin') {
+  if (typeof showToast === 'function') {
+    showToast(`Sign in required to ${featureName}.`, 'warning', 'Authentication Required');
+  }
+  if (typeof window.openAuthDrawer === 'function') {
+    window.openAuthDrawer(tab);
   }
 }
 
+/**
+ * Topbar, Sidebar & Auth State Synchronization
+ */
 function initGuestTopbarUser() {
   const user = VerdantDB.getCurrentUser();
-  if (!user) return;
-  const avatarUrl = window.VerdantDB ? VerdantDB.getUserAvatar(user, 120) : '';
-  document.querySelectorAll('.current-user-name').forEach(el => el.textContent = user.name || 'Guest Member');
-  document.querySelectorAll('.current-user-email').forEach(el => el.textContent = user.email || '');
+  const isGuestMode = !user;
+
+  const defaultAvatar = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='50' fill='%231b4332'/><circle cx='50' cy='38' r='18' fill='%23ffffff'/><path d='M22 84c0-15.5 12.5-28 28-28s28 12.5 28 28' fill='%23ffffff'/></svg>";
+  const avatarUrl = user && window.VerdantDB ? VerdantDB.getUserAvatar(user, 120) : defaultAvatar;
+
+  document.querySelectorAll('.current-user-name').forEach(el => {
+    el.textContent = user ? (user.name || 'Guest Member') : 'Guest Visitor';
+  });
+  document.querySelectorAll('.current-user-email').forEach(el => {
+    el.textContent = user ? (user.email || '') : 'Not signed in';
+  });
+  document.querySelectorAll('.current-user-role').forEach(el => {
+    el.textContent = user ? (user.role || 'Verified Guest') : 'Preview Mode';
+  });
   document.querySelectorAll('.current-user-avatar').forEach(img => {
     img.src = avatarUrl;
-    img.alt = user.name || 'Guest Member';
+    img.alt = user ? (user.name || 'Guest Member') : 'Guest Visitor';
   });
+
+  // Dynamic Dashboard Auth Buttons: Shows Login/Signup before login, removed after login
+  updateDashboardAuthControls(isGuestMode);
 
   // Logout buttons
   document.querySelectorAll('.logout-btn').forEach(btn => {
@@ -68,13 +111,89 @@ function initGuestTopbarUser() {
   });
 }
 
+/**
+ * Manages Login/Signup vs Sign Out visibility across dashboard
+ */
+function updateDashboardAuthControls(isGuestMode) {
+  // 1. Dashboard Topbar: Show Sign In / Sign Up button before login, remove after login
+  const topbarRight = document.querySelector('.dashboard-topbar-right');
+  if (topbarRight) {
+    let topbarAuthBtn = topbarRight.querySelector('.dashboard-topbar-auth-btn');
+    if (isGuestMode) {
+      if (!topbarAuthBtn) {
+        topbarAuthBtn = document.createElement('button');
+        topbarAuthBtn.type = 'button';
+        topbarAuthBtn.className = 'btn btn-verdant btn-sm dashboard-topbar-auth-btn d-inline-flex align-items-center gap-1';
+        topbarAuthBtn.setAttribute('data-auth-drawer', 'signin');
+        topbarAuthBtn.innerHTML = '<i class="bi bi-box-arrow-in-right"></i> <span class="d-none d-sm-inline">Sign In / Sign Up</span>';
+        topbarRight.prepend(topbarAuthBtn);
+      }
+    } else {
+      if (topbarAuthBtn) topbarAuthBtn.remove();
+    }
+  }
+
+  // 2. Dashboard Sidebar Footer: Show Sign In / Register before login, remove after login
+  document.querySelectorAll('.sidebar-footer').forEach(footer => {
+    let sidebarAuthBox = footer.querySelector('.dashboard-sidebar-auth-box');
+    const logoutBtn = footer.querySelector('.logout-btn');
+
+    if (isGuestMode) {
+      if (logoutBtn) logoutBtn.style.display = 'none';
+      if (!sidebarAuthBox) {
+        sidebarAuthBox = document.createElement('div');
+        sidebarAuthBox.className = 'dashboard-sidebar-auth-box d-grid gap-2 mt-2';
+        sidebarAuthBox.innerHTML = `
+          <button type="button" class="btn btn-sm btn-verdant w-100 d-inline-flex align-items-center justify-content-center gap-1 dashboard-sidebar-signin-btn" data-auth-drawer="signin">
+            <i class="bi bi-box-arrow-in-right"></i> Sign In / Register
+          </button>
+        `;
+        footer.appendChild(sidebarAuthBox);
+      }
+    } else {
+      if (sidebarAuthBox) sidebarAuthBox.remove();
+      if (logoutBtn) logoutBtn.style.display = '';
+    }
+  });
+
+  // Remove any preview banner from the dashboard content area
+  document.querySelectorAll('.guest-preview-banner').forEach(b => b.remove());
+}
+
+/**
+ * Re-renders all active dashboard widgets when auth state changes (e.g. after login from sliding drawer)
+ */
+window.refreshGuestDashboardState = function () {
+  initGuestTopbarUser();
+  if (document.getElementById('guest-dashboard-overview')) {
+    initGuestDashboardOverview();
+  }
+  if (document.getElementById('guest-bookings-page')) {
+    initGuestBookingsPage();
+  }
+  if (document.getElementById('guest-booking-details-page')) {
+    initGuestBookingDetailsPage();
+  }
+  if (document.getElementById('guest-wishlist-page')) {
+    initGuestWishlistPage();
+  }
+  if (document.getElementById('guest-payments-page')) {
+    initGuestPaymentsPage();
+  }
+  if (document.getElementById('guest-profile-page')) {
+    initGuestProfilePage();
+  }
+  if (document.getElementById('guest-notifications-page')) {
+    initGuestNotificationsPage();
+  }
+};
+
 /* ===================================================================
    GUEST DASHBOARD OVERVIEW
 =================================================================== */
 function initGuestDashboardOverview() {
   const user = VerdantDB.getCurrentUser();
-  if (!user) return;
-  const bookings = VerdantDB.getUserBookings(user.email);
+  const bookings = user ? VerdantDB.getUserBookings(user.email) : [];
   const wishlist = VerdantDB.getWishlist();
 
   const upcoming = bookings.filter(b => b.bookingStatus === 'Upcoming' || b.bookingStatus === 'Checked In');
@@ -82,7 +201,7 @@ function initGuestDashboardOverview() {
   const cancelled = bookings.filter(b => b.bookingStatus === 'Cancelled');
   const totalSpent = bookings.reduce((sum, b) => b.paymentStatus === 'Paid' ? sum + b.totalAmount : sum, 0);
 
-  // Metrics
+  // Metrics (Zero values when not logged in)
   const setVal = (id, val) => {
     const el = document.getElementById(id);
     if (el) el.textContent = val;
@@ -126,9 +245,14 @@ function initGuestDashboardOverview() {
       `;
     } else {
       upcomingCard.innerHTML = `
-        <div class="card p-4 text-center border rounded-3 bg-white">
-          <p class="text-muted mb-2">You don't have any upcoming countryside escapes booked yet.</p>
-          <a href="../stays.html" class="btn btn-verdant btn-sm mx-auto">Explore Farmstays & Cottages</a>
+        <div class="card p-4 text-center border rounded-4 bg-white shadow-sm">
+          <i class="bi bi-calendar2-range text-muted fs-1 mb-2 d-block"></i>
+          <h5 class="font-serif fw-bold mb-1">No Active Reservations</h5>
+          <p class="text-muted small mb-3">${user ? "You don't have any upcoming countryside escapes booked yet." : "You are browsing in guest mode with zero values and no account setup. Sign in to view and manage your verified itineraries."}</p>
+          <div class="d-flex justify-content-center gap-2">
+            ${user ? '' : '<button type="button" class="btn btn-verdant btn-sm px-3" data-auth-drawer="signin"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</button>'}
+            <a href="../stays.html" class="btn ${user ? 'btn-verdant' : 'btn-outline-success'} btn-sm px-3">Explore Farmstays & Cottages</a>
+          </div>
         </div>
       `;
     }
@@ -142,7 +266,7 @@ function initGuestDashboardOverview() {
         <tr>
           <td colspan="7" class="text-center py-4 text-muted">
             <i class="bi bi-calendar-x d-block fs-3 mb-2 text-muted"></i>
-            No countryside reservations made yet. <a href="../stays.html" class="text-success fw-bold">Book your first stay</a>
+            ${user ? 'No countryside reservations made yet. <a href="../stays.html" class="text-success fw-bold ms-1">Book your first stay</a>' : 'No reservations found for guest preview. <a href="#" class="text-success fw-bold ms-1" data-auth-drawer="signin">Sign In</a> to view your account history.'}
           </td>
         </tr>
       `;
@@ -193,9 +317,12 @@ function initGuestBookingsPage() {
       container.innerHTML = `
         <div class="text-center py-5">
           <i class="bi bi-calendar-x text-muted" style="font-size: 3rem;"></i>
-          <h5 class="mt-3">No bookings found in this category</h5>
-          <p class="text-muted">Explore our curated farmstays and discover your next retreat.</p>
-          <a href="../stays.html" class="btn btn-verdant btn-sm mt-2">Explore Stays</a>
+          <h5 class="mt-3 font-serif">${user ? 'No bookings found in this category' : 'No Bookings in Guest Mode'}</h5>
+          <p class="text-muted">${user ? 'Explore our curated farmstays and discover your next retreat.' : 'You are browsing in preview mode with zero values and no account setup. Sign in to view and manage your reservations.'}</p>
+          <div class="d-flex justify-content-center gap-2 mt-3">
+            ${user ? '' : '<button type="button" class="btn btn-verdant btn-sm" data-auth-drawer="signin"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In to View Bookings</button>'}
+            <a href="../stays.html" class="btn ${user ? 'btn-verdant' : 'btn-outline-success'} btn-sm">Explore Stays</a>
+          </div>
         </div>
       `;
       return;
@@ -252,6 +379,11 @@ function initGuestBookingsPage() {
 
 // Cancel Booking Modal Handler
 window.openCancelModal = function (id) {
+  const user = VerdantDB.getCurrentUser();
+  if (!user) {
+    requireAuthRedirect('cancel or manage reservations', 'signin');
+    return;
+  }
   if (confirm(`Are you sure you wish to cancel reservation #${id}? A refund will be initiated per host policy.`)) {
     VerdantDB.updateBookingStatus(id, 'Cancelled');
     showToast(`Reservation #${id} has been cancelled.`, 'warning', 'Booking Cancelled');
@@ -280,8 +412,11 @@ function initGuestBookingDetailsPage() {
         <div class="card p-5 text-center border rounded-4 bg-white shadow-sm my-4">
           <i class="bi bi-calendar-x text-muted fs-1 mb-2"></i>
           <h4 class="font-serif">Reservation Not Found</h4>
-          <p class="text-muted">This booking does not exist or does not belong to your account.</p>
-          <a href="bookings.html" class="btn btn-verdant btn-sm mx-auto px-4 py-2 mt-2">Back to My Reservations</a>
+          <p class="text-muted">${user ? 'This booking does not exist or does not belong to your account.' : 'You are currently browsing in Guest Preview Mode with zero values. Sign in to access your verified reservation vouchers.'}</p>
+          <div class="d-flex justify-content-center gap-2 mt-3">
+            ${user ? '' : '<button type="button" class="btn btn-verdant btn-sm px-4" data-auth-drawer="signin"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</button>'}
+            <a href="bookings.html" class="btn btn-outline-success btn-sm px-4">Back to My Bookings</a>
+          </div>
         </div>
       `;
     }
@@ -321,7 +456,13 @@ function initGuestBookingDetailsPage() {
   // Print button
   const printBtn = document.getElementById('print-receipt-btn');
   if (printBtn) {
-    printBtn.addEventListener('click', () => window.print());
+    printBtn.addEventListener('click', () => {
+      if (!user) {
+        requireAuthRedirect('download or print verified booking invoices', 'signin');
+        return;
+      }
+      window.print();
+    });
   }
 
   // Cancel reservation button
@@ -420,33 +561,43 @@ function initGuestPaymentsPage() {
     tbody.innerHTML = `
       <tr>
         <td colspan="8" class="text-center py-4 text-muted">
-          No payment transactions found for your account.
+          <i class="bi bi-credit-card-2-front fs-3 d-block mb-1"></i>
+          ${user ? 'No payment transactions found for your account.' : 'No payment transactions found in guest preview mode. <a href="#" class="text-success fw-bold ms-1" data-auth-drawer="signin">Sign In</a> to manage payment methods and view tax receipts.'}
         </td>
       </tr>
     `;
-    return;
+  } else {
+    tbody.innerHTML = bookings.map((b, idx) => `
+      <tr>
+        <td><code>TXN-904${idx + 10}</code></td>
+        <td><strong>#${b.id}</strong></td>
+        <td>${b.propertyName}</td>
+        <td>${b.createdAt ? b.createdAt.split('T')[0] : '2026-11-01'}</td>
+        <td><i class="bi bi-credit-card me-1"></i> ${b.paymentMethod}</td>
+        <td><strong>$${b.totalAmount}</strong></td>
+        <td>
+          <span class="badge ${b.paymentStatus === 'Paid' ? 'bg-success-subtle text-success' : (b.paymentStatus === 'Refunded' ? 'bg-danger-subtle text-danger' : 'bg-warning-subtle text-warning')}">
+            ${b.paymentStatus}
+          </span>
+        </td>
+        <td>
+          <a href="booking-details.html?id=${b.id}" class="btn btn-sm btn-outline-secondary py-1 px-2" title="Receipt">
+            <i class="bi bi-receipt"></i> Receipt
+          </a>
+        </td>
+      </tr>
+    `).join('');
   }
 
-  tbody.innerHTML = bookings.map((b, idx) => `
-    <tr>
-      <td><code>TXN-904${idx + 10}</code></td>
-      <td><strong>#${b.id}</strong></td>
-      <td>${b.propertyName}</td>
-      <td>${b.createdAt ? b.createdAt.split('T')[0] : '2026-11-01'}</td>
-      <td><i class="bi bi-credit-card me-1"></i> ${b.paymentMethod}</td>
-      <td><strong>$${b.totalAmount}</strong></td>
-      <td>
-        <span class="badge ${b.paymentStatus === 'Paid' ? 'bg-success-subtle text-success' : (b.paymentStatus === 'Refunded' ? 'bg-danger-subtle text-danger' : 'bg-warning-subtle text-warning')}">
-          ${b.paymentStatus}
-        </span>
-      </td>
-      <td>
-        <a href="booking-details.html?id=${b.id}" class="btn btn-sm btn-outline-secondary py-1 px-2" title="Receipt">
-          <i class="bi bi-receipt"></i> Receipt
-        </a>
-      </td>
-    </tr>
-  `).join('');
+  // Intercept actions requiring account values
+  if (!user) {
+    document.querySelectorAll('.add-payment-btn, [data-bs-target="#addPaymentModal"], .manage-cards-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        requireAuthRedirect('add or manage payment methods', 'signin');
+      });
+    });
+  }
 }
 
 /* ===================================================================
@@ -454,7 +605,6 @@ function initGuestPaymentsPage() {
 =================================================================== */
 function initGuestProfilePage() {
   const user = VerdantDB.getCurrentUser();
-  if (!user) return;
 
   const nameInput = document.getElementById('profile-name');
   const emailInput = document.getElementById('profile-email');
@@ -463,14 +613,64 @@ function initGuestProfilePage() {
   const countryInput = document.getElementById('profile-country');
   const langInput = document.getElementById('profile-lang');
 
-  if (nameInput) nameInput.value = user.name || '';
-  if (emailInput) emailInput.value = user.email || '';
-  if (phoneInput) phoneInput.value = user.phone || '';
-  if (addressInput) addressInput.value = user.address || '';
-  if (countryInput) countryInput.value = user.country || '';
-  if (langInput) langInput.value = user.language || 'English';
+  if (nameInput) nameInput.value = user ? (user.name || '') : 'Guest Visitor';
+  if (emailInput) emailInput.value = user ? (user.email || '') : 'Not signed in';
+  if (phoneInput) phoneInput.value = user ? (user.phone || '') : 'No phone registered';
+  if (addressInput) addressInput.value = user ? (user.address || '') : 'No address saved';
+  if (countryInput) countryInput.value = user ? (user.country || '') : 'United Kingdom';
+  if (langInput) langInput.value = user ? (user.language || 'English') : 'English';
 
   const form = document.getElementById('profile-form');
+  const pwdForm = document.getElementById('password-form');
+  const photoInput = document.getElementById('profile-photo-input');
+
+  // If in guest mode, show notice and redirect to drawer when user attempts changes
+  if (!user) {
+    const profileCard = document.querySelector('.card');
+    if (profileCard && !profileCard.querySelector('.guest-profile-alert')) {
+      const alertDiv = document.createElement('div');
+      alertDiv.className = 'alert alert-warning border-0 rounded-4 mb-4 p-3 guest-profile-alert shadow-sm';
+      alertDiv.innerHTML = `
+        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+          <div class="d-flex align-items-center gap-2 min-w-0">
+            <i class="bi bi-exclamation-triangle-fill fs-5 text-warning flex-shrink-0"></i>
+            <span class="small mb-0">You are in <strong>Guest Preview Mode</strong>. Updating profile or password settings requires an active account.</span>
+          </div>
+          <div class="d-flex align-items-center gap-2 flex-nowrap flex-shrink-0 guest-profile-actions">
+            <button type="button" class="btn btn-verdant btn-sm text-nowrap fw-semibold flex-shrink-0" data-auth-drawer="signin">
+              <i class="bi bi-box-arrow-in-right"></i> <span>Sign In</span>
+            </button>
+            <button type="button" class="btn btn-verdant-outline btn-sm text-nowrap fw-semibold flex-shrink-0" data-auth-drawer="signup">
+              <i class="bi bi-person-plus"></i> <span>Sign Up</span>
+            </button>
+          </div>
+        </div>
+      `;
+      profileCard.prepend(alertDiv);
+    }
+
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        requireAuthRedirect('save profile information', 'signin');
+      });
+    }
+    if (pwdForm) {
+      pwdForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        requireAuthRedirect('change password', 'signin');
+      });
+    }
+    if (photoInput) {
+      photoInput.addEventListener('click', (e) => {
+        e.preventDefault();
+        requireAuthRedirect('upload profile avatar', 'signin');
+      });
+    }
+    return;
+  }
+
+  // Authenticated Profile Form submission
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -487,7 +687,6 @@ function initGuestProfilePage() {
   }
 
   // Password change simulation
-  const pwdForm = document.getElementById('password-form');
   if (pwdForm) {
     pwdForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -497,7 +696,6 @@ function initGuestProfilePage() {
   }
 
   // Profile photo upload handler
-  const photoInput = document.getElementById('profile-photo-input');
   if (photoInput) {
     photoInput.addEventListener('change', (e) => {
       const file = e.target.files && e.target.files[0];
@@ -520,12 +718,17 @@ function initGuestProfilePage() {
 function initGuestNotificationsPage() {
   const container = document.getElementById('guest-notif-list');
   const markAllBtn = document.getElementById('mark-all-read-btn');
+  const user = VerdantDB.getCurrentUser();
 
   function renderNotifications() {
-    const user = VerdantDB.getCurrentUser();
     const list = user ? VerdantDB.getUserNotifications(user.email) : [];
     if (list.length === 0) {
-      container.innerHTML = `<div class="p-5 text-center text-muted">No notifications yet for your account.</div>`;
+      container.innerHTML = `
+        <div class="p-5 text-center text-muted">
+          <i class="bi bi-bell-slash fs-1 d-block mb-2 text-muted"></i>
+          ${user ? 'No notifications yet for your account.' : 'No notifications in guest preview mode. <a href="#" class="text-success fw-bold ms-1" data-auth-drawer="signin">Sign In</a> to receive real-time booking alerts.'}
+        </div>
+      `;
       return;
     }
 
@@ -542,10 +745,11 @@ function initGuestNotificationsPage() {
 
   if (markAllBtn) {
     markAllBtn.addEventListener('click', () => {
-      const user = VerdantDB.getCurrentUser();
-      if (user) {
-        VerdantDB.markUserNotificationsRead(user.email);
+      if (!user) {
+        requireAuthRedirect('manage notifications', 'signin');
+        return;
       }
+      VerdantDB.markUserNotificationsRead(user.email);
       renderNotifications();
       showToast('All notifications marked as read', 'info', 'Notifications');
     });
@@ -570,4 +774,3 @@ function getStatusBadge(status) {
   }
   return `<span class="badge bg-warning-subtle text-warning"><i class="bi bi-hourglass-split me-1"></i> ${status}</span>`;
 }
-

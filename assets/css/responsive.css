@@ -94,7 +94,9 @@
     height: 30px !important;
   }
 
-  /* Compact Book Your Stay Button */
+  /* Compact Dashboard & Book Buttons */
+  .verdant-navbar .nav-dashboard-btn,
+  .verdant-navbar .nav-book-now-btn,
   .verdant-navbar .nav-book-btn {
     height: 35px !important;
     padding: 6px 12px !important;
@@ -428,7 +430,8 @@
     height: 30px !important;
   }
 
-  .nav-signin-btn {
+  .nav-signin-btn,
+  .nav-book-now-btn {
     height: 36px !important;
     padding: 6px 12px !important;
     font-size: 13px !important;
@@ -602,7 +605,9 @@
     height: 7px !important;
   }
 
-  .nav-signin-btn {
+  .nav-signin-btn,
+  .nav-dashboard-btn,
+  .nav-book-now-btn {
     width: 32px !important;
     height: 32px !important;
     padding: 0 !important;
@@ -610,7 +615,9 @@
     justify-content: center !important;
   }
 
-  .nav-signin-btn span {
+  .nav-signin-btn span,
+  .nav-dashboard-btn span,
+  .nav-book-now-btn span {
     display: none !important;
   }
 
@@ -668,6 +675,34 @@
     display: inline-flex;
     align-items: center;
   }
+
+  /* Guest Profile Alert Mobile Optimization */
+  .guest-profile-alert {
+    padding: 12px 14px !important;
+  }
+
+  .guest-profile-alert .guest-profile-actions {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+  }
+
+  .guest-profile-alert .guest-profile-actions .btn {
+    flex: 1 1 50% !important;
+    width: 50% !important;
+    min-width: 0 !important;
+    height: 38px !important;
+    padding: 0 10px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+  }
 }
 
 /* ==========================================
@@ -712,7 +747,9 @@
     height: 26px !important;
   }
 
-  .nav-signin-btn {
+  .nav-signin-btn,
+  .nav-dashboard-btn,
+  .nav-book-now-btn {
     width: 31px !important;
     height: 31px !important;
   }

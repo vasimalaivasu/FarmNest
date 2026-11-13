@@ -176,20 +176,51 @@ function initNavbar() {
     });
   });
 
-  // Desktop hover auto-dismiss when cursor leaves dropdown
+  // Desktop hover handling with smooth debounce / grace period timer
   document.querySelectorAll('.verdant-navbar .dropdown').forEach(dropdownEl => {
-    dropdownEl.addEventListener('mouseleave', () => {
+    let hoverTimer = null;
+
+    const openDropdown = () => {
       if (window.innerWidth >= 992) {
+        if (hoverTimer) {
+          clearTimeout(hoverTimer);
+          hoverTimer = null;
+        }
         const menu = dropdownEl.querySelector('.dropdown-menu');
         const toggleBtn = dropdownEl.querySelector('.dropdown-toggle');
-        if (menu) menu.classList.remove('show');
-        dropdownEl.classList.remove('show');
+        dropdownEl.classList.add('show');
+        if (menu) menu.classList.add('show');
         if (toggleBtn) {
-          toggleBtn.classList.remove('show');
-          toggleBtn.setAttribute('aria-expanded', 'false');
+          toggleBtn.classList.add('show');
+          toggleBtn.setAttribute('aria-expanded', 'true');
         }
       }
-    });
+    };
+
+    const closeDropdown = () => {
+      if (window.innerWidth >= 992) {
+        if (hoverTimer) clearTimeout(hoverTimer);
+        hoverTimer = setTimeout(() => {
+          const menu = dropdownEl.querySelector('.dropdown-menu');
+          const toggleBtn = dropdownEl.querySelector('.dropdown-toggle');
+          dropdownEl.classList.remove('show');
+          if (menu) menu.classList.remove('show');
+          if (toggleBtn) {
+            toggleBtn.classList.remove('show');
+            toggleBtn.setAttribute('aria-expanded', 'false');
+          }
+        }, 220); // 220ms grace period so moving cursor to dropdown items is smooth and never collapses
+      }
+    };
+
+    dropdownEl.addEventListener('mouseenter', openDropdown);
+    dropdownEl.addEventListener('mouseleave', closeDropdown);
+
+    const menuEl = dropdownEl.querySelector('.dropdown-menu');
+    if (menuEl) {
+      menuEl.addEventListener('mouseenter', openDropdown);
+      menuEl.addEventListener('mouseleave', closeDropdown);
+    }
   });
 
   // Close dropdown menu when clicking anywhere outside
@@ -555,6 +586,9 @@ function renderAuthDrawer(activeTab = 'signin') {
         if (typeof window.updateBookingAuthState === 'function') {
           window.updateBookingAuthState();
         }
+        if (typeof window.refreshGuestDashboardState === 'function') {
+          window.refreshGuestDashboardState();
+        }
       } else {
         showToast(res.message || 'Invalid email or password.', 'danger', 'Authentication Error');
       }
@@ -590,6 +624,9 @@ function renderAuthDrawer(activeTab = 'signin') {
         closeAuthDrawer();
         if (typeof window.updateBookingAuthState === 'function') {
           window.updateBookingAuthState();
+        }
+        if (typeof window.refreshGuestDashboardState === 'function') {
+          window.refreshGuestDashboardState();
         }
       } else {
         showToast(res.message || 'Could not complete registration.', 'danger', 'Registration Error');
@@ -631,6 +668,9 @@ function handleDrawerSocialAuth(provider) {
   closeAuthDrawer();
   if (typeof window.updateBookingAuthState === 'function') {
     window.updateBookingAuthState();
+  }
+  if (typeof window.refreshGuestDashboardState === 'function') {
+    window.refreshGuestDashboardState();
   }
 }
 
@@ -813,7 +853,7 @@ window.openWishlistDrawer = openWishlistDrawer;
 window.closeWishlistDrawer = closeWishlistDrawer;
 
 /* ==========================================
-   NAVBAR AUTH STATE (Sign In vs Customer Dashboard)
+   NAVBAR AUTH STATE (Sign In vs Book Now / Customer Dashboard)
 ========================================== */
 function initNavbarAuth() {
   const authContainer = document.getElementById('nav-auth-container');
@@ -827,42 +867,33 @@ function initNavbarAuth() {
   const relPrefix = isSubdir ? '../' : '';
 
   if (user) {
-    // LOGGED IN: Show personalized account avatar/button that triggers the left-to-right Auth/Account Drawer
-    const userName = user.name || 'Guest Member';
-    const firstName = userName.split(' ')[0];
-    const avatarUrl = window.VerdantDB ? VerdantDB.getUserAvatar(user, 48) : '';
+    // LOGGED IN: Replace account icon with "Book Now" button to start booking procedures immediately
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentPropId = urlParams.get('id');
+    const bookingTarget = (currentPropId && path.includes('stay-details.html'))
+      ? `${relPrefix}booking/booking.html?id=${encodeURIComponent(currentPropId)}`
+      : `${relPrefix}booking/booking.html`;
 
     authContainer.innerHTML = `
-      <div class="nav-account-wrapper d-inline-flex align-items-center">
-        <button type="button" class="nav-account-btn" id="nav-account-trigger" data-bs-toggle="offcanvas" data-bs-target="#authDrawer" title="My Account (${escapeHTML(userName)})" aria-label="My Account">
-          <div class="nav-avatar-circle position-relative">
-            <img src="${avatarUrl}" alt="${escapeHTML(userName)}" class="nav-avatar-img">
-            <span class="nav-avatar-dot" title="Active"></span>
-          </div>
-          <span class="nav-account-label d-none d-md-inline">${escapeHTML(firstName)}</span>
-          <i class="bi bi-chevron-down d-none d-md-inline nav-account-chevron"></i>
-        </button>
-      </div>
+      <a href="${bookingTarget}" class="btn btn-verdant btn-sm px-3 d-inline-flex align-items-center gap-1 nav-book-now-btn" id="nav-book-now-trigger" title="Book Now">
+        <i class="bi bi-calendar-check"></i>
+        <span>Book Now</span>
+      </a>
     `;
-
-      authContainer.querySelector('#nav-account-trigger')?.addEventListener('click', (e) => {
-        e.preventDefault();
-        openAuthDrawer();
-      });
-    } else {
-      // NOT LOGGED IN / INITIAL: Show ONLY the Sign In button which pops LEFT drawer
-      authContainer.innerHTML = `
+  } else {
+    // NOT LOGGED IN / INITIAL: Show ONLY the Sign In button which pops LEFT drawer
+    authContainer.innerHTML = `
       <button type="button" class="btn btn-verdant btn-sm px-3 d-inline-flex align-items-center gap-1 nav-signin-btn" id="nav-signin-trigger" data-bs-toggle="offcanvas" data-bs-target="#authDrawer" title="Sign In or Register" aria-label="Sign In">
         <i class="bi bi-box-arrow-in-right"></i>
         <span>Sign In</span>
       </button>
     `;
 
-      authContainer.querySelector('#nav-signin-trigger')?.addEventListener('click', (e) => {
-        e.preventDefault();
-        openAuthDrawer('signin');
-      });
-    }
+    authContainer.querySelector('#nav-signin-trigger')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      openAuthDrawer('signin');
+    });
+  }
 }
 
   function escapeHTML(str) {

@@ -31,8 +31,21 @@
       <div class="d-flex align-items-center order-lg-3 nav-actions gap-2">
         <button class="rtl-toggle-btn" title="Toggle RTL Layout"><i class="bi bi-arrow-left-right"></i></button>
         <button class="theme-toggle-btn" title="Toggle Dark/Light Mode"><i class="bi bi-moon-stars-fill"></i></button>
-        <a href="../guest/bookings.html" class="btn btn-verdant btn-sm">
-          <i class="bi bi-calendar-check"></i> My Bookings
+
+        <!-- Auth Container -->
+        <div id="nav-auth-container" class="nav-auth-area">
+          <button type="button"
+            class="btn btn-verdant btn-sm px-3 d-inline-flex align-items-center gap-1 nav-signin-btn"
+            id="nav-signin-trigger" data-bs-toggle="offcanvas" data-bs-target="#authDrawer" title="Sign In or Register">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Sign In</span>
+          </button>
+        </div>
+
+        <a href="../guest/dashboard.html"
+          class="btn btn-verdant btn-sm px-3 d-inline-flex align-items-center gap-1 nav-dashboard-btn"
+          title="Customer Dashboard">
+          <i class="bi bi-speedometer2"></i> <span>Dashboard</span>
         </a>
       </div>
     </div>
