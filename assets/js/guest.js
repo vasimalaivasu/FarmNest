@@ -158,6 +158,9 @@ function updateDashboardAuthControls(isGuestMode) {
 
   // Remove any preview banner from the dashboard content area
   document.querySelectorAll('.guest-preview-banner').forEach(b => b.remove());
+  if (!isGuestMode) {
+    document.querySelectorAll('.guest-profile-alert').forEach(b => b.remove());
+  }
 }
 
 /**
@@ -650,29 +653,32 @@ function initGuestProfilePage() {
     }
 
     if (form) {
-      form.addEventListener('submit', (e) => {
+      form.onsubmit = (e) => {
         e.preventDefault();
         requireAuthRedirect('save profile information', 'signin');
-      });
+      };
     }
     if (pwdForm) {
-      pwdForm.addEventListener('submit', (e) => {
+      pwdForm.onsubmit = (e) => {
         e.preventDefault();
         requireAuthRedirect('change password', 'signin');
-      });
+      };
     }
     if (photoInput) {
-      photoInput.addEventListener('click', (e) => {
+      photoInput.onclick = (e) => {
         e.preventDefault();
         requireAuthRedirect('upload profile avatar', 'signin');
-      });
+      };
     }
     return;
   }
 
+  // Authenticated State: Immediately remove any guest preview alert banner
+  document.querySelectorAll('.guest-profile-alert').forEach(b => b.remove());
+
   // Authenticated Profile Form submission
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.onsubmit = (e) => {
       e.preventDefault();
       VerdantDB.updateProfile({
         name: nameInput.value.trim(),
@@ -683,21 +689,22 @@ function initGuestProfilePage() {
       });
       showToast('Your guest profile has been updated.', 'success', 'Profile Saved');
       initGuestTopbarUser();
-    });
+    };
   }
 
   // Password change simulation
   if (pwdForm) {
-    pwdForm.addEventListener('submit', (e) => {
+    pwdForm.onsubmit = (e) => {
       e.preventDefault();
       pwdForm.reset();
       showToast('Your password has been changed securely.', 'success', 'Security');
-    });
+    };
   }
 
   // Profile photo upload handler
   if (photoInput) {
-    photoInput.addEventListener('change', (e) => {
+    photoInput.onclick = null;
+    photoInput.onchange = (e) => {
       const file = e.target.files && e.target.files[0];
       if (file) {
         const reader = new FileReader();
@@ -708,7 +715,7 @@ function initGuestProfilePage() {
         };
         reader.readAsDataURL(file);
       }
-    });
+    };
   }
 }
 
