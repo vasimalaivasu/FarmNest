@@ -1638,18 +1638,31 @@ body.dark-mode .verdant-navbar.scrolled {
   }
 
   /* ===================================================================
-   FOOTER (Professional Luxury Style)
+   FOOTER (Rustic Luxury Style - Theme Adaptive)
 =================================================================== */
   .verdant-footer {
-    background: linear-gradient(180deg, #12281e 0%, #0d1e16 100%);
-    color: rgba(255, 255, 255, 0.8);
+    background: var(--bg-cream-surface, #f4efe6);
+    color: var(--text-muted, #4b5563);
     padding: 48px 0 24px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid var(--border-color, #e5ded3);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .verdant-footer .footer-brand-text,
+  .verdant-footer .navbar-brand {
+    color: var(--primary-forest, #1b4332);
+    transition: color 0.2s ease;
+  }
+
+  .verdant-footer .navbar-brand:hover {
+    color: var(--primary-forest-light, #2d6a4f);
   }
 
   .verdant-footer h5,
-  .verdant-footer h6 {
-    color: #ffffff;
+  .verdant-footer h6,
+  .verdant-footer .footer-title,
+  .verdant-footer .footer-heading {
+    color: var(--primary-forest, #1b4332);
     font-size: 1.02rem;
     font-weight: 700;
     letter-spacing: 0.02em;
@@ -1659,25 +1672,40 @@ body.dark-mode .verdant-navbar.scrolled {
   }
 
   .verdant-footer h5::after,
-  .verdant-footer h6::after {
+  .verdant-footer h6::after,
+  .verdant-footer .footer-title::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 24px;
     height: 2px;
-    background: var(--accent-gold, #d4a373);
+    background: var(--earth-terracotta, #b07d62);
     border-radius: 2px;
   }
 
+  .verdant-footer .footer-desc,
+  .verdant-footer .footer-contact-list {
+    color: var(--text-muted, #4b5563);
+  }
+
+  .verdant-footer .footer-contact-link {
+    color: var(--text-muted, #4b5563);
+    transition: color 0.2s ease;
+  }
+
+  .verdant-footer .footer-contact-link:hover {
+    color: var(--primary-forest, #1b4332);
+  }
+
   .verdant-footer a {
-    color: rgba(255, 255, 255, 0.72);
+    color: var(--text-muted, #4b5563);
     text-decoration: none;
     transition: all 0.2s ease;
   }
 
   .verdant-footer a:hover {
-    color: #ffffff;
+    color: var(--primary-forest, #1b4332);
     text-decoration: none;
     padding-left: 3px;
   }
@@ -1686,46 +1714,95 @@ body.dark-mode .verdant-navbar.scrolled {
     margin-bottom: 7px;
   }
 
+  .footer-links a {
+    color: var(--text-muted, #4b5563);
+  }
+
+  .footer-links a:hover {
+    color: var(--primary-forest, #1b4332);
+    font-weight: 500;
+  }
+
+  /* Newsletter Box */
   .footer-newsletter-box {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(8px);
+    background: var(--bg-surface, #ffffff);
+    border: 1px solid var(--border-color, #e5ded3);
+    box-shadow: 0 4px 20px rgba(27, 67, 50, 0.05);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .footer-newsletter-box .rounded-circle.bg-success {
+    background-color: var(--primary-forest, #1b4332) !important;
+    color: #ffffff !important;
+  }
+
+  .footer-input-icon {
+    background: var(--bg-surface, #ffffff) !important;
+    border-color: var(--border-color, #e5ded3) !important;
+    color: var(--primary-forest-light, #2d6a4f) !important;
   }
 
   .footer-newsletter-form .form-control {
-    background: rgba(255, 255, 255, 0.08) !important;
-    border-color: rgba(255, 255, 255, 0.2) !important;
-    color: #ffffff !important;
+    background: var(--bg-surface, #ffffff) !important;
+    border-color: var(--border-color, #e5ded3) !important;
+    color: var(--text-dark, #111827) !important;
   }
 
   .footer-newsletter-form .form-control::placeholder {
-    color: rgba(255, 255, 255, 0.5) !important;
+    color: #9ca3af !important;
   }
 
   .footer-newsletter-form .form-control:focus {
-    background: rgba(255, 255, 255, 0.12) !important;
-    border-color: var(--accent-sage-light, #95d5b2) !important;
-    box-shadow: 0 0 0 0.2rem rgba(149, 213, 178, 0.25) !important;
+    background: var(--bg-surface, #ffffff) !important;
+    border-color: var(--primary-forest, #1b4332) !important;
+    box-shadow: 0 0 0 0.2rem rgba(27, 67, 50, 0.15) !important;
   }
 
+  /* Social Buttons */
+  .footer-social-btn {
+    background: var(--bg-surface, #ffffff) !important;
+    border: 1px solid var(--border-color, #e5ded3) !important;
+    color: var(--primary-forest, #1b4332) !important;
+    transition: all 0.2s ease;
+  }
+
+  .footer-social-btn:hover {
+    background: var(--primary-forest, #1b4332) !important;
+    color: #ffffff !important;
+    border-color: var(--primary-forest, #1b4332) !important;
+    transform: translateY(-2px);
+  }
+
+  /* Bottom Bar */
   .footer-bottom {
     padding-top: 18px;
     margin-top: 32px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--border-color, #e5ded3) !important;
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.55);
+    color: var(--text-light, #6b7280);
   }
 
+  .footer-bottom .footer-copy-text {
+    color: var(--text-light, #6b7280);
+  }
+
+  .footer-bottom .footer-bottom-link,
   .footer-bottom a {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-muted, #4b5563);
   }
 
+  .footer-bottom .footer-bottom-link:hover,
   .footer-bottom a:hover {
-    color: #ffffff;
+    color: var(--primary-forest, #1b4332);
     padding-left: 0;
   }
 
+  .footer-bottom .text-secondary {
+    color: var(--border-color, #d1c7b7) !important;
+  }
+
   .hover-white:hover {
-    color: #ffffff !important;
+    color: var(--primary-forest, #1b4332) !important;
   }
 
   /* ===================================================================
