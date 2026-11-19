@@ -157,184 +157,297 @@
 
         <!-- Upcoming Stay Banner Highlight -->
         <div class="mb-5" id="dash-upcoming-reservation-card">
-          <!-- Populated by assets/js/guest.js -->
+          <div class="card p-4 text-center border rounded-4 bg-white shadow-sm">
+            <i class="bi bi-calendar2-range text-muted fs-1 mb-2 d-block"></i>
+            <h5 class="font-serif fw-bold mb-1">No Active Reservations</h5>
+            <p class="text-muted small mb-3">You are browsing in guest mode with zero values and no account setup. Sign
+              in to view and manage your verified itineraries.</p>
+            <div class="d-flex justify-content-center gap-2">
+              <button type="button" class="btn btn-verdant btn-sm px-3" data-auth-drawer="signin"><i
+                  class="bi bi-box-arrow-in-right me-1"></i> Sign In</button>
+              <a href="../stays.html" class="btn btn-verdant-outline btn-sm px-3">Explore Farmstays & Cottages</a>
+            </div>
+          </div>
         </div>
 
-            <!-- Quick Escape Planner & Date Booking Widget -->
-            <div class="card border rounded-4 p-4 shadow-sm mb-5 bg-theme-surface">
-              <div class="row align-items-center mb-3">
-                <div class="col-md-8">
-                  <h5 class="font-serif fw-bold mb-1"><i class="bi bi-calendar2-range text-success me-2"></i>Book Your
-                    Countryside Stay</h5>
-                  <p class="text-muted small mb-0">Select your destination haven, pick arrival & departure dates, and
-                    reserve instantly.</p>
-                </div>
-                <div class="col-md-4 text-md-end mt-2 mt-md-0">
-                  <span
-                    class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill small">
-                    <i class="bi bi-shield-check me-1"></i> Best Rate Guaranteed
-                  </span>
-                </div>
-              </div>
-              <form id="dash-quick-book-form">
-                <div class="row g-3">
-                  <div class="col-lg-4 col-md-6">
-                    <label class="form-label small fw-semibold">Countryside Haven</label>
-                    <div class="input-group">
-                      <span class="input-group-text bg-transparent text-muted"><i class="bi bi-house-door"></i></span>
-                      <select id="dash-book-property" class="form-select" required>
-                        <!-- Populated dynamically by assets/js/guest.js -->
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-6">
-                    <label class="form-label small fw-semibold">Check-in Date</label>
-                    <div class="input-group">
-                      <span class="input-group-text bg-transparent text-muted"><i
-                          class="bi bi-calendar-event"></i></span>
-                      <input type="date" id="dash-book-checkin" class="form-control" required>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-6">
-                    <label class="form-label small fw-semibold">Check-out Date</label>
-                    <div class="input-group">
-                      <span class="input-group-text bg-transparent text-muted"><i
-                          class="bi bi-calendar-check"></i></span>
-                      <input type="date" id="dash-book-checkout" class="form-control" required>
-                    </div>
-                  </div>
-                  <div class="col-lg-2 col-md-6">
-                    <label class="form-label small fw-semibold">Guests</label>
-                    <div class="input-group">
-                      <span class="input-group-text bg-transparent text-muted"><i class="bi bi-people"></i></span>
-                      <select id="dash-book-guests" class="form-select">
-                        <option value="1">1 Guest</option>
-                        <option value="2" selected>2 Guests</option>
-                        <option value="3">3 Guests</option>
-                        <option value="4">4+ Guests</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-12 text-end">
-                    <button type="submit" class="btn btn-verdant px-4 py-2 fw-semibold">
-                      <i class="bi bi-calendar-plus me-1"></i> Check Availability & Book Dates
-                    </button>
-                  </div>
-                </div>
-              </form>
+        <!-- Quick Escape Planner & Date Booking Widget -->
+        <div class="card border rounded-4 p-4 shadow-sm mb-5 bg-theme-surface">
+          <div class="row align-items-center mb-3">
+            <div class="col-md-8">
+              <h5 class="font-serif fw-bold mb-1"><i class="bi bi-calendar2-range text-success me-2"></i>Book Your
+                Countryside Stay</h5>
+              <p class="text-muted small mb-0">Select your destination haven, pick arrival & departure dates, and
+                reserve instantly.</p>
             </div>
-
-            <!-- Browse Stays & Countryside Escapes Section -->
-            <div class="mb-5">
-              <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
-                <div>
-                  <h5 class="font-serif fw-bold mb-1"><i class="bi bi-compass text-success me-2"></i>Browse Stays &
-                    Farmhouses</h5>
-                  <p class="text-muted small mb-0">Discover authentic rural retreats, organic farmsteads, and mountain
-                    chalets.</p>
-                </div>
-                <a href="../stays.html" class="small text-success text-decoration-none fw-bold mt-2 mt-sm-0">View All
-                  Stays &rarr;</a>
-              </div>
-
-              <!-- Category Filter Chips -->
-              <div class="d-flex flex-wrap gap-2 mb-4" id="dash-category-filter-chips">
-                <button type="button" class="btn btn-sm btn-verdant dash-stay-cat active" data-category="all">All
-                  Stays</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary dash-stay-cat"
-                  data-category="Historic Farmhouse">Historic Farmhouse</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary dash-stay-cat"
-                  data-category="Eco Lodge">Eco Lodges</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary dash-stay-cat"
-                  data-category="Mountain Chalet">Mountain Chalets</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary dash-stay-cat"
-                  data-category="Vineyard Bastide">Vineyard Bastide</button>
-              </div>
-
-              <!-- Stays Grid -->
-              <div class="row g-4" id="dash-browse-stays-grid">
-                <!-- Populated dynamically by assets/js/guest.js -->
-              </div>
+            <div class="col-md-4 text-md-end mt-2 mt-md-0">
+              <span
+                class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill small">
+                <i class="bi bi-shield-check me-1"></i> Best Rate Guaranteed
+              </span>
             </div>
-
-            <!-- Reservations Management with Status Filter Tabs -->
-            <div class="verdant-table-card mb-5">
-              <div class="p-3 border-bottom d-flex flex-wrap justify-content-between align-items-center gap-2">
-                <div>
-                  <h6 class="font-serif fw-bold mb-0"><i class="bi bi-calendar-check text-success me-2"></i>Your
-                    Countryside Reservations</h6>
-                  <small class="text-muted">Track reservation status, access check-in guides, and view details</small>
-                </div>
-                <div class="d-flex align-items-center gap-2">
-                  <div class="btn-group btn-group-sm" role="group" id="dash-booking-filters">
-                    <button type="button" class="btn btn-outline-secondary active dash-booking-filter-btn"
-                      data-filter="all">All</button>
-                    <button type="button" class="btn btn-outline-secondary dash-booking-filter-btn"
-                      data-filter="upcoming">Upcoming</button>
-                    <button type="button" class="btn btn-outline-secondary dash-booking-filter-btn"
-                      data-filter="completed">Completed</button>
-                    <button type="button" class="btn btn-outline-secondary dash-booking-filter-btn"
-                      data-filter="cancelled">Cancelled</button>
-                  </div>
-                  <a href="bookings.html" class="small text-success text-decoration-none fw-bold ms-2">All Bookings
-                    &rarr;</a>
-                </div>
-              </div>
-
-              <div class="table-responsive">
-                <table class="verdant-table">
-                  <thead>
-                    <tr>
-                      <th>Booking ID</th>
-                      <th>Property & Suite</th>
-                      <th>Check-in</th>
-                      <th>Duration</th>
-                      <th>Total Amount</th>
-                      <th>Status</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody id="dash-recent-bookings-tbody">
-                    <!-- Populated by assets/js/guest.js -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <!-- Payments & Billing Management Section -->
-            <div class="verdant-table-card mb-4">
-              <div class="p-3 border-bottom d-flex flex-wrap justify-content-between align-items-center gap-2">
-                <div>
-                  <h6 class="font-serif fw-bold mb-0"><i class="bi bi-credit-card text-success me-2"></i>Payments &
-                    Billing Management</h6>
-                  <small class="text-muted">Review transactions, invoices, and download receipts</small>
-                </div>
-                <a href="payments.html" class="small text-success text-decoration-none fw-bold">Manage All Invoices
-                  &rarr;</a>
-              </div>
-
-              <div class="table-responsive">
-                <table class="verdant-table">
-                  <thead>
-                    <tr>
-                      <th>Transaction ID</th>
-                      <th>Booking ID</th>
-                      <th>Property</th>
-                      <th>Date</th>
-                      <th>Method</th>
-                      <th>Amount</th>
-                      <th>Payment Status</th>
-                      <th>Receipt</th>
-                    </tr>
-                  </thead>
-                  <tbody id="dash-payments-tbody">
-                    <!-- Populated by assets/js/guest.js -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
           </div>
+          <form id="dash-quick-book-form">
+            <div class="row g-3">
+              <div class="col-lg-4 col-md-6">
+                <label class="form-label small fw-semibold">Countryside Haven</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-transparent text-muted"><i class="bi bi-house-door"></i></span>
+                  <select id="dash-book-property" class="form-select" required>
+                    <option value="prop-1">Whispering Pines Farmhouse &mdash; Cotswolds, United Kingdom (from $185/nt)
+                    </option>
+                    <option value="prop-2">Willow Creek Eco Lodge &mdash; Black Forest, Germany (from $160/nt)</option>
+                    <option value="prop-3">Golden Valley Vineyard Estate &mdash; Tuscany, Italy (from $295/nt)</option>
+                    <option value="prop-4">Cedar Ridge Mountain Cottage &mdash; Stowe, Vermont, USA (from $215/nt)
+                    </option>
+                    <option value="prop-5">Sunny Meadow Organic Farmstay &mdash; Somerset, United Kingdom (from $140/nt)
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <label class="form-label small fw-semibold">Check-in Date</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-transparent text-muted"><i class="bi bi-calendar-event"></i></span>
+                  <input type="date" id="dash-book-checkin" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <label class="form-label small fw-semibold">Check-out Date</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-transparent text-muted"><i class="bi bi-calendar-check"></i></span>
+                  <input type="date" id="dash-book-checkout" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-6">
+                <label class="form-label small fw-semibold">Guests</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-transparent text-muted"><i class="bi bi-people"></i></span>
+                  <select id="dash-book-guests" class="form-select">
+                    <option value="1">1 Guest</option>
+                    <option value="2" selected>2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4+ Guests</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-12 text-end">
+                <button type="submit" class="btn btn-verdant px-4 py-2 fw-semibold">
+                  <i class="bi bi-calendar-plus me-1"></i> Check Availability & Book Dates
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Browse Stays & Countryside Escapes Section -->
+        <div class="mb-5">
+          <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+            <div>
+              <h5 class="font-serif fw-bold mb-1"><i class="bi bi-compass text-success me-2"></i>Browse Stays &
+                Farmhouses</h5>
+              <p class="text-muted small mb-0">Discover authentic rural retreats, organic farmsteads, and mountain
+                chalets.</p>
+            </div>
+            <a href="../stays.html" class="small text-success text-decoration-none fw-bold mt-2 mt-sm-0">View All
+              Stays &rarr;</a>
+          </div>
+
+          <!-- Category Filter Chips -->
+          <div class="d-flex flex-wrap gap-2 mb-4" id="dash-category-filter-chips">
+            <button type="button" class="btn btn-sm btn-verdant dash-stay-cat active" data-category="all">All
+              Stays</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary dash-stay-cat"
+              data-category="Historic Farmhouse">Historic Farmhouse</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary dash-stay-cat" data-category="Eco Lodge">Eco
+              Lodges</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary dash-stay-cat"
+              data-category="Mountain Chalet">Mountain Chalets</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary dash-stay-cat"
+              data-category="Vineyard Bastide">Vineyard Bastide</button>
+          </div>
+
+          <!-- Stays Grid -->
+          <div class="row g-4" id="dash-browse-stays-grid">
+            <div class="col-md-6 col-xl-4">
+              <div class="card border rounded-4 overflow-hidden h-100 shadow-sm bg-theme-surface property-card">
+                <div class="property-thumb position-relative" style="height: 200px; overflow: hidden;">
+                  <img src="../assets/images/whispering-pines.jpg" class="w-100 h-100" style="object-fit: cover;"
+                    alt="Whispering Pines Farmhouse">
+                  <span class="badge bg-success position-absolute top-0 start-0 m-3">Farmhouse</span>
+                </div>
+                <div class="p-3 d-flex flex-column flex-grow-1">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div>
+                      <h6 class="font-serif fw-bold mb-0">Whispering Pines Farmhouse</h6>
+                      <small class="text-muted"><i class="bi bi-geo-alt-fill text-danger me-1"></i>Cotswolds, United
+                        Kingdom</small>
+                    </div>
+                    <span class="fw-bold text-success">$185<small class="text-muted fw-normal">/nt</small></span>
+                  </div>
+                  <div class="d-flex gap-2 text-muted small mb-3">
+                    <span><i class="bi bi-people me-1"></i>6 Guests</span> &bull;
+                    <span><i class="bi bi-door-open me-1"></i>3 Beds</span> &bull;
+                    <span><i class="bi bi-droplet me-1"></i>2 Baths</span>
+                  </div>
+                  <div class="mt-auto d-flex gap-2">
+                    <a href="../stay-details.html?id=prop-1"
+                      class="btn btn-sm btn-outline-secondary flex-grow-1">Details</a>
+                    <a href="../booking/booking.html?id=prop-1" class="btn btn-sm btn-verdant flex-grow-1">Book</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-xl-4">
+              <div class="card border rounded-4 overflow-hidden h-100 shadow-sm bg-theme-surface property-card">
+                <div class="property-thumb position-relative" style="height: 200px; overflow: hidden;">
+                  <img src="../assets/images/willow-creek.jpg" class="w-100 h-100" style="object-fit: cover;"
+                    alt="Willow Creek Eco Lodge">
+                  <span class="badge bg-success position-absolute top-0 start-0 m-3">Eco Lodge</span>
+                </div>
+                <div class="p-3 d-flex flex-column flex-grow-1">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div>
+                      <h6 class="font-serif fw-bold mb-0">Willow Creek Eco Lodge</h6>
+                      <small class="text-muted"><i class="bi bi-geo-alt-fill text-danger me-1"></i>Black Forest,
+                        Germany</small>
+                    </div>
+                    <span class="fw-bold text-success">$160<small class="text-muted fw-normal">/nt</small></span>
+                  </div>
+                  <div class="d-flex gap-2 text-muted small mb-3">
+                    <span><i class="bi bi-people me-1"></i>4 Guests</span> &bull;
+                    <span><i class="bi bi-door-open me-1"></i>2 Beds</span> &bull;
+                    <span><i class="bi bi-droplet me-1"></i>1 Bath</span>
+                  </div>
+                  <div class="mt-auto d-flex gap-2">
+                    <a href="../stay-details.html?id=prop-2"
+                      class="btn btn-sm btn-outline-secondary flex-grow-1">Details</a>
+                    <a href="../booking/booking.html?id=prop-2" class="btn btn-sm btn-verdant flex-grow-1">Book</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-xl-4">
+              <div class="card border rounded-4 overflow-hidden h-100 shadow-sm bg-theme-surface property-card">
+                <div class="property-thumb position-relative" style="height: 200px; overflow: hidden;">
+                  <img src="../assets/images/golden-valley.jpg" class="w-100 h-100" style="object-fit: cover;"
+                    alt="Golden Valley Vineyard Estate">
+                  <span class="badge bg-success position-absolute top-0 start-0 m-3">Vineyard</span>
+                </div>
+                <div class="p-3 d-flex flex-column flex-grow-1">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div>
+                      <h6 class="font-serif fw-bold mb-0">Golden Valley Vineyard Estate</h6>
+                      <small class="text-muted"><i class="bi bi-geo-alt-fill text-danger me-1"></i>Tuscany,
+                        Italy</small>
+                    </div>
+                    <span class="fw-bold text-success">$295<small class="text-muted fw-normal">/nt</small></span>
+                  </div>
+                  <div class="d-flex gap-2 text-muted small mb-3">
+                    <span><i class="bi bi-people me-1"></i>8 Guests</span> &bull;
+                    <span><i class="bi bi-door-open me-1"></i>4 Beds</span> &bull;
+                    <span><i class="bi bi-droplet me-1"></i>4 Baths</span>
+                  </div>
+                  <div class="mt-auto d-flex gap-2">
+                    <a href="../stay-details.html?id=prop-3"
+                      class="btn btn-sm btn-outline-secondary flex-grow-1">Details</a>
+                    <a href="../booking/booking.html?id=prop-3" class="btn btn-sm btn-verdant flex-grow-1">Book</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reservations Management with Status Filter Tabs -->
+        <div class="verdant-table-card mb-5">
+          <div class="p-3 border-bottom d-flex flex-wrap justify-content-between align-items-center gap-2">
+            <div>
+              <h6 class="font-serif fw-bold mb-0"><i class="bi bi-calendar-check text-success me-2"></i>Your
+                Countryside Reservations</h6>
+              <small class="text-muted">Track reservation status, access check-in guides, and view details</small>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <div class="btn-group btn-group-sm" role="group" id="dash-booking-filters">
+                <button type="button" class="btn btn-outline-secondary active dash-booking-filter-btn"
+                  data-filter="all">All</button>
+                <button type="button" class="btn btn-outline-secondary dash-booking-filter-btn"
+                  data-filter="upcoming">Upcoming</button>
+                <button type="button" class="btn btn-outline-secondary dash-booking-filter-btn"
+                  data-filter="completed">Completed</button>
+                <button type="button" class="btn btn-outline-secondary dash-booking-filter-btn"
+                  data-filter="cancelled">Cancelled</button>
+              </div>
+              <a href="bookings.html" class="small text-success text-decoration-none fw-bold ms-2">All Bookings
+                &rarr;</a>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="verdant-table">
+              <thead>
+                <tr>
+                  <th>Booking ID</th>
+                  <th>Property & Suite</th>
+                  <th>Check-in</th>
+                  <th>Duration</th>
+                  <th>Total Amount</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="dash-recent-bookings-tbody">
+                <tr>
+                  <td colspan="7" class="text-center py-4 text-muted">
+                    <i class="bi bi-calendar-x d-block fs-3 mb-2 text-muted"></i>
+                    No reservations found in guest preview mode. <a href="#" class="text-success fw-bold ms-1"
+                      data-auth-drawer="signin">Sign In</a> to view your account history.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Payments & Billing Management Section -->
+        <div class="verdant-table-card mb-4">
+          <div class="p-3 border-bottom d-flex flex-wrap justify-content-between align-items-center gap-2">
+            <div>
+              <h6 class="font-serif fw-bold mb-0"><i class="bi bi-credit-card text-success me-2"></i>Payments &
+                Billing Management</h6>
+              <small class="text-muted">Review transactions, invoices, and download receipts</small>
+            </div>
+            <a href="payments.html" class="small text-success text-decoration-none fw-bold">Manage All Invoices
+              &rarr;</a>
+          </div>
+
+          <div class="table-responsive">
+            <table class="verdant-table">
+              <thead>
+                <tr>
+                  <th>Transaction ID</th>
+                  <th>Booking ID</th>
+                  <th>Property</th>
+                  <th>Date</th>
+                  <th>Method</th>
+                  <th>Amount</th>
+                  <th>Payment Status</th>
+                  <th>Receipt</th>
+                </tr>
+              </thead>
+              <tbody id="dash-payments-tbody">
+                <tr>
+                  <td colspan="8" class="text-center py-4 text-muted">
+                    <i class="bi bi-credit-card-2-front fs-3 d-block mb-1 text-muted"></i>
+                    No transactions found in guest preview mode. <a href="#" class="text-success fw-bold ms-1"
+                      data-auth-drawer="signin">Sign In</a> to manage payment methods and view tax receipts.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
 
     </main>
 

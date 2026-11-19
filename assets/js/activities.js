@@ -63,7 +63,7 @@ function initActivitiesListing() {
       const imgSrc = (window.VerdantDB && VerdantDB.resolveImagePath) ? VerdantDB.resolveImagePath(a.image) : a.image;
       return `
       <div class="col-md-6 col-lg-4 mb-4">
-        <div class="activity-card">
+        <div class="activity-card h-100">
           <div class="activity-thumb">
             <img src="${imgSrc}" alt="${a.title}">
             <span class="badge-category position-absolute top-0 start-0 m-3">${a.category}</span>

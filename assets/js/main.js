@@ -1102,7 +1102,7 @@ function showToast(message, type = 'info', title = 'Verdant Haven') {
   if (type === 'danger') iconClass = 'bi-x-circle-fill text-danger';
 
   toast.innerHTML = `
-    < i class="bi ${iconClass} fs-5 mt-1" ></i >
+    <i class="bi ${iconClass} fs-5 mt-1"></i>
     <div class="flex-grow-1">
       <div class="verdant-toast-title">${title}</div>
       <div class="verdant-toast-msg">${message}</div>

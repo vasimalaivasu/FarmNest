@@ -263,22 +263,22 @@ function initGuestDashboardOverview() {
 
   // Recent Bookings Table with Interactive Filter Tabs
   const tableBody = document.getElementById('dash-recent-bookings-tbody');
-      const bookingFilterBtns = document.querySelectorAll('.dash-booking-filter-btn');
-      let currentDashFilter = 'all';
+  const bookingFilterBtns = document.querySelectorAll('.dash-booking-filter-btn');
+  let currentDashFilter = 'all';
 
-      function renderDashBookings() {
-        if (!tableBody) return;
-        let filtered = bookings;
-        if (currentDashFilter === 'upcoming') {
-          filtered = bookings.filter(b => b.bookingStatus === 'Upcoming' || b.bookingStatus === 'Checked In');
-        } else if (currentDashFilter === 'completed') {
-          filtered = bookings.filter(b => b.bookingStatus === 'Completed');
-        } else if (currentDashFilter === 'cancelled') {
-          filtered = bookings.filter(b => b.bookingStatus === 'Cancelled');
-        }
+  function renderDashBookings() {
+    if (!tableBody) return;
+    let filtered = bookings;
+    if (currentDashFilter === 'upcoming') {
+      filtered = bookings.filter(b => b.bookingStatus === 'Upcoming' || b.bookingStatus === 'Checked In');
+    } else if (currentDashFilter === 'completed') {
+      filtered = bookings.filter(b => b.bookingStatus === 'Completed');
+    } else if (currentDashFilter === 'cancelled') {
+      filtered = bookings.filter(b => b.bookingStatus === 'Cancelled');
+    }
 
-        if (filtered.length === 0) {
-          tableBody.innerHTML = `
+    if (filtered.length === 0) {
+      tableBody.innerHTML = `
         <tr>
           <td colspan="7" class="text-center py-4 text-muted">
             <i class="bi bi-calendar-x d-block fs-3 mb-2 text-muted"></i>
@@ -286,9 +286,9 @@ function initGuestDashboardOverview() {
           </td>
         </tr>
       `;
-        } else {
+    } else {
       tableBody.innerHTML = filtered.slice(0, 6).map(b => `
-            < tr >
+            <tr>
           <td><strong>#${b.id}</strong></td>
           <td>
             <div class="d-flex align-items-center gap-2">
@@ -313,7 +313,7 @@ function initGuestDashboardOverview() {
               </a>
             </div>
           </td>
-        </tr >
+        </tr>
             `).join('');
     }
   }
@@ -339,7 +339,7 @@ function initGuestDashboardOverview() {
 
   if (propSelect && allProps.length > 0) {
     propSelect.innerHTML = allProps.map(p => `
-            < option value = "${p.id}" > ${ p.name } & mdash; ${ p.location } (from $${ p.price } /nt)</option >
+            <option value="${p.id}"> ${p.name} &mdash; ${p.location} (from $${p.price} /nt)</option>
               `).join('');
   }
 
@@ -392,7 +392,7 @@ function initGuestDashboardOverview() {
 
       showToast('Checking availability & preparing your reservation checkout...', 'info', 'Reservation Booking');
       setTimeout(() => {
-        window.location.href = `../ booking / booking.html ? id = ${ encodeURIComponent(selectedProp) }& checkin=${ encodeURIComponent(inDate) }& checkout=${ encodeURIComponent(outDate) }& guests=${ encodeURIComponent(guests) } `;
+        window.location.href = `../booking/booking.html?id=${encodeURIComponent(selectedProp)}&checkin=${encodeURIComponent(inDate)}&checkout=${encodeURIComponent(outDate)}&guests=${encodeURIComponent(guests)}`;
       }, 350);
     };
   }
@@ -414,7 +414,7 @@ function initGuestDashboardOverview() {
       const imgPath = (window.VerdantDB && VerdantDB.resolveImagePath) ? VerdantDB.resolveImagePath(rawImg) : rawImg;
       const features = (p.amenities || ['Organic Breakfast', 'Animal Feeding', 'Fireplace']).slice(0, 3);
       return `
-            < div class="col-md-6 col-xl-4" >
+            <div class="col-md-6 col-xl-4">
               <div class="card border rounded-4 overflow-hidden h-100 shadow-sm bg-theme-surface property-card">
                 <div class="property-thumb position-relative" style="height: 200px; overflow: hidden;">
                   <img src="${imgPath}" class="w-100 h-100" style="object-fit: cover;" alt="${p.name}">
@@ -447,7 +447,7 @@ function initGuestDashboardOverview() {
                   </div>
                 </div>
               </div>
-        </div >
+        </div>
             `;
     }).join('');
 
@@ -485,16 +485,16 @@ function initGuestDashboardOverview() {
   if (paymentsTableBody) {
     if (bookings.length === 0) {
       paymentsTableBody.innerHTML = `
-            < tr >
+            <tr>
             <td colspan="8" class="text-center py-4 text-muted">
               <i class="bi bi-credit-card-2-front fs-3 d-block mb-1 text-muted"></i>
               ${user ? 'No billing transactions recorded yet. Completed bookings will generate tax invoices and receipts here.' : 'No transactions found in guest preview mode. <a href="#" class="text-success fw-bold ms-1" data-auth-drawer="signin">Sign In</a> to manage payment methods and view tax receipts.'}
             </td>
-        </tr >
+        </tr>
             `;
     } else {
       paymentsTableBody.innerHTML = bookings.slice(0, 5).map(b => `
-            < tr >
+            <tr>
           <td><code class="text-success fw-bold">TXN-${b.id}</code></td>
           <td><strong>#${b.id}</strong></td>
           <td>
@@ -514,7 +514,7 @@ function initGuestDashboardOverview() {
               <i class="bi bi-download me-1"></i> Receipt
             </a>
           </td>
-        </tr >
+        </tr>
             `).join('');
     }
   }
@@ -537,7 +537,7 @@ function initGuestBookingsPage() {
 
     if (bookings.length === 0) {
       container.innerHTML = `
-            < div class="text-center py-5" >
+            <div class="text-center py-5">
           <i class="bi bi-calendar-x text-muted" style="font-size: 3rem;"></i>
           <h5 class="mt-3 font-serif">${user ? 'No bookings found in this category' : 'No Bookings in Guest Mode'}</h5>
           <p class="text-muted">${user ? 'Explore our curated farmstays and discover your next retreat.' : 'You are browsing in preview mode with zero values and no account setup. Sign in to view and manage your reservations.'}</p>
@@ -545,13 +545,13 @@ function initGuestBookingsPage() {
             ${user ? '' : '<button type="button" class="btn btn-verdant btn-sm" data-auth-drawer="signin"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In to View Bookings</button>'}
             <a href="../stays.html" class="btn ${user ? 'btn-verdant' : 'btn-verdant-outline'} btn-sm">Explore Stays</a>
           </div>
-        </div >
+        </div>
             `;
       return;
     }
 
     container.innerHTML = bookings.map(b => `
-            < div class="card border rounded-3 mb-3 overflow-hidden shadow-sm" >
+            <div class="card border rounded-3 mb-3 overflow-hidden shadow-sm">
               <div class="card-body p-4">
                 <div class="row align-items-center">
                   <div class="col-md-2 mb-3 mb-md-0">
@@ -582,7 +582,7 @@ function initGuestBookingsPage() {
                   </div>
                 </div>
               </div>
-      </div >
+      </div>
             `).join('');
   }
 
@@ -606,9 +606,9 @@ window.openCancelModal = function (id) {
     requireAuthRedirect('cancel or manage reservations', 'signin');
     return;
   }
-  if (confirm(`Are you sure you wish to cancel reservation #${ id }? A refund will be initiated per host policy.`)) {
+  if (confirm(`Are you sure you wish to cancel reservation #${id}? A refund will be initiated per host policy.`)) {
     VerdantDB.updateBookingStatus(id, 'Cancelled');
-    showToast(`Reservation #${ id } has been cancelled.`, 'warning', 'Booking Cancelled');
+    showToast(`Reservation #${id} has been cancelled.`, 'warning', 'Booking Cancelled');
     if (document.getElementById('guest-bookings-page')) {
       initGuestBookingsPage();
     } else {
@@ -631,7 +631,7 @@ function initGuestBookingDetailsPage() {
     const main = document.querySelector('.dashboard-content');
     if (main) {
       main.innerHTML = `
-            < div class="card p-5 text-center border rounded-4 bg-white shadow-sm my-4" >
+            <div class="card p-5 text-center border rounded-4 bg-white shadow-sm my-4">
           <i class="bi bi-calendar-x text-muted fs-1 mb-2"></i>
           <h4 class="font-serif">Reservation Not Found</h4>
           <p class="text-muted">${user ? 'This booking does not exist or does not belong to your account.' : 'You are currently browsing in Guest Preview Mode with zero values. Sign in to access your verified reservation vouchers.'}</p>
@@ -639,7 +639,7 @@ function initGuestBookingDetailsPage() {
             ${user ? '' : '<button type="button" class="btn btn-verdant btn-sm px-4" data-auth-drawer="signin"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</button>'}
             <a href="bookings.html" class="btn btn-verdant-outline btn-sm px-4">Back to My Bookings</a>
           </div>
-        </div >
+        </div>
             `;
     }
     return;
@@ -656,13 +656,13 @@ function initGuestBookingDetailsPage() {
   setT('detail-room-type', booking.roomType);
   setT('detail-checkin-date', booking.checkIn);
   setT('detail-checkout-date', booking.checkOut);
-  setT('detail-nights-count', `${ booking.nights } Nights`);
-  setT('detail-guests-count', `${ booking.adults } Adults${ booking.children ? `, ${booking.children} Children` : '' } `);
-  setT('detail-subtotal', `$${ booking.subtotal } `);
-  setT('detail-cleaning', `$${ booking.cleaningFee } `);
-  setT('detail-tax', `$${ booking.tax } `);
-  setT('detail-discount', `- $${ booking.discount } `);
-  setT('detail-total', `$${ booking.totalAmount } `);
+  setT('detail-nights-count', `${booking.nights} Nights`);
+  setT('detail-guests-count', `${booking.adults} Adults${booking.children ? `, ${booking.children} Children` : ''} `);
+  setT('detail-subtotal', `$${booking.subtotal} `);
+  setT('detail-cleaning', `$${booking.cleaningFee} `);
+  setT('detail-tax', `$${booking.tax} `);
+  setT('detail-discount', `- $${booking.discount} `);
+  setT('detail-total', `$${booking.totalAmount} `);
   setT('detail-payment-method', booking.paymentMethod);
   setT('detail-payment-status', booking.paymentStatus);
   setT('detail-special-requests', booking.specialRequests || 'None provided');
@@ -712,12 +712,12 @@ function initGuestWishlistPage() {
 
     if (wishProps.length === 0) {
       container.innerHTML = `
-            < div class="col-12 py-5 text-center" >
+            <div class="col-12 py-5 text-center">
           <i class="bi bi-heart text-muted" style="font-size: 3.5rem;"></i>
           <h4 class="mt-3">Your wishlist is empty</h4>
           <p class="text-muted">Save your favorite countryside retreats to easily plan your future vacations.</p>
           <a href="../stays.html" class="btn btn-verdant btn-sm mt-2">Explore Countryside Stays</a>
-        </div >
+        </div>
             `;
       return;
     }
@@ -725,7 +725,7 @@ function initGuestWishlistPage() {
     container.innerHTML = wishProps.map(p => {
       const imgSrc = (window.VerdantDB && VerdantDB.resolveImagePath) ? VerdantDB.resolveImagePath(p.images[0]) : p.images[0];
       return `
-            < div class="col-md-6 col-lg-4 mb-4" >
+            <div class="col-md-6 col-lg-4 mb-4">
               <div class="property-card h-100">
                 <div class="property-thumb">
                   <img src="${imgSrc}" alt="${p.name}">
@@ -754,7 +754,7 @@ function initGuestWishlistPage() {
                   </div>
                 </div>
               </div>
-      </div >
+      </div>
             `;
     }).join('');
   }
@@ -781,16 +781,16 @@ function initGuestPaymentsPage() {
 
   if (bookings.length === 0) {
     tbody.innerHTML = `
-            < tr >
+            <tr>
             <td colspan="8" class="text-center py-4 text-muted">
               <i class="bi bi-credit-card-2-front fs-3 d-block mb-1"></i>
               ${user ? 'No payment transactions found for your account.' : 'No payment transactions found in guest preview mode. <a href="#" class="text-success fw-bold ms-1" data-auth-drawer="signin">Sign In</a> to manage payment methods and view tax receipts.'}
             </td>
-      </tr >
+      </tr>
             `;
   } else {
     tbody.innerHTML = bookings.map((b, idx) => `
-            < tr >
+            <tr>
         <td><code>TXN-904${idx + 10}</code></td>
         <td><strong>#${b.id}</strong></td>
         <td>${b.propertyName}</td>
@@ -807,7 +807,7 @@ function initGuestPaymentsPage() {
             <i class="bi bi-receipt"></i> Receipt
           </a>
         </td>
-      </tr >
+      </tr>
             `).join('');
   }
 
@@ -853,7 +853,7 @@ function initGuestProfilePage() {
       const alertDiv = document.createElement('div');
       alertDiv.className = 'alert alert-warning border-0 rounded-4 mb-4 p-3 guest-profile-alert shadow-sm';
       alertDiv.innerHTML = `
-            < div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3" >
+            <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
           <div class="d-flex align-items-center gap-2 min-w-0">
             <i class="bi bi-exclamation-triangle-fill fs-5 text-warning flex-shrink-0"></i>
             <span class="small mb-0">You are in <strong>Guest Preview Mode</strong>. Updating profile or password settings requires an active account.</span>
@@ -866,7 +866,7 @@ function initGuestProfilePage() {
               <i class="bi bi-person-plus"></i> <span>Sign Up</span>
             </button>
           </div>
-        </div >
+        </div>
             `;
       profileCard.prepend(alertDiv);
     }
@@ -962,22 +962,22 @@ function initGuestNotificationsPage() {
     const list = user ? VerdantDB.getUserNotifications(user.email) : [];
     if (list.length === 0) {
       container.innerHTML = `
-            < div class="p-5 text-center text-muted" >
+            <div class="p-5 text-center text-muted">
               <i class="bi bi-bell-slash fs-1 d-block mb-2 text-muted"></i>
-          ${ user ? 'No notifications yet for your account.' : 'No notifications in guest preview mode. <a href="#" class="text-success fw-bold ms-1" data-auth-drawer="signin">Sign In</a> to receive real-time booking alerts.' }
-        </div >
+          ${user ? 'No notifications yet for your account.' : 'No notifications in guest preview mode. <a href="#" class="text-success fw-bold ms-1" data-auth-drawer="signin">Sign In</a> to receive real-time booking alerts.'}
+        </div>
             `;
       return;
     }
 
     container.innerHTML = list.map(n => `
-            < div class="list-group-item list-group-item-action p-3 ${!n.read ? 'bg-light border-start border-4 border-success' : ''}" >
+            <div class="list-group-item list-group-item-action p-3 ${!n.read ? 'bg-light border-start border-4 border-success' : ''}">
         <div class="d-flex w-100 justify-content-between align-items-center mb-1">
           <h6 class="mb-1 font-serif fw-bold ${!n.read ? 'text-success' : ''}">${n.title}</h6>
           <small class="text-muted">${n.date ? n.date.split('T')[0] : 'Today'}</small>
         </div>
         <p class="mb-1 small text-muted">${n.message}</p>
-      </div >
+      </div>
             `).join('');
   }
 
@@ -999,16 +999,16 @@ function initGuestNotificationsPage() {
 /* Helpers */
 function getStatusBadge(status) {
   if (status === 'Upcoming' || status === 'Confirmed') {
-    return `< span class="badge bg-success-subtle text-success" > <i class="bi bi-calendar-check me-1"></i> ${ status }</span > `;
+    return `<span class="badge bg-success-subtle text-success"> <i class="bi bi-calendar-check me-1"></i> ${status}</span> `;
   }
   if (status === 'Checked In') {
-    return `< span class="badge bg-primary-subtle text-primary" > <i class="bi bi-house-door me-1"></i> Checked In</span > `;
+    return `<span class="badge bg-primary-subtle text-primary"> <i class="bi bi-house-door me-1"></i> Checked In</span> `;
   }
   if (status === 'Completed') {
-    return `< span class="badge bg-secondary-subtle text-secondary" > <i class="bi bi-check2-all me-1"></i> Completed</span > `;
+    return `<span class="badge bg-secondary-subtle text-secondary"> <i class="bi bi-check2-all me-1"></i> Completed</span> `;
   }
   if (status === 'Cancelled') {
-    return `< span class="badge bg-danger-subtle text-danger" > <i class="bi bi-x-circle me-1"></i> Cancelled</span > `;
+    return `<span class="badge bg-danger-subtle text-danger"> <i class="bi bi-x-circle me-1"></i> Cancelled</span> `;
   }
-  return `< span class="badge bg-warning-subtle text-warning" > <i class="bi bi-hourglass-split me-1"></i> ${ status }</span > `;
+  return `<span class="badge bg-warning-subtle text-warning"> <i class="bi bi-hourglass-split me-1"></i> ${status}</span> `;
 }
