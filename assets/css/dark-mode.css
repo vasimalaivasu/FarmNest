@@ -585,55 +585,73 @@ body.dark-mode .btn-success:hover {
 }
 
 
-/* Preserve High Contrast for Hero CTA Buttons in Dark Mode */
+/* High Contrast White Hero CTA Buttons in Dark Mode */
 [data-bs-theme="dark"] .hero-cta-primary,
 body.dark-mode .hero-cta-primary,
+[data-bs-theme="dark"] .hero-cta-secondary,
+body.dark-mode .hero-cta-secondary,
 [data-bs-theme="dark"] .hero-content .btn-verdant,
+[data-bs-theme="dark"] .hero-content .btn-outline-light,
 [data-bs-theme="dark"] .hero-countryside .btn-verdant,
+[data-bs-theme="dark"] .hero-countryside .btn-outline-light,
 body.dark-mode .hero-content .btn-verdant,
-body.dark-mode .hero-countryside .btn-verdant {
+body.dark-mode .hero-content .btn-outline-light,
+body.dark-mode .hero-countryside .btn-verdant,
+body.dark-mode .hero-countryside .btn-outline-light {
   background-color: #ffffff !important;
   color: var(--primary-forest, #1b4332) !important;
-  border-color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45) !important;
+}
+
+[data-bs-theme="dark"] .hero-cta-primary i,
+body.dark-mode .hero-cta-primary i,
+[data-bs-theme="dark"] .hero-cta-secondary i,
+body.dark-mode .hero-cta-secondary i,
+[data-bs-theme="dark"] .hero-content .btn-verdant i,
+[data-bs-theme="dark"] .hero-content .btn-outline-light i,
+[data-bs-theme="dark"] .hero-countryside .btn-verdant i,
+[data-bs-theme="dark"] .hero-countryside .btn-outline-light i,
+body.dark-mode .hero-content .btn-verdant i,
+body.dark-mode .hero-content .btn-outline-light i,
+body.dark-mode .hero-countryside .btn-verdant i,
+body.dark-mode .hero-countryside .btn-outline-light i {
+  color: var(--primary-forest, #1b4332) !important;
 }
 
 [data-bs-theme="dark"] .hero-cta-primary:hover,
 body.dark-mode .hero-cta-primary:hover,
-[data-bs-theme="dark"] .hero-cta-primary:hover,
-body.dark-mode .hero-cta-primary:hover,
+[data-bs-theme="dark"] .hero-cta-secondary:hover,
+body.dark-mode .hero-cta-secondary:hover,
 [data-bs-theme="dark"] .hero-content .btn-verdant:hover,
+[data-bs-theme="dark"] .hero-content .btn-outline-light:hover,
 [data-bs-theme="dark"] .hero-countryside .btn-verdant:hover,
+[data-bs-theme="dark"] .hero-countryside .btn-outline-light:hover,
 body.dark-mode .hero-content .btn-verdant:hover,
-body.dark-mode .hero-countryside .btn-verdant:hover {
+body.dark-mode .hero-content .btn-outline-light:hover,
+body.dark-mode .hero-countryside .btn-verdant:hover,
+body.dark-mode .hero-countryside .btn-outline-light:hover {
   background-color: var(--bg-warm-cream, #fbf9f5) !important;
   color: var(--primary-forest-dark, #0f271d) !important;
   border-color: var(--bg-warm-cream, #fbf9f5) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6) !important;
 }
 
-[data-bs-theme="dark"] .hero-cta-secondary,
-body.dark-mode .hero-cta-secondary,
-[data-bs-theme="dark"] .hero-cta-secondary,
-body.dark-mode .hero-cta-secondary,
-[data-bs-theme="dark"] .hero-content .btn-outline-light,
-[data-bs-theme="dark"] .hero-countryside .btn-outline-light,
-body.dark-mode .hero-content .btn-outline-light,
-body.dark-mode .hero-countryside .btn-outline-light {
-  background: rgba(255, 255, 255, 0.12) !important;
-  color: #ffffff !important;
-  border-color: rgba(255, 255, 255, 0.85) !important;
-}
-
-[data-bs-theme="dark"] .hero-cta-secondary:hover,
-body.dark-mode .hero-cta-secondary:hover,
-[data-bs-theme="dark"] .hero-cta-secondary:hover,
-body.dark-mode .hero-cta-secondary:hover,
-[data-bs-theme="dark"] .hero-content .btn-outline-light:hover,
-[data-bs-theme="dark"] .hero-countryside .btn-outline-light:hover,
-body.dark-mode .hero-content .btn-outline-light:hover,
-body.dark-mode .hero-countryside .btn-outline-light:hover {
-  background-color: #ffffff !important;
-  color: var(--primary-forest, #1b4332) !important;
-  border-color: #ffffff !important;
+[data-bs-theme="dark"] .hero-cta-primary:hover i,
+body.dark-mode .hero-cta-primary:hover i,
+[data-bs-theme="dark"] .hero-cta-secondary:hover i,
+body.dark-mode .hero-cta-secondary:hover i,
+[data-bs-theme="dark"] .hero-content .btn-verdant:hover i,
+[data-bs-theme="dark"] .hero-content .btn-outline-light:hover i,
+[data-bs-theme="dark"] .hero-countryside .btn-verdant:hover i,
+[data-bs-theme="dark"] .hero-countryside .btn-outline-light:hover i,
+body.dark-mode .hero-content .btn-verdant:hover i,
+body.dark-mode .hero-content .btn-outline-light:hover i,
+body.dark-mode .hero-countryside .btn-verdant:hover i,
+body.dark-mode .hero-countryside .btn-outline-light:hover i {
+  color: var(--primary-forest-dark, #0f271d) !important;
 }
 
 /* Filter Tabs & Category Pills in Dark Mode */
