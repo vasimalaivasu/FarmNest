@@ -378,6 +378,12 @@
     font-size: 13px !important;
     white-space: nowrap !important;
   }
+
+  /* About Us Story Image Wrap Tablet */
+  .about-story-img-wrap {
+    min-height: 360px !important;
+    max-height: 440px !important;
+  }
 }
 
 /* ==========================================
@@ -415,6 +421,11 @@
     width: 36px !important;
     height: 36px !important;
     font-size: 13px !important;
+  }
+
+  .rtl-toggle-btn {
+    font-size: 11px !important;
+    letter-spacing: 0.3px !important;
   }
 
   .nav-account-btn {
@@ -541,12 +552,41 @@
     height: 34px !important;
     font-size: 12.5px !important;
   }
+
+  .dashboard-topbar .rtl-toggle-btn {
+    font-size: 10.5px !important;
+  }
+
+  /* Inner Hero Section Tablet */
+  .inner-page-hero {
+    min-height: 210px !important;
+    padding: 38px 0 !important;
+  }
+  .inner-hero-content .section-title,
+  .inner-hero-content h1 {
+    font-size: 1.7rem !important;
+  }
+
+  /* About Us Story Image Wrap Mobile Landscape */
+  .about-story-img-wrap {
+    min-height: 300px !important;
+    max-height: 380px !important;
+  }
 }
 
 /* ==========================================
    STANDARD MOBILE (<= 575.98px)
 ========================================== */
 @media (max-width: 575.98px) {
+  /* About Us Story & Host Images Mobile Portrait */
+  .about-story-img-wrap {
+    min-height: 240px !important;
+    max-height: 300px !important;
+  }
+
+  .about-host-img-wrap {
+    height: 210px !important;
+  }
   .verdant-navbar {
     padding: 6px 0 !important;
     min-height: 52px !important;
@@ -674,6 +714,16 @@
     text-align: left;
     display: inline-flex;
     align-items: center;
+  }
+
+  /* Inner Hero Section Mobile */
+  .inner-page-hero {
+    min-height: 190px !important;
+    padding: 30px 12px !important;
+  }
+  .inner-hero-content .section-title,
+  .inner-hero-content h1 {
+    font-size: 1.48rem !important;
   }
 
   /* Guest Profile Alert Mobile Optimization */
@@ -830,6 +880,11 @@
     width: 31px !important;
     height: 31px !important;
     font-size: 11.5px !important;
+  }
+
+  .dashboard-topbar .rtl-toggle-btn {
+    font-size: 9.5px !important;
+    letter-spacing: 0px !important;
   }
 }
 

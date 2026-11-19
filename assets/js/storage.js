@@ -1544,6 +1544,70 @@ const INITIAL_DATABASE = {
 };
 
 // Global DB Wrapper API
+/**
+ * Universal Full Name Validator
+ * Rejects single characters, numbers/digits, and non-name symbols.
+ * Requires at least 2 alphabetic letters.
+ */
+function isValidFullName(name) {
+  if (!name || typeof name !== 'string') return false;
+  const trimmed = name.trim();
+  if (trimmed.length < 2 || trimmed.length > 60) return false;
+  if (/\d/.test(trimmed)) return false;
+  const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿĀ-ž'’.\-\s]+$/;
+  if (!nameRegex.test(trimmed)) return false;
+  const letters = trimmed.match(/[A-Za-zÀ-ÖØ-öø-ÿĀ-ž]/g);
+  return letters !== null && letters.length >= 2;
+}
+
+/**
+ * Universal Email Validator
+ * Rejects incomplete emails like "ice@g", missing domains, or missing top-level domains.
+ * Requires valid username, @, domain name, and at least a 2-letter TLD (e.g. .com, .org, .co.uk).
+ */
+function isValidEmail(email) {
+  if (!email || typeof email !== 'string') return false;
+  const trimmed = email.trim().toLowerCase();
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!emailRegex.test(trimmed)) return false;
+  const parts = trimmed.split('@');
+  if (parts.length !== 2) return false;
+  const domain = parts[1];
+  if (domain.startsWith('.') || domain.endsWith('.') || domain.startsWith('-') || domain.endsWith('-')) return false;
+  if (domain.includes('..')) return false;
+  const domainParts = domain.split('.');
+  if (domainParts.length < 2) return false;
+  const tld = domainParts[domainParts.length - 1];
+  if (tld.length < 2 || !/^[a-zA-Z]+$/.test(tld)) return false;
+  return true;
+}
+
+/**
+ * Universal Phone Validator
+ * Rejects any alphabetical characters.
+ * Requires valid telephone characters (+, digits, spaces, -, ()),
+ * with at least 7 digits (international E.164 / local minimum) and at most 20 characters.
+ */
+function isValidPhone(phone) {
+  if (!phone || typeof phone !== 'string') return false;
+  const trimmed = phone.trim();
+  if (trimmed.length < 7 || trimmed.length > 20) return false;
+  // Strictly reject ANY alphabetic characters
+  if (/[a-zA-Z]/.test(trimmed)) return false;
+  // Valid pattern: optional leading +, then digits, spaces, hyphens, and parens
+  const phonePattern = /^\+?[0-9\s\-()]{7,20}$/;
+  if (!phonePattern.test(trimmed)) return false;
+  // Must contain at least 7 digits
+  const digits = trimmed.match(/\d/g);
+  return digits !== null && digits.length >= 7 && digits.length <= 16;
+}
+
+if (typeof window !== 'undefined') {
+  window.isValidFullName = isValidFullName;
+  window.isValidEmail = isValidEmail;
+  window.isValidPhone = isValidPhone;
+}
+
 const VerdantDB = {
   // Helper to resolve image paths across root and subfolders (e.g. /guest/, /booking/)
   resolveImagePath(url) {
@@ -2019,6 +2083,15 @@ const VerdantDB = {
   },
 
   register(userData) {
+    if (!isValidFullName(userData.name)) {
+      return { success: false, message: "Please enter a valid full name (at least 2 letters, letters only, no numbers)." };
+    }
+    if (!isValidEmail(userData.email)) {
+      return { success: false, message: "Please enter a valid email address with a domain (e.g. name@example.com)." };
+    }
+    if (userData.phone && !isValidPhone(userData.phone)) {
+      return { success: false, message: "Please enter a valid phone number (digits only, minimum 7 digits, e.g. +1 (555) 000-0000)." };
+    }
     const db = this.getDB();
     const cleanEmail = userData.email.trim().toLowerCase();
     if (db.users.some(u => u.email.toLowerCase() === cleanEmail)) {
@@ -2066,6 +2139,12 @@ const VerdantDB = {
   },
 
   updateProfile(profileData) {
+    if (profileData && profileData.name !== undefined && !isValidFullName(profileData.name)) {
+      return false;
+    }
+    if (profileData && profileData.phone && !isValidPhone(profileData.phone)) {
+      return false;
+    }
     const db = this.getDB();
     const currentUser = this.getCurrentUser();
     if (!currentUser) return false;

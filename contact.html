@@ -34,7 +34,7 @@
       </a>
 
       <div class="d-flex align-items-center order-lg-3 nav-actions">
-        <button class="rtl-toggle-btn" title="Toggle RTL Layout"><i class="bi bi-arrow-left-right"></i></button>
+        <button class="rtl-toggle-btn" title="Toggle RTL Layout">RTL</button>
         <button class="theme-toggle-btn" title="Toggle Dark/Light Mode"><i class="bi bi-moon-stars-fill"></i></button>
         <a href="#wishlistDrawer" class="wishlist-nav-btn" data-bs-toggle="offcanvas" data-bs-target="#wishlistDrawer"
           title="Saved Stays">
@@ -52,31 +52,32 @@
           </button>
         </div>
 
-                    <a href="guest/dashboard.html"
-            class="btn btn-verdant btn-sm px-3 d-inline-flex align-items-center gap-1 nav-dashboard-btn"
-            title="Customer Dashboard">
-            <i class="bi bi-speedometer2"></i> <span>Dashboard</span>
-          </a>
+        <a href="guest/dashboard.html"
+          class="btn btn-verdant btn-sm px-3 d-inline-flex align-items-center gap-1 nav-dashboard-btn"
+          title="Customer Dashboard">
+          <i class="bi bi-speedometer2"></i> <span>Dashboard</span>
+        </a>
 
-          <button class="navbar-toggler border-0 shadow-none ms-1" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarMain">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+        <button class="navbar-toggler border-0 shadow-none ms-1" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarMain">
+          <span class="navbar-toggler-icon"></span>
+        </button>
       </div>
 
       <div class="collapse navbar-collapse order-lg-2" id="navbarMain">
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                                        <!-- Desktop: Home Dropdown (visible only on desktop >= 992px) -->
+          <!-- Desktop: Home Dropdown (visible only on desktop >= 992px) -->
           <li class="nav-item dropdown d-none d-lg-block">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-              Home
-            </a>
-            <ul class="dropdown-menu shadow-sm">
-              <li><a class="dropdown-item" href="index.html"><i
-                    class="bi bi-house-door me-2 text-success"></i>Home 1 &ndash; Classic Countryside</a></li>
-              <li><a class="dropdown-item" href="index-2.html"><i
-                    class="bi bi-tree me-2 text-success"></i>Home 2 &ndash; Eco Luxury Retreats</a></li>
-            </ul>
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                data-bs-display="static" aria-expanded="false">
+                Home
+              </a>
+              <ul class="dropdown-menu shadow-sm">
+                <li><a class="dropdown-item" href="index.html"><i class="bi bi-house-door me-2 text-success"></i>Home 1
+                    &ndash; Classic Countryside</a></li>
+                <li><a class="dropdown-item" href="index-2.html"><i class="bi bi-tree me-2 text-success"></i>Home 2
+                    &ndash; Eco Luxury Retreats</a></li>
+              </ul>
           </li>
           <!-- Mobile / Tablet (Hamburger drawer): Listed directly in navbar -->
           <li class="nav-item d-lg-none">
@@ -100,12 +101,20 @@
   </nav>
 
   <!-- Header -->
-  <section class="py-5 bg-warm-cream border-bottom">
-    <div class="container py-3 text-center max-w-700 mx-auto">
-      <span class="section-subtitle">We Are Here For You</span>
-      <h1 class="section-title mb-2">Connect with Our Countryside Team</h1>
-      <p class="text-muted mb-0">Have questions regarding a reservation, seeking custom group farmstay packages, or
-        interested in becoming a verified host partner?</p>
+  <section class="inner-page-hero">
+    <div class="container">
+      <div class="inner-hero-content text-center max-w-700 mx-auto">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-center mb-2 small">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Contact Concierge</li>
+          </ol>
+        </nav>
+        <span class="section-subtitle">We Are Here For You</span>
+        <h1 class="section-title mb-2">Connect with Our Countryside Team</h1>
+        <p class="text-muted mb-0">Have questions regarding a reservation, seeking custom group farmstay packages, or
+          interested in becoming a verified host partner?</p>
+      </div>
     </div>
   </section>
 
@@ -152,19 +161,38 @@
               hours during normal hours.</p>
 
             <form id="contact-form"
-              onsubmit="event.preventDefault(); showToast('Your message has been safely delivered to our concierge team!', 'success', 'Message Dispatched'); this.reset();">
+              onsubmit="event.preventDefault(); const cName = document.getElementById('contact-name')?.value.trim();
+              const cEmail = document.getElementById('contact-email')?.value.trim(); const cPhone =
+              document.getElementById('contact-phone')?.value.trim(); if (!window.isValidFullName ||
+              !window.isValidFullName(cName)) { showToast('Please enter a valid full name (at least 2 letters, letters
+              only, no numbers).', 'warning', 'Invalid Name'); document.getElementById('contact-name')?.focus(); return;
+              } if (!window.isValidEmail || !window.isValidEmail(cEmail)) { showToast('Please enter a valid email
+              address with a domain (e.g. name@example.com).', 'warning', 'Invalid Email');
+              document.getElementById('contact-email')?.focus(); return; } if (cPhone && (!window.isValidPhone ||
+              !window.isValidPhone(cPhone))) { showToast('Please enter a valid phone number (digits only, minimum 7
+              digits, e.g. +1 (555) 000-0000).', 'warning', 'Invalid Phone Number');
+              document.getElementById('contact-phone')?.focus(); return; } showToast('Your message has been safely
+              delivered to our concierge team!', 'success', 'Message Dispatched'); this.reset();">
               <div class="row g-3">
                 <div class="col-md-6">
                   <label class="form-label">Full Name</label>
-                  <input type="text" class="form-control" placeholder="Enter your full name" required>
+                  <input type="text" id="contact-name" class="form-control" placeholder="Enter your full name" required
+                    minlength="2" maxlength="60" pattern="^[A-Za-zÀ-ÖØ-öø-ÿĀ-ž'’.\-\s]{2,60}$"
+                    title="Please enter a valid full name (at least 2 letters, letters only, no numbers)">
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Email Address</label>
-                  <input type="email" class="form-control" placeholder="name@example.com" required>
+                  <input type="email" id="contact-email" class="form-control" placeholder="name@example.com" required
+                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                    title="Please enter a valid email address with a domain (e.g. name@example.com)">
                 </div>
                 <div class="col-12">
                   <label class="form-label">Phone Number (Optional)</label>
-                  <input type="tel" class="form-control" placeholder="+1 (555) 000-0000">
+                  <input type="tel" id="contact-phone" class="form-control" placeholder="+1 (555) 000-0000"
+                    pattern="^\+?[0-9\s\-()]{7,20}$" inputmode="tel"
+                    title="Please enter a valid phone number (digits only, minimum 7 digits, e.g. +1 (555) 000-0000)"
+                    onkeydown="if(event.key && event.key.length===1 && !/^[0-9\+\-\(\)\s]$/.test(event.key)){event.preventDefault();}"
+                    oninput="this.value=this.value.replace(/[a-zA-Z]/g,'')">
                 </div>
                 <div class="col-12">
                   <label class="form-label">Subject</label>
@@ -233,7 +261,7 @@
     </div>
   </section>
 
-    <!-- Footer -->
+  <!-- Footer -->
   <footer class="verdant-footer" id="main-footer">
     <div class="container">
       <!-- Concise Newsletter Bar -->
@@ -241,118 +269,131 @@
         <div class="row align-items-center g-3">
           <div class="col-lg-6">
             <div class="d-flex align-items-center gap-3">
-              <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center flex-shrink-0" style="width: 44px; height: 44px; font-size: 1.2rem;">
-                <i class="bi bi-envelope-paper-heart"></i>
-              </div>
-              <div>
-                <h6 class="footer-heading fw-bold font-serif mb-0">Join The Verdant Journal</h6>
-                <p class="footer-desc small mb-0">Seasonal harvest guides, secret farmstay openings, and $30 welcome voucher.</p>
+                <div
+                  class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center flex-shrink-0"
+                  style="width: 44px; height: 44px; font-size: 1.2rem;">
+                  <i class="bi bi-envelope-paper-heart"></i>
+                </div>
+                <div>
+                  <h6 class="footer-heading fw-bold font-serif mb-0">Join The Verdant Journal</h6>
+                  <p class="footer-desc small mb-0">Seasonal harvest guides, secret farmstay openings, and $30 welcome
+                    voucher.</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-6">
-            <form class="footer-newsletter-form d-flex gap-2">
-              <div class="input-group">
-                <span class="input-group-text footer-input-icon"><i class="bi bi-envelope"></i></span>
-                <input type="email" class="form-control" placeholder="Enter your email address" required>
-                <button class="btn btn-verdant px-3 fw-semibold" type="submit">
-                  <i class="bi bi-send-fill me-1"></i> Subscribe
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <!-- Main Navigation Columns -->
-      <div class="row g-4">
-        <!-- Col 1: Brand & Contact -->
-        <div class="col-lg-4 col-md-12">
-          <a class="navbar-brand footer-brand mb-2 d-inline-flex align-items-center gap-2" href="index.html">
-            <span class="brand-icon"><i class="bi bi-flower1"></i></span>
-            <span class="footer-brand-text fs-5 fw-bold font-serif">Verdant Haven</span>
-          </a>
-          <p class="footer-desc small mb-3" style="line-height: 1.5; max-width: 360px;">
-            Boutique countryside homestays, heritage organic farmstays, and secluded eco-lodges dedicated to regenerative rural tourism.
-          </p>
-          <div class="d-flex flex-column gap-1 mb-3 footer-contact-list small">
-            <div><i class="bi bi-geo-alt-fill text-success me-2"></i>Bourton-on-the-Water, GL54 2BY, United Kingdom</div>
-            <div><i class="bi bi-telephone-fill text-success me-2"></i><a href="tel:+441451820441" class="footer-contact-link text-decoration-none">+44 1451 820 441</a></div>
-            <div><i class="bi bi-envelope-fill text-success me-2"></i><a href="mailto:concierge@verdanthaven.com" class="footer-contact-link text-decoration-none">concierge@verdanthaven.com</a></div>
-          </div>
-          <div class="d-flex gap-2">
-            <a href="https://www.instagram.com/accounts/login/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round footer-social-btn"
-              aria-label="Instagram" title="Instagram Login"><i class="bi bi-instagram"></i></a>
-            <a href="https://www.facebook.com/login/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round footer-social-btn"
-              aria-label="Facebook" title="Facebook Login"><i class="bi bi-facebook"></i></a>
-            <a href="https://x.com/i/flow/login" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round footer-social-btn"
-              aria-label="Twitter" title="X (Twitter) Login"><i class="bi bi-twitter-x"></i></a>
-            <a href="https://www.pinterest.com/login/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-icon-round footer-social-btn"
-              aria-label="Pinterest" title="Pinterest Login"><i class="bi bi-pinterest"></i></a>
-          </div>
-        </div>
-
-        <!-- Col 2: Explore Stays -->
-        <div class="col-6 col-md-4 col-lg-2 offset-lg-1">
-          <h6 class="fw-bold font-serif footer-title mb-3">Explore Stays</h6>
-          <ul class="list-unstyled footer-links small">
-            <li class="mb-2"><a href="stays.html">All Stays & Retreats</a></li>
-            <li class="mb-2"><a href="stays.html?category=Luxury+Farmhouses">Luxury Farmhouses</a></li>
-            <li class="mb-2"><a href="stays.html?category=Eco-Lodge">Eco Lodges & Sanctuaries</a></li>
-            <li class="mb-2"><a href="stays.html?category=Mountain+Cabins">Mountain Chalets</a></li>
-            <li class="mb-2"><a href="stays.html?category=Romantic+Getaways">Romantic Cottages</a></li>
-            <li class="mb-2"><a href="offers.html">Seasonal Packages</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 3: Farm Experiences -->
-        <div class="col-6 col-md-4 col-lg-2">
-          <h6 class="fw-bold font-serif footer-title mb-3">Farm Experiences</h6>
-          <ul class="list-unstyled footer-links small">
-            <li class="mb-2"><a href="activities.html">All 15 Experiences</a></li>
-            <li class="mb-2"><a href="activities.html?category=Traditional+Cooking">Cooking & Sourdough</a></li>
-            <li class="mb-2"><a href="activities.html?category=Organic+Farming">Cider & Beekeeping</a></li>
-            <li class="mb-2"><a href="activities.html?category=Horse+Riding">Horseback Riding</a></li>
-            <li class="mb-2"><a href="activities.html?category=Campfire+Nights">Campfire Stargazing</a></li>
-            <li class="mb-2"><a href="activities.html?category=Nature+Walks">Wild Foraging & Walks</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 4: Right Side - Company & Quick Links -->
-        <div class="col-6 col-md-4 col-lg-3">
-          <h6 class="fw-bold font-serif footer-title mb-3">Company & Stories</h6>
-          <ul class="list-unstyled footer-links small">
-            <li class="mb-2"><a href="about.html">Our Story & Heritage</a></li>
-            <li class="mb-2"><a href="blog/blog.html">Journal & Stories</a></li>
-            <li class="mb-2"><a href="offers.html">Special Offers & Rates</a></li>
-            <li class="mb-2"><a href="contact.html">Contact Concierge</a></li>
-            <li class="mb-2"><a href="faq.html">Booking FAQs</a></li>
-            <li class="mb-2"><a href="privacy.html">Privacy Policy</a></li>
-            <li class="mb-2"><a href="terms.html">Terms of Service</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Bottom Bar: Left side Copyright, Right side Privacy Policy, Terms & FAQ -->
-      <div class="footer-bottom mt-4 pt-3 border-top small">
-        <div class="row align-items-center gy-2">
-          <div class="col-md-6 text-center text-md-start footer-copy-text">
-            &copy; 2026 Verdant Haven Hospitality Group Ltd. All rights reserved.
-          </div>
-          <div class="col-md-6 text-center text-md-end">
-            <div class="d-inline-flex flex-wrap justify-content-center justify-content-md-end gap-3">
-              <a href="privacy.html" class="footer-bottom-link text-decoration-none">Privacy Policy</a>
-              <span class="text-secondary">&bull;</span>
-              <a href="terms.html" class="footer-bottom-link text-decoration-none">Terms of Service</a>
-              <span class="text-secondary">&bull;</span>
-              <a href="faq.html" class="footer-bottom-link text-decoration-none">FAQ</a>
-              <span class="text-secondary">&bull;</span>
-              <a href="contact.html" class="footer-bottom-link text-decoration-none">Contact</a>
+            <div class="col-lg-6">
+              <form class="footer-newsletter-form d-flex gap-2">
+                <div class="input-group">
+                  <span class="input-group-text footer-input-icon"><i class="bi bi-envelope"></i></span>
+                  <input type="email" class="form-control" placeholder="Enter your email address" required
+                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                    title="Please enter a valid email address with a domain (e.g. name@example.com)">
+                  <button class="btn btn-verdant px-3 fw-semibold" type="submit">
+                    <i class="bi bi-send-fill me-1"></i> Subscribe
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
+
+        <!-- Main Navigation Columns -->
+        <div class="row g-4">
+          <!-- Col 1: Brand & Contact -->
+          <div class="col-lg-4 col-md-12">
+            <a class="navbar-brand footer-brand mb-2 d-inline-flex align-items-center gap-2" href="index.html">
+              <span class="brand-icon"><i class="bi bi-flower1"></i></span>
+              <span class="footer-brand-text fs-5 fw-bold font-serif">Verdant Haven</span>
+            </a>
+            <p class="footer-desc small mb-3" style="line-height: 1.5; max-width: 360px;">
+              Boutique countryside homestays, heritage organic farmstays, and secluded eco-lodges dedicated to
+              regenerative rural tourism.
+            </p>
+            <div class="d-flex flex-column gap-1 mb-3 footer-contact-list small">
+              <div><i class="bi bi-geo-alt-fill text-success me-2"></i>Bourton-on-the-Water, GL54 2BY, United Kingdom
+              </div>
+              <div><i class="bi bi-telephone-fill text-success me-2"></i><a href="tel:+441451820441"
+                  class="footer-contact-link text-decoration-none">+44 1451 820 441</a></div>
+              <div><i class="bi bi-envelope-fill text-success me-2"></i><a href="mailto:concierge@verdanthaven.com"
+                  class="footer-contact-link text-decoration-none">concierge@verdanthaven.com</a></div>
+            </div>
+            <div class="d-flex gap-2">
+              <a href="https://www.instagram.com/accounts/login/" target="_blank" rel="noopener noreferrer"
+                class="btn btn-sm btn-icon-round footer-social-btn" aria-label="Instagram" title="Instagram Login"><i
+                  class="bi bi-instagram"></i></a>
+              <a href="https://www.facebook.com/login/" target="_blank" rel="noopener noreferrer"
+                class="btn btn-sm btn-icon-round footer-social-btn" aria-label="Facebook" title="Facebook Login"><i
+                  class="bi bi-facebook"></i></a>
+              <a href="https://x.com/i/flow/login" target="_blank" rel="noopener noreferrer"
+                class="btn btn-sm btn-icon-round footer-social-btn" aria-label="Twitter" title="X (Twitter) Login"><i
+                  class="bi bi-twitter-x"></i></a>
+              <a href="https://www.pinterest.com/login/" target="_blank" rel="noopener noreferrer"
+                class="btn btn-sm btn-icon-round footer-social-btn" aria-label="Pinterest" title="Pinterest Login"><i
+                  class="bi bi-pinterest"></i></a>
+            </div>
+          </div>
+
+          <!-- Col 2: Explore Stays -->
+          <div class="col-6 col-md-4 col-lg-2 offset-lg-1">
+            <h6 class="fw-bold font-serif footer-title mb-3">Explore Stays</h6>
+            <ul class="list-unstyled footer-links small">
+              <li class="mb-2"><a href="stays.html">All Stays & Retreats</a></li>
+              <li class="mb-2"><a href="stays.html?category=Luxury+Farmhouses">Luxury Farmhouses</a></li>
+              <li class="mb-2"><a href="stays.html?category=Eco-Lodge">Eco Lodges & Sanctuaries</a></li>
+              <li class="mb-2"><a href="stays.html?category=Mountain+Cabins">Mountain Chalets</a></li>
+              <li class="mb-2"><a href="stays.html?category=Romantic+Getaways">Romantic Cottages</a></li>
+              <li class="mb-2"><a href="offers.html">Seasonal Packages</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Farm Experiences -->
+          <div class="col-6 col-md-4 col-lg-2">
+            <h6 class="fw-bold font-serif footer-title mb-3">Farm Experiences</h6>
+            <ul class="list-unstyled footer-links small">
+              <li class="mb-2"><a href="activities.html">All 15 Experiences</a></li>
+              <li class="mb-2"><a href="activities.html?category=Traditional+Cooking">Cooking & Sourdough</a></li>
+              <li class="mb-2"><a href="activities.html?category=Organic+Farming">Cider & Beekeeping</a></li>
+              <li class="mb-2"><a href="activities.html?category=Horse+Riding">Horseback Riding</a></li>
+              <li class="mb-2"><a href="activities.html?category=Campfire+Nights">Campfire Stargazing</a></li>
+              <li class="mb-2"><a href="activities.html?category=Nature+Walks">Wild Foraging & Walks</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Right Side - Company & Quick Links -->
+          <div class="col-6 col-md-4 col-lg-3">
+            <h6 class="fw-bold font-serif footer-title mb-3">Company & Stories</h6>
+            <ul class="list-unstyled footer-links small">
+              <li class="mb-2"><a href="about.html">Our Story & Heritage</a></li>
+              <li class="mb-2"><a href="blog/blog.html">Journal & Stories</a></li>
+              <li class="mb-2"><a href="offers.html">Special Offers & Rates</a></li>
+              <li class="mb-2"><a href="contact.html">Contact Concierge</a></li>
+              <li class="mb-2"><a href="faq.html">Booking FAQs</a></li>
+              <li class="mb-2"><a href="privacy.html">Privacy Policy</a></li>
+              <li class="mb-2"><a href="terms.html">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bottom Bar: Left side Copyright, Right side Privacy Policy, Terms & FAQ -->
+        <div class="footer-bottom mt-4 pt-3 border-top small">
+          <div class="row align-items-center gy-2">
+            <div class="col-md-6 text-center text-md-start footer-copy-text">
+              &copy; 2026 Verdant Haven Hospitality Group Ltd. All rights reserved.
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+              <div class="d-inline-flex flex-wrap justify-content-center justify-content-md-end gap-3">
+                <a href="privacy.html" class="footer-bottom-link text-decoration-none">Privacy Policy</a>
+                <span class="text-secondary">&bull;</span>
+                <a href="terms.html" class="footer-bottom-link text-decoration-none">Terms of Service</a>
+                <span class="text-secondary">&bull;</span>
+                <a href="faq.html" class="footer-bottom-link text-decoration-none">FAQ</a>
+                <span class="text-secondary">&bull;</span>
+                <a href="contact.html" class="footer-bottom-link text-decoration-none">Contact</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

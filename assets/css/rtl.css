@@ -190,8 +190,8 @@
 [dir="rtl"] .verdant-footer h6,
 [dir="rtl"] .verdant-footer .footer-title,
 [dir="rtl"] .verdant-footer .footer-heading {
-  text-align: right;
-  display: inline-block;
+  text-align: right !important;
+  display: inline-block !important;
 }
 
 [dir="rtl"] .verdant-footer h5::after,
@@ -205,9 +205,29 @@
 [dir="rtl"] .text-center .verdant-footer h5::after,
 [dir="rtl"] .text-center .verdant-footer h6::after,
 [dir="rtl"] .text-center .verdant-footer .footer-title::after,
-[dir="rtl"] .text-center.footer-title::after {
+[dir="rtl"] .text-center.footer-title::after,
+[dir="rtl"] .text-center .footer-title::after {
   left: 50% !important;
   right: auto !important;
   transform: translateX(50%) !important;
+}
+
+/* About Us Story Badge RTL Alignment */
+[dir="rtl"] .about-story-badge {
+  left: auto !important;
+  right: 0 !important;
+  text-align: right;
+}
+
+/* Grid Offset RTL Mirroring */
+@media (min-width: 992px) {
+  [dir="rtl"] .offset-lg-1 {
+    margin-left: 0 !important;
+    margin-right: 8.33333333% !important;
+  }
+  [dir="rtl"] .offset-lg-2 {
+    margin-left: 0 !important;
+    margin-right: 16.66666667% !important;
+  }
 }
 

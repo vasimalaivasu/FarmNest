@@ -478,15 +478,99 @@ body.dark-mode .property-wishlist-btn:hover {
 
   /* Outlined buttons */
   [data-bs-theme="dark"] .btn-verdant-outline,
-  body.dark-mode .btn-verdant-outline {
+  [data-bs-theme="dark"] .btn-outline-primary,
+  [data-bs-theme="dark"] .btn-outline-success,
+  body.dark-mode .btn-verdant-outline,
+  body.dark-mode .btn-outline-primary,
+  body.dark-mode .btn-outline-success {
     border-color: #52b788 !important;
     color: #74c69d !important;
+    background-color: transparent !important;
   }
 
   [data-bs-theme="dark"] .btn-verdant-outline:hover,
-  body.dark-mode .btn-verdant-outline:hover {
+  [data-bs-theme="dark"] .btn-outline-primary:hover,
+  [data-bs-theme="dark"] .btn-outline-success:hover,
+  body.dark-mode .btn-verdant-outline:hover,
+  body.dark-mode .btn-outline-primary:hover,
+  body.dark-mode .btn-outline-success:hover {
     background-color: var(--primary-forest) !important;
+    border-color: #52b788 !important;
     color: #fff !important;
+  }
+
+  /* Solid CTA buttons in Dark Mode */
+  [data-bs-theme="dark"] .btn-verdant,
+  [data-bs-theme="dark"] .btn-primary,
+  [data-bs-theme="dark"] .btn-success,
+  body.dark-mode .btn-verdant,
+  body.dark-mode .btn-primary,
+  body.dark-mode .btn-success {
+    background-color: #2d6a4f !important;
+    border-color: #2d6a4f !important;
+    color: #ffffff !important;
+  }
+
+  [data-bs-theme="dark"] .btn-verdant:hover,
+  [data-bs-theme="dark"] .btn-primary:hover,
+  [data-bs-theme="dark"] .btn-success:hover,
+  body.dark-mode .btn-verdant:hover,
+  body.dark-mode .btn-primary:hover,
+  body.dark-mode .btn-success:hover {
+    background-color: #1b4332 !important;
+    border-color: #52b788 !important;
+    color: #ffffff !important;
+  }
+
+  /* Filter Tabs & Category Pills in Dark Mode */
+  [data-bs-theme="dark"] .activity-cat-btn,
+  [data-bs-theme="dark"] .booking-filter-tab,
+  body.dark-mode .activity-cat-btn,
+  body.dark-mode .booking-filter-tab {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-muted) !important;
+  }
+
+  [data-bs-theme="dark"] .activity-cat-btn:hover,
+  [data-bs-theme="dark"] .booking-filter-tab:hover,
+  body.dark-mode .activity-cat-btn:hover,
+  body.dark-mode .booking-filter-tab:hover {
+    background-color: var(--bg-cream-surface) !important;
+    border-color: var(--accent-sage) !important;
+    color: var(--accent-sage-light) !important;
+  }
+
+  [data-bs-theme="dark"] .activity-cat-btn.active,
+  [data-bs-theme="dark"] .booking-filter-tab.active,
+  body.dark-mode .activity-cat-btn.active,
+  body.dark-mode .booking-filter-tab.active {
+    background-color: #2d6a4f !important;
+    border-color: var(--accent-sage) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* Stays Toolbar View Toggle in Dark Mode */
+  [data-bs-theme="dark"] .stays-toolbar .btn-group .btn-outline-secondary,
+  body.dark-mode .stays-toolbar .btn-group .btn-outline-secondary {
+    border-color: var(--border-color) !important;
+    color: var(--text-muted) !important;
+    background: var(--bg-surface) !important;
+  }
+
+  [data-bs-theme="dark"] .stays-toolbar .btn-group .btn-outline-secondary:hover,
+  body.dark-mode .stays-toolbar .btn-group .btn-outline-secondary:hover {
+    background: var(--bg-cream-surface) !important;
+    color: var(--accent-sage-light) !important;
+    border-color: var(--accent-sage) !important;
+  }
+
+  [data-bs-theme="dark"] .stays-toolbar .btn-group .btn-outline-secondary.active,
+  body.dark-mode .stays-toolbar .btn-group .btn-outline-secondary.active {
+    background-color: #2d6a4f !important;
+    border-color: var(--accent-sage) !important;
+    color: #ffffff !important;
   }
 
   /* Guest Profile Alert in dark mode */
@@ -750,4 +834,54 @@ body.dark-mode .property-wishlist-btn:hover {
     background-color: rgba(45, 106, 79, 0.95) !important;
     border-color: #52b788 !important;
     color: #ffffff !important;
+  }
+
+  /* RTL Navbar Switcher in Dark Mode */
+  [data-bs-theme="dark"] .rtl-toggle-btn.active,
+  body.dark-mode .rtl-toggle-btn.active {
+    background: #2d6a4f !important;
+    color: #ffffff !important;
+    border-color: #52b788 !important;
+  }
+
+  /* Inner Page Hero in Dark Mode */
+  [data-bs-theme="dark"] .inner-page-hero,
+  body.dark-mode .inner-page-hero {
+    background-color: var(--bg-cream-surface) !important;
+    border-bottom-color: var(--border-color) !important;
+  }
+
+  [data-bs-theme="dark"] .inner-hero-content .breadcrumb-item a,
+  body.dark-mode .inner-hero-content .breadcrumb-item a {
+    color: #74c69d !important;
+  }
+
+  [data-bs-theme="dark"] .inner-hero-content .breadcrumb-item.active,
+  body.dark-mode .inner-hero-content .breadcrumb-item.active {
+    color: var(--text-muted) !important;
+  }
+
+  [data-bs-theme="dark"] .activities-toolbar,
+  body.dark-mode .activities-toolbar {
+    background: var(--bg-surface) !important;
+    border-color: var(--border-color) !important;
+  }
+
+  /* About Us Image & Cards in Dark Mode */
+  [data-bs-theme="dark"] .about-story-badge,
+  body.dark-mode .about-story-badge {
+    background-color: rgba(22, 38, 30, 0.94) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+  }
+
+  [data-bs-theme="dark"] .about-story-badge .text-muted,
+  body.dark-mode .about-story-badge .text-muted {
+    color: rgba(255, 255, 255, 0.72) !important;
+  }
+
+  [data-bs-theme="dark"] .about-host-card,
+  body.dark-mode .about-host-card {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--border-color) !important;
   }

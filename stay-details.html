@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="light" dir="ltr">
 
 <head>
@@ -30,8 +30,7 @@
       </a>
 
       <div class="d-flex align-items-center order-lg-3 nav-actions">
-        <button class="rtl-toggle-btn" title="Toggle RTL Layout" aria-label="Toggle RTL"><i
-            class="bi bi-arrow-left-right"></i></button>
+        <button class="rtl-toggle-btn" title="Toggle RTL Layout" aria-label="Toggle RTL">RTL</button>
         <button class="theme-toggle-btn" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Mode"><i
             class="bi bi-moon-stars-fill"></i></button>
         <a href="#wishlistDrawer" class="wishlist-nav-btn" data-bs-toggle="offcanvas" data-bs-target="#wishlistDrawer"
@@ -109,7 +108,7 @@
           </ol>
         </nav>
         <div class="d-flex gap-2 mt-2 mt-sm-0">
-          <button id="detail-share-btn" class="btn btn-sm btn-outline-secondary"><i class="bi bi-share me-1"></i>
+          <button id="detail-share-btn" class="btn btn-sm btn-verdant-outline"><i class="bi bi-share me-1"></i>
             Share</button>
           <button id="detail-wishlist-btn" class="btn btn-sm btn-outline-danger"><i class="bi bi-heart me-1"></i> Add to
             Wishlist</button>
@@ -256,7 +255,7 @@
                   <div class="col-md-6">
                     <label class="form-label small fw-bold">Your Name</label>
                     <input type="text" id="review-author" class="form-control" placeholder="Enter your full name"
-                      required>
+                      required minlength="2" maxlength="60" pattern="^[A-Za-zÀ-ÖØ-öø-ÿĀ-ž'’.\-\s]{2,60}$" title="Please enter a valid full name (at least 2 letters, letters only, no numbers)">
                   </div>
                   <div class="col-md-6">
                     <label class="form-label small fw-bold">Overall Rating</label>
@@ -376,7 +375,7 @@
             <form class="footer-newsletter-form d-flex gap-2">
               <div class="input-group">
                 <span class="input-group-text footer-input-icon"><i class="bi bi-envelope"></i></span>
-                <input type="email" class="form-control" placeholder="Enter your email address" required>
+                <input type="email" class="form-control" placeholder="Enter your email address" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address with a domain (e.g. name@example.com)">
                 <button class="btn btn-verdant px-3 fw-semibold" type="submit">
                   <i class="bi bi-send-fill me-1"></i> Subscribe
                 </button>

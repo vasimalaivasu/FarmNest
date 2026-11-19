@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="light" dir="ltr">
 
 <head>
@@ -29,7 +29,7 @@
       </a>
 
       <div class="d-flex align-items-center order-lg-3 nav-actions gap-2">
-        <button class="rtl-toggle-btn" title="Toggle RTL Layout"><i class="bi bi-arrow-left-right"></i></button>
+        <button class="rtl-toggle-btn" title="Toggle RTL Layout">RTL</button>
         <button class="theme-toggle-btn" title="Toggle Dark/Light Mode"><i class="bi bi-moon-stars-fill"></i></button>
 
         <!-- Auth Container -->
@@ -52,22 +52,22 @@
   </nav>
 
   <!-- Confirmation Hero -->
-  <section class="py-5 bg-warm-cream">
-    <div class="container max-w-800 mx-auto">
-
-      <!-- Top Success Alert -->
-      <div class="text-center mb-5">
-        <div
-          class="rounded-circle bg-success text-white d-inline-flex align-items-center justify-content-center mb-3 shadow-md"
-          style="width: 72px; height: 72px; font-size: 2.2rem;">
-          <i class="bi bi-check2"></i>
-        </div>
-        <span class="badge bg-success-subtle text-success mb-2 px-3 py-2 fw-bold text-uppercase">Reservation
-          Confirmed</span>
-        <h1 class="font-serif display-5 fw-bold mb-2">Pack Your Bags for the Countryside!</h1>
-        <p class="text-muted">A confirmation voucher has been sent to your email. Your booking code is <strong
+  <section class="inner-page-hero">
+    <div class="container">
+      <div class="inner-hero-content text-center max-w-700 mx-auto">
+        <span class="badge bg-success-subtle text-success mb-2 px-3 py-2 fw-bold text-uppercase">
+          <i class="bi bi-check2-circle me-1"></i> Reservation Confirmed
+        </span>
+        <h1 class="section-title mb-2">Pack Your Bags for the Countryside!</h1>
+        <p class="text-muted mb-0">A confirmation voucher has been sent to your email. Your booking code is <strong
             id="conf-booking-id" class="text-success font-monospace fs-5">VH-80291</strong></p>
       </div>
+    </div>
+  </section>
+
+  <!-- Voucher Details -->
+  <section class="py-5 bg-warm-cream">
+    <div class="container max-w-800 mx-auto">
 
       <!-- Printable Voucher / Receipt Card -->
       <div class="card border rounded-4 p-4 p-md-5 bg-white shadow-sm mb-4" id="printable-voucher">
@@ -144,13 +144,13 @@
 
       <!-- Action Buttons -->
       <div class="d-flex flex-wrap gap-2 justify-content-center">
-        <button id="print-invoice-btn" class="btn btn-outline-secondary">
+        <button id="print-invoice-btn" class="btn btn-verdant-outline">
           <i class="bi bi-printer me-1"></i> Print / Save Receipt
         </button>
         <a id="view-in-dashboard-btn" href="../guest/bookings.html" class="btn btn-verdant">
           <i class="bi bi-calendar-check me-1"></i> View in My Bookings
         </a>
-        <a href="../index.html" class="btn btn-light border">
+        <a href="../index.html" class="btn btn-verdant-outline">
           Return to Home
         </a>
       </div>
@@ -179,7 +179,7 @@
             <form class="footer-newsletter-form d-flex gap-2">
               <div class="input-group">
                 <span class="input-group-text footer-input-icon"><i class="bi bi-envelope"></i></span>
-                <input type="email" class="form-control" placeholder="Enter your email address" required>
+                <input type="email" class="form-control" placeholder="Enter your email address" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address with a domain (e.g. name@example.com)">
                 <button class="btn btn-verdant px-3 fw-semibold" type="submit">
                   <i class="bi bi-send-fill me-1"></i> Subscribe
                 </button>

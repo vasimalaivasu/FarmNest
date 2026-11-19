@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="light" dir="ltr">
 
 <head>
@@ -29,7 +29,7 @@
       </a>
 
       <div class="d-flex align-items-center order-lg-3 nav-actions">
-        <button class="rtl-toggle-btn" title="Toggle RTL Layout"><i class="bi bi-arrow-left-right"></i></button>
+        <button class="rtl-toggle-btn" title="Toggle RTL Layout">RTL</button>
         <button class="theme-toggle-btn" title="Toggle Dark/Light Mode"><i class="bi bi-moon-stars-fill"></i></button>
         <a href="#wishlistDrawer" class="wishlist-nav-btn" data-bs-toggle="offcanvas" data-bs-target="#wishlistDrawer"
           title="Saved Stays">
@@ -239,7 +239,7 @@
             <form class="footer-newsletter-form d-flex gap-2">
               <div class="input-group">
                 <span class="input-group-text footer-input-icon"><i class="bi bi-envelope"></i></span>
-                <input type="email" class="form-control" placeholder="Enter your email address" required>
+                <input type="email" class="form-control" placeholder="Enter your email address" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address with a domain (e.g. name@example.com)">
                 <button class="btn btn-verdant px-3 fw-semibold" type="submit">
                   <i class="bi bi-send-fill me-1"></i> Subscribe
                 </button>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="light" dir="ltr">
 
 <head>
@@ -30,7 +30,7 @@
       </a>
 
       <div class="d-flex align-items-center order-lg-3 nav-actions">
-        <button class="rtl-toggle-btn" title="Toggle RTL Layout"><i class="bi bi-arrow-left-right"></i></button>
+        <button class="rtl-toggle-btn" title="Toggle RTL Layout">RTL</button>
         <button class="theme-toggle-btn" title="Toggle Dark/Light Mode"><i class="bi bi-moon-stars-fill"></i></button>
         <a href="#wishlistDrawer" class="wishlist-nav-btn" data-bs-toggle="offcanvas" data-bs-target="#wishlistDrawer"
           title="Saved Stays">
@@ -96,12 +96,19 @@
   </nav>
 
   <!-- Header -->
-  <section class="py-5 bg-warm-cream border-bottom">
-    <div class="container py-3 text-center max-w-700 mx-auto">
-      <span class="section-subtitle">Curated Bundles & Discounts</span>
-      <h1 class="section-title mb-3">Countryside Packages & Special Offers</h1>
-      <p class="text-muted">Save significantly by bundling peaceful accommodation with farm-fresh organic breakfasts,
-        artisanal workshops, and guided outdoor experiences.</p>
+  <section class="inner-page-hero">
+    <div class="container">
+      <div class="inner-hero-content text-center max-w-700 mx-auto">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-center mb-2 small">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Special Offers</li>
+          </ol>
+        </nav>
+        <span class="section-subtitle">Curated Bundles & Discounts</span>
+        <h1 class="section-title mb-2">Countryside Packages & Special Offers</h1>
+        <p class="text-muted mb-0">Save significantly by bundling peaceful accommodation with farm-fresh organic breakfasts, artisanal workshops, and guided outdoor experiences.</p>
+      </div>
     </div>
   </section>
 
@@ -213,7 +220,7 @@
             <div class="display-6 text-success fw-bold font-monospace mb-2">VERDANT20</div>
             <h6 class="fw-bold mb-1">Autumn Countryside Sale</h6>
             <p class="text-muted small mb-3">20% discount on any 3+ night countryside farmstay reservation.</p>
-            <button class="btn btn-outline-secondary btn-sm copy-coupon-btn"
+            <button class="btn btn-verdant-outline btn-sm copy-coupon-btn"
               onclick="navigator.clipboard.writeText('VERDANT20'); showToast('Coupon VERDANT20 copied to clipboard!', 'success', 'Coupon');">
               <i class="bi bi-copy me-1"></i> Copy Code
             </button>
@@ -227,7 +234,7 @@
             <div class="display-6 text-success fw-bold font-monospace mb-2">HARVEST15</div>
             <h6 class="fw-bold mb-1">Harvest Packages</h6>
             <p class="text-muted small mb-3">15% off any Farm & Harvest Experience package bundle.</p>
-            <button class="btn btn-outline-secondary btn-sm copy-coupon-btn"
+            <button class="btn btn-verdant-outline btn-sm copy-coupon-btn"
               onclick="navigator.clipboard.writeText('HARVEST15'); showToast('Coupon HARVEST15 copied to clipboard!', 'success', 'Coupon');">
               <i class="bi bi-copy me-1"></i> Copy Code
             </button>
@@ -241,7 +248,7 @@
             <div class="display-6 text-success fw-bold font-monospace mb-2">NATURE10</div>
             <h6 class="fw-bold mb-1">First-Time Guests</h6>
             <p class="text-muted small mb-3">Welcome 10% voucher for first-time countryside travelers.</p>
-            <button class="btn btn-outline-secondary btn-sm copy-coupon-btn"
+            <button class="btn btn-verdant-outline btn-sm copy-coupon-btn"
               onclick="navigator.clipboard.writeText('NATURE10'); showToast('Coupon NATURE10 copied to clipboard!', 'success', 'Coupon');">
               <i class="bi bi-copy me-1"></i> Copy Code
             </button>
@@ -255,7 +262,7 @@
             <div class="display-6 text-success fw-bold font-monospace mb-2">RUSTIC50</div>
             <h6 class="fw-bold mb-1">Extended Stays</h6>
             <p class="text-muted small mb-3">$50 flat deduction on bookings with subtotal greater than $300.</p>
-            <button class="btn btn-outline-secondary btn-sm copy-coupon-btn"
+            <button class="btn btn-verdant-outline btn-sm copy-coupon-btn"
               onclick="navigator.clipboard.writeText('RUSTIC50'); showToast('Coupon RUSTIC50 copied to clipboard!', 'success', 'Coupon');">
               <i class="bi bi-copy me-1"></i> Copy Code
             </button>
@@ -286,7 +293,7 @@
             <form class="footer-newsletter-form d-flex gap-2">
               <div class="input-group">
                 <span class="input-group-text footer-input-icon"><i class="bi bi-envelope"></i></span>
-                <input type="email" class="form-control" placeholder="Enter your email address" required>
+                <input type="email" class="form-control" placeholder="Enter your email address" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address with a domain (e.g. name@example.com)">
                 <button class="btn btn-verdant px-3 fw-semibold" type="submit">
                   <i class="bi bi-send-fill me-1"></i> Subscribe
                 </button>

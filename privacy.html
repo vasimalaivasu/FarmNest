@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="light" dir="ltr">
 
 <head>
@@ -30,7 +30,7 @@
       </a>
 
       <div class="d-flex align-items-center order-lg-3 nav-actions">
-        <button class="rtl-toggle-btn" title="Toggle RTL Layout"><i class="bi bi-arrow-left-right"></i></button>
+        <button class="rtl-toggle-btn" title="Toggle RTL Layout">RTL</button>
         <button class="theme-toggle-btn" title="Toggle Dark/Light Mode"><i class="bi bi-moon-stars-fill"></i></button>
         <a href="#wishlistDrawer" class="wishlist-nav-btn" data-bs-toggle="offcanvas" data-bs-target="#wishlistDrawer"
           title="Saved Stays">
@@ -96,22 +96,18 @@
   </nav>
 
   <!-- Page Header -->
-  <section class="py-5 bg-warm-cream border-bottom">
-    <div class="container py-2">
-      <div class="row align-items-center">
-        <div class="col-md-8">
-          <span class="section-subtitle">Legal & Trust Center</span>
-          <h1 class="section-title mb-2">Privacy & Cookie Policy</h1>
-          <p class="text-muted mb-0">Learn how Verdant Haven collects, safeguards, and respects your personal information.</p>
-        </div>
-        <div class="col-md-4 text-md-end mt-3 mt-md-0">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb justify-content-md-end mb-0">
-              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Privacy Policy</li>
-            </ol>
-          </nav>
-        </div>
+  <section class="inner-page-hero">
+    <div class="container">
+      <div class="inner-hero-content text-center max-w-700 mx-auto">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-center mb-2 small">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Privacy Policy</li>
+          </ol>
+        </nav>
+        <span class="section-subtitle">Legal & Trust Center</span>
+        <h1 class="section-title mb-2">Privacy & Cookie Policy</h1>
+        <p class="text-muted mb-0">Learn how Verdant Haven collects, safeguards, and respects your personal information.</p>
       </div>
     </div>
   </section>
@@ -216,7 +212,7 @@
             <form class="footer-newsletter-form d-flex gap-2">
               <div class="input-group">
                 <span class="input-group-text footer-input-icon"><i class="bi bi-envelope"></i></span>
-                <input type="email" class="form-control" placeholder="Enter your email address" required>
+                <input type="email" class="form-control" placeholder="Enter your email address" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address with a domain (e.g. name@example.com)">
                 <button class="btn btn-verdant px-3 fw-semibold" type="submit">
                   <i class="bi bi-send-fill me-1"></i> Subscribe
                 </button>

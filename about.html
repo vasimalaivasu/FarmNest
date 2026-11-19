@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="light" dir="ltr">
 
 <head>
@@ -30,7 +30,7 @@
       </a>
 
       <div class="d-flex align-items-center order-lg-3 nav-actions">
-        <button class="rtl-toggle-btn" title="Toggle RTL Layout"><i class="bi bi-arrow-left-right"></i></button>
+        <button class="rtl-toggle-btn" title="Toggle RTL Layout">RTL</button>
         <button class="theme-toggle-btn" title="Toggle Dark/Light Mode"><i class="bi bi-moon-stars-fill"></i></button>
         <a href="#wishlistDrawer" class="wishlist-nav-btn" data-bs-toggle="offcanvas" data-bs-target="#wishlistDrawer"
           title="Saved Stays">
@@ -96,13 +96,19 @@
   </nav>
 
   <!-- Hero Header -->
-  <section class="py-5 bg-warm-cream border-bottom">
-    <div class="container py-4 text-center max-w-700 mx-auto">
-      <span class="section-subtitle">Our Heritage & Purpose</span>
-      <h1 class="section-title mb-3">Reconnecting Modern Souls with the Peace of the Land</h1>
-      <p class="lead text-muted">Verdant Haven was born from a simple belief: the most profound luxury in our hurried
-        modern world is clean air, ancient trees, unpolluted starry skies, and warm hospitality shared around a wooden
-        farm table.</p>
+  <section class="inner-page-hero">
+    <div class="container">
+      <div class="inner-hero-content text-center max-w-700 mx-auto">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-center mb-2 small">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">About Us</li>
+          </ol>
+        </nav>
+        <span class="section-subtitle">Our Heritage & Purpose</span>
+        <h1 class="section-title mb-2">Reconnecting Modern Souls with the Peace of the Land</h1>
+        <p class="text-muted mb-0">Verdant Haven was born from a simple belief: the most profound luxury in our hurried modern world is clean air, ancient trees, unpolluted starry skies, and warm hospitality shared around a wooden farm table.</p>
+      </div>
     </div>
   </section>
 
@@ -111,11 +117,11 @@
     <div class="container py-3">
       <div class="row align-items-center g-5">
         <div class="col-lg-6">
-          <div class="position-relative">
+          <div class="position-relative overflow-hidden rounded-4 shadow-lg about-story-img-wrap">
             <img src="https://images.unsplash.com/photo-1500076656116-558758c991c1?w=800&auto=format&fit=crop&q=80"
-              class="rounded-4 shadow-lg w-100" alt="Farmhouse Landscape">
+              class="about-story-img" alt="Farmhouse Landscape">
             <div
-              class="position-absolute bottom-0 start-0 m-4 p-3 bg-white rounded-3 shadow-sm border d-none d-sm-block">
+              class="position-absolute bottom-0 start-0 m-3 m-sm-4 p-3 rounded-3 shadow-sm border about-story-badge">
               <span class="fs-4 fw-bold text-success font-serif">100%</span>
               <div class="small text-muted">Eco-certified organic rural havens</div>
             </div>
@@ -238,9 +244,11 @@
       <div class="row g-4">
         <!-- Host 1 -->
         <div class="col-md-6 col-lg-3">
-          <div class="card border rounded-4 overflow-hidden text-center bg-white shadow-sm h-100">
-            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&auto=format&fit=crop&q=80"
-              class="img-fluid" style="height: 220px; object-fit: cover;" alt="Martha Pendelton">
+          <div class="card border rounded-4 overflow-hidden text-center bg-theme-surface shadow-sm h-100 about-host-card">
+            <div class="about-host-img-wrap">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&auto=format&fit=crop&q=80"
+                class="card-img-top about-host-img" alt="Arthur & Martha">
+            </div>
             <div class="p-3">
               <span class="badge bg-warning text-dark mb-1">Superhost &bull; Cotswolds</span>
               <h5 class="font-serif mb-1">Arthur & Martha</h5>
@@ -251,9 +259,11 @@
 
         <!-- Host 2 -->
         <div class="col-md-6 col-lg-3">
-          <div class="card border rounded-4 overflow-hidden text-center bg-white shadow-sm h-100">
-            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80"
-              class="img-fluid" style="height: 220px; object-fit: cover;" alt="Matteo Rossi">
+          <div class="card border rounded-4 overflow-hidden text-center bg-theme-surface shadow-sm h-100 about-host-card">
+            <div class="about-host-img-wrap">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80"
+                class="card-img-top about-host-img" alt="Matteo & Sofia">
+            </div>
             <div class="p-3">
               <span class="badge bg-warning text-dark mb-1">Winemaker &bull; Tuscany</span>
               <h5 class="font-serif mb-1">Matteo & Sofia</h5>
@@ -264,9 +274,11 @@
 
         <!-- Host 3 -->
         <div class="col-md-6 col-lg-3">
-          <div class="card border rounded-4 overflow-hidden text-center bg-white shadow-sm h-100">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80"
-              class="img-fluid" style="height: 220px; object-fit: cover;" alt="Lukas Weber">
+          <div class="card border rounded-4 overflow-hidden text-center bg-theme-surface shadow-sm h-100 about-host-card">
+            <div class="about-host-img-wrap">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80"
+                class="card-img-top about-host-img" alt="Lukas & Greta">
+            </div>
             <div class="p-3">
               <span class="badge bg-success mb-1">Eco Leader &bull; Black Forest</span>
               <h5 class="font-serif mb-1">Lukas & Greta</h5>
@@ -277,9 +289,11 @@
 
         <!-- Host 4 -->
         <div class="col-md-6 col-lg-3">
-          <div class="card border rounded-4 overflow-hidden text-center bg-white shadow-sm h-100">
-            <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&auto=format&fit=crop&q=80"
-              class="img-fluid" style="height: 220px; object-fit: cover;" alt="David Miller">
+          <div class="card border rounded-4 overflow-hidden text-center bg-theme-surface shadow-sm h-100 about-host-card">
+            <div class="about-host-img-wrap">
+              <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&auto=format&fit=crop&q=80"
+                class="card-img-top about-host-img" alt="David & Claire">
+            </div>
             <div class="p-3">
               <span class="badge bg-warning text-dark mb-1">Trail Guide &bull; Vermont</span>
               <h5 class="font-serif mb-1">David & Claire</h5>
@@ -322,7 +336,7 @@
             <form class="footer-newsletter-form d-flex gap-2">
               <div class="input-group">
                 <span class="input-group-text footer-input-icon"><i class="bi bi-envelope"></i></span>
-                <input type="email" class="form-control" placeholder="Enter your email address" required>
+                <input type="email" class="form-control" placeholder="Enter your email address" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address with a domain (e.g. name@example.com)">
                 <button class="btn btn-verdant px-3 fw-semibold" type="submit">
                   <i class="bi bi-send-fill me-1"></i> Subscribe
                 </button>

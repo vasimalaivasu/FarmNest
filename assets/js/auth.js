@@ -50,6 +50,12 @@ function initLoginHandlers() {
         return;
       }
 
+      if (typeof isValidEmail === 'function' && !isValidEmail(email)) {
+        showToast('Please enter a valid email address with a domain (e.g. name@example.com).', 'warning', 'Invalid Email');
+        emailInput?.focus();
+        return;
+      }
+
       const res = VerdantDB.login(email, password);
       if (res.success) {
         // If user was prompted to login while proceeding to booking
@@ -119,8 +125,8 @@ function handleSocialSignInPrompt(provider) {
   const inputEmail = prompt(`Please enter your ${provider} account email address to continue:`);
   if (!inputEmail) return;
   const cleanEmail = inputEmail.trim().toLowerCase();
-  if (!cleanEmail.includes('@') || !cleanEmail.includes('.')) {
-    showToast('Please enter a valid email address.', 'warning', 'Social Sign-In');
+  if (typeof isValidEmail === 'function' ? !isValidEmail(cleanEmail) : (!cleanEmail.includes('@') || !cleanEmail.includes('.'))) {
+    showToast('Please enter a valid email address with a domain (e.g. name@example.com).', 'warning', 'Social Sign-In');
     return;
   }
 
@@ -177,53 +183,71 @@ function initRegisterHandlers() {
     const confirmPassword = document.getElementById('reg-confirm-password')?.value;
     const termsChecked = document.getElementById('reg-terms')?.checked;
 
-    if (!termsChecked) {
-      showToast('You must accept our Terms of Service to register.', 'warning', 'Terms Agreement');
+    if (!isValidFullName(fullName)) {
+      showToast('Please enter a valid full name (at least 2 letters, letters only, no numbers).', 'warning', 'Invalid Name');
+      document.getElementById('reg-name')?.focus();
       return;
     }
 
-    if (password !== confirmPassword) {
-      showToast('Passwords do not match. Please re-enter.', 'danger', 'Password Mismatch');
+    if (typeof isValidEmail === 'function' && !isValidEmail(email)) {
+      showToast('Please enter a valid email address with a domain (e.g. name@example.com).', 'warning', 'Invalid Email');
+      document.getElementById('reg-email')?.focus();
       return;
     }
 
-    if (password.length < 6) {
-      showToast('Password should be at least 6 characters.', 'warning', 'Password Security');
-      return;
-    }
-
-    const res = VerdantDB.register({
-      name: fullName,
-      email: email,
-      phone: phone,
-      password: password,
-      role: 'guest',
-      country: 'United States',
-      avatar: null
-    });
-
-    if (res.success) {
-      const pendingWishlist = sessionStorage.getItem('verdant_pending_wishlist');
-      if (pendingWishlist) {
-        if (!VerdantDB.isInWishlist(pendingWishlist)) {
-          VerdantDB.toggleWishlist(pendingWishlist);
-        }
-        sessionStorage.removeItem('verdant_pending_wishlist');
-        showToast('Account created & stay saved to your wishlist!', 'success', 'Welcome');
-        setTimeout(() => {
-          window.location.href = '../guest/wishlist.html';
-        }, 500);
+      if (!phone || (typeof isValidPhone === 'function' && !isValidPhone(phone))) {
+        showToast('Please enter a valid phone number (digits only, minimum 7 digits, e.g. +1 (555) 000-0000).', 'warning', 'Invalid Phone Number');
+        document.getElementById('reg-phone')?.focus();
         return;
       }
 
-      showToast('Account created successfully! Redirecting...', 'success', 'Welcome');
-      setTimeout(() => {
-        window.location.href = '../guest/dashboard.html';
-      }, 700);
-    } else {
-      showToast(res.message, 'danger', 'Registration Error');
-    }
-  });
+      if (!termsChecked) {
+        showToast('You must accept our Terms of Service to register.', 'warning', 'Terms Agreement');
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        showToast('Passwords do not match. Please re-enter.', 'danger', 'Password Mismatch');
+        return;
+      }
+
+      if (password.length < 6) {
+        showToast('Password should be at least 6 characters.', 'warning', 'Password Security');
+        return;
+      }
+
+      const res = VerdantDB.register({
+        name: fullName,
+        email: email,
+        phone: phone,
+        password: password,
+        role: 'guest',
+        country: 'United States',
+        avatar: null
+      });
+
+      if (res.success) {
+        const pendingWishlist = sessionStorage.getItem('verdant_pending_wishlist');
+        if (pendingWishlist) {
+          if (!VerdantDB.isInWishlist(pendingWishlist)) {
+            VerdantDB.toggleWishlist(pendingWishlist);
+          }
+          sessionStorage.removeItem('verdant_pending_wishlist');
+          showToast('Account created & stay saved to your wishlist!', 'success', 'Welcome');
+          setTimeout(() => {
+            window.location.href = '../guest/wishlist.html';
+          }, 500);
+          return;
+        }
+
+        showToast('Account created successfully! Redirecting...', 'success', 'Welcome');
+        setTimeout(() => {
+          window.location.href = '../guest/dashboard.html';
+        }, 700);
+      } else {
+        showToast(res.message, 'danger', 'Registration Error');
+      }
+    });
 }
 
 /* ===================================================================
@@ -238,6 +262,12 @@ function initForgotPasswordHandlers() {
     const email = document.getElementById('forgot-email')?.value.trim();
     if (!email) {
       showToast('Please enter your account email address.', 'warning', 'Email Required');
+      return;
+    }
+
+    if (typeof isValidEmail === 'function' && !isValidEmail(email)) {
+      showToast('Please enter a valid email address with a domain (e.g. name@example.com).', 'warning', 'Invalid Email');
+      document.getElementById('forgot-email')?.focus();
       return;
     }
 

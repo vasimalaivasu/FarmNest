@@ -560,6 +560,11 @@ function setupReviewForm(propId) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const author = document.getElementById('review-author')?.value.trim() || 'Guest';
+    if (author && author !== 'Guest' && typeof isValidFullName === 'function' && !isValidFullName(author)) {
+      showToast('Please enter a valid full name (at least 2 letters, letters only, no numbers).', 'warning', 'Invalid Name');
+      document.getElementById('review-author')?.focus();
+      return;
+    }
     const rating = parseFloat(document.getElementById('review-rating')?.value || '5');
     const text = document.getElementById('review-text')?.value.trim();
 

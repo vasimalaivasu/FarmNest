@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="light" dir="ltr">
 
 <head>
@@ -36,9 +36,7 @@
 
       <div class="d-flex align-items-center order-lg-3 nav-actions">
         <!-- RTL Switcher -->
-        <button class="rtl-toggle-btn" title="Toggle RTL Layout" aria-label="Toggle RTL">
-          <i class="bi bi-arrow-left-right"></i>
-        </button>
+        <button class="rtl-toggle-btn" title="Toggle RTL Layout" aria-label="Toggle RTL">RTL</button>
 
         <!-- Dark Mode Switcher -->
         <button class="theme-toggle-btn" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Mode">
@@ -619,7 +617,7 @@
               fog, and cozy hearth fires. Apply promotional code at checkout.</p>
             <div class="d-flex flex-wrap align-items-center gap-3">
               <div class="bg-white text-dark py-2 px-3 rounded-2 font-monospace fw-bold fs-5">VERDANT20</div>
-              <a href="offers.html" class="btn btn-light fw-bold py-2 px-4">Claim Package</a>
+              <a href="offers.html" class="btn btn-light banner-claim-btn fw-bold py-2 px-4">Claim Package</a>
             </div>
           </div>
           <div class="col-lg-6 d-none d-lg-block">
@@ -771,7 +769,7 @@
         <form class="row g-2 justify-content-center"
           onsubmit="event.preventDefault(); showToast('Thank you for subscribing! Check your inbox for your 15% welcome voucher.', 'success', 'Subscribed'); this.reset();">
           <div class="col-sm-8 col-md-6">
-            <input type="email" class="form-control py-3" placeholder="Enter your email address..." required>
+            <input type="email" class="form-control py-3" placeholder="Enter your email address..." required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address with a domain (e.g. name@example.com)">
           </div>
           <div class="col-sm-4 col-md-3">
             <button type="submit" class="btn btn-verdant w-100 py-3">Subscribe</button>
@@ -804,7 +802,7 @@
             <form class="footer-newsletter-form d-flex gap-2">
               <div class="input-group">
                 <span class="input-group-text footer-input-icon"><i class="bi bi-envelope"></i></span>
-                <input type="email" class="form-control" placeholder="Enter your email address" required>
+                <input type="email" class="form-control" placeholder="Enter your email address" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address with a domain (e.g. name@example.com)">
                 <button class="btn btn-verdant px-3 fw-semibold" type="submit">
                   <i class="bi bi-send-fill me-1"></i> Subscribe
                 </button>

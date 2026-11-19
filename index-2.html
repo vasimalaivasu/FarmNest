@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="light" dir="ltr">
 
 <head>
@@ -36,9 +36,7 @@
 
       <div class="d-flex align-items-center order-lg-3 nav-actions">
         <!-- RTL Switcher -->
-        <button class="rtl-toggle-btn" title="Toggle RTL Layout" aria-label="Toggle RTL">
-          <i class="bi bi-arrow-left-right"></i>
-        </button>
+        <button class="rtl-toggle-btn" title="Toggle RTL Layout" aria-label="Toggle RTL">RTL</button>
 
         <!-- Dark Mode Switcher -->
         <button class="theme-toggle-btn" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Mode">
@@ -651,7 +649,7 @@
         <form class="row g-2 justify-content-center"
           onsubmit="event.preventDefault(); showToast('Thank you for subscribing! Your 15% agritourism voucher has been dispatched.', 'success', 'Subscribed'); this.reset();">
           <div class="col-sm-8 col-md-6">
-            <input type="email" class="form-control py-3" placeholder="Enter your email address..." required>
+            <input type="email" class="form-control py-3" placeholder="Enter your email address..." required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address with a domain (e.g. name@example.com)">
           </div>
           <div class="col-sm-4 col-md-3">
             <button type="submit" class="btn btn-verdant w-100 py-3">Subscribe</button>
@@ -684,7 +682,7 @@
             <form class="footer-newsletter-form d-flex gap-2">
               <div class="input-group">
                 <span class="input-group-text footer-input-icon"><i class="bi bi-envelope"></i></span>
-                <input type="email" class="form-control" placeholder="Enter your email address" required>
+                <input type="email" class="form-control" placeholder="Enter your email address" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address with a domain (e.g. name@example.com)">
                 <button class="btn btn-verdant px-3 fw-semibold" type="submit">
                   <i class="bi bi-send-fill me-1"></i> Subscribe
                 </button>

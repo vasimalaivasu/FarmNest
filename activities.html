@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="light" dir="ltr">
 
 <head>
@@ -30,8 +30,7 @@
       </a>
 
       <div class="d-flex align-items-center order-lg-3 nav-actions">
-        <button class="rtl-toggle-btn" title="Toggle RTL Layout" aria-label="Toggle RTL"><i
-            class="bi bi-arrow-left-right"></i></button>
+        <button class="rtl-toggle-btn" title="Toggle RTL Layout" aria-label="Toggle RTL">RTL</button>
         <button class="theme-toggle-btn" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Mode"><i
             class="bi bi-moon-stars-fill"></i></button>
         <a href="#wishlistDrawer" class="wishlist-nav-btn" data-bs-toggle="offcanvas" data-bs-target="#wishlistDrawer"
@@ -98,42 +97,18 @@
   </nav>
 
   <!-- Hero Header -->
-  <section class="py-5 bg-warm-cream border-bottom">
-    <div class="container py-3">
-      <div class="row align-items-center">
-        <div class="col-md-8">
-          <span class="section-subtitle">Authentic Rural Immersion</span>
-          <h1 class="section-title mb-2">Farm Activities & Countryside Experiences</h1>
-          <p class="text-muted mb-0">Immerse your hands in the soil, learn age-old agrarian craft, and experience
-            genuine rural traditions.</p>
-        </div>
-        <div class="col-md-4 text-md-end mt-3 mt-md-0">
-          <div class="input-group">
-            <span class="input-group-text bg-white border-end-0"><i class="bi bi-search"></i></span>
-            <input type="text" id="activity-search-input" class="form-control border-start-0"
-              placeholder="Search experiences...">
-          </div>
-        </div>
-      </div>
-
-      <!-- Category Filter Pills -->
-      <div class="d-flex flex-wrap gap-2 mt-4">
-        <button class="btn btn-sm btn-outline-secondary activity-cat-btn active" data-category="all">All
-          Experiences</button>
-        <button class="btn btn-sm btn-outline-secondary activity-cat-btn"
-          data-category="Traditional Cooking">Traditional Cooking</button>
-        <button class="btn btn-sm btn-outline-secondary activity-cat-btn" data-category="Organic Farming">Organic
-          Farming</button>
-        <button class="btn btn-sm btn-outline-secondary activity-cat-btn" data-category="Horse Riding">Horse
-          Riding</button>
-        <button class="btn btn-sm btn-outline-secondary activity-cat-btn" data-category="Campfire Nights">Campfire &
-          Stargazing</button>
-        <button class="btn btn-sm btn-outline-secondary activity-cat-btn" data-category="Nature Walks">Nature
-          Walks</button>
-        <button class="btn btn-sm btn-outline-secondary activity-cat-btn" data-category="Yoga and Meditation">Yoga &
-          Wellness</button>
-        <button class="btn btn-sm btn-outline-secondary activity-cat-btn" data-category="Farm Animal Feeding">Animal
-          Care</button>
+  <section class="inner-page-hero">
+    <div class="container">
+      <div class="inner-hero-content text-center max-w-700 mx-auto">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-center mb-2 small">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Farm Activities</li>
+          </ol>
+        </nav>
+        <span class="section-subtitle">Authentic Rural Immersion</span>
+        <h1 class="section-title mb-2">Farm Activities & Countryside Experiences</h1>
+        <p class="text-muted mb-0">Immerse your hands in the soil, learn age-old agrarian craft, and experience genuine rural traditions.</p>
       </div>
     </div>
   </section>
@@ -141,6 +116,30 @@
   <!-- Activities Container -->
   <section class="py-5">
     <div class="container">
+      <!-- Activities Toolbar: Search & Category Filter Pills -->
+      <div class="activities-toolbar mb-4 p-3 bg-white border rounded-4 shadow-sm">
+        <div class="row g-3 align-items-center">
+          <div class="col-lg-8">
+            <div class="d-flex flex-wrap gap-2">
+              <button class="btn btn-sm btn-outline-secondary activity-cat-btn active" data-category="all">All Experiences</button>
+              <button class="btn btn-sm btn-outline-secondary activity-cat-btn" data-category="Traditional Cooking">Traditional Cooking</button>
+              <button class="btn btn-sm btn-outline-secondary activity-cat-btn" data-category="Organic Farming">Organic Farming</button>
+              <button class="btn btn-sm btn-outline-secondary activity-cat-btn" data-category="Horse Riding">Horse Riding</button>
+              <button class="btn btn-sm btn-outline-secondary activity-cat-btn" data-category="Campfire Nights">Campfire & Stargazing</button>
+              <button class="btn btn-sm btn-outline-secondary activity-cat-btn" data-category="Nature Walks">Nature Walks</button>
+              <button class="btn btn-sm btn-outline-secondary activity-cat-btn" data-category="Yoga and Meditation">Yoga & Wellness</button>
+              <button class="btn btn-sm btn-outline-secondary activity-cat-btn" data-category="Farm Animal Feeding">Animal Care</button>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="input-group">
+              <span class="input-group-text bg-white border-end-0"><i class="bi bi-search"></i></span>
+              <input type="text" id="activity-search-input" class="form-control border-start-0" placeholder="Search experiences...">
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div id="activities-container" class="row">
         <!-- Rendered via assets/js/activities.js -->
       </div>
@@ -168,7 +167,7 @@
             <form class="footer-newsletter-form d-flex gap-2">
               <div class="input-group">
                 <span class="input-group-text footer-input-icon"><i class="bi bi-envelope"></i></span>
-                <input type="email" class="form-control" placeholder="Enter your email address" required>
+                <input type="email" class="form-control" placeholder="Enter your email address" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address with a domain (e.g. name@example.com)">
                 <button class="btn btn-verdant px-3 fw-semibold" type="submit">
                   <i class="bi bi-send-fill me-1"></i> Subscribe
                 </button>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="light" dir="ltr">
 
 <head>
@@ -30,7 +30,7 @@
       </a>
 
       <div class="d-flex align-items-center order-lg-3 nav-actions">
-        <button class="rtl-toggle-btn" title="Toggle RTL Layout"><i class="bi bi-arrow-left-right"></i></button>
+        <button class="rtl-toggle-btn" title="Toggle RTL Layout">RTL</button>
         <button class="theme-toggle-btn" title="Toggle Dark/Light Mode"><i class="bi bi-moon-stars-fill"></i></button>
         <a href="#wishlistDrawer" class="wishlist-nav-btn" data-bs-toggle="offcanvas" data-bs-target="#wishlistDrawer"
           title="Saved Stays" aria-label="Saved Stays">
@@ -113,7 +113,7 @@
             <span>Published October 24, 2026 &bull; 6 min read</span>
           </div>
           <div class="ms-auto d-flex gap-2">
-            <button class="btn btn-sm btn-outline-secondary"
+            <button class="btn btn-sm btn-verdant-outline"
               onclick="navigator.clipboard.writeText(window.location.href); showToast('Article link copied!', 'success', 'Share');"><i
                 class="bi bi-share"></i> Share</button>
           </div>
@@ -194,13 +194,13 @@
         <div class="card border rounded-4 p-4 bg-white shadow-sm">
           <h5 class="font-serif mb-3">Join the Conversation</h5>
           <form
-            onsubmit="event.preventDefault(); showToast('Your reflection has been submitted for moderation.', 'success', 'Comment Posted'); this.reset();">
+            onsubmit="event.preventDefault(); const cName = document.getElementById('comment-author')?.value.trim(); const cEmail = document.getElementById('comment-email')?.value.trim(); if (!window.isValidFullName || !window.isValidFullName(cName)) { showToast('Please enter a valid full name (at least 2 letters, letters only, no numbers).', 'warning', 'Invalid Name'); document.getElementById('comment-author')?.focus(); return; } if (!window.isValidEmail || !window.isValidEmail(cEmail)) { showToast('Please enter a valid email address with a domain (e.g. name@example.com).', 'warning', 'Invalid Email'); document.getElementById('comment-email')?.focus(); return; } showToast('Your reflection has been submitted for moderation.', 'success', 'Comment Posted'); this.reset();">
             <div class="row g-3 mb-3">
               <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Your Name" required>
+                <input type="text" id="comment-author" class="form-control" placeholder="Your Name" required minlength="2" maxlength="60" pattern="^[A-Za-zÀ-ÖØ-öø-ÿĀ-ž'’.\-\s]{2,60}$" title="Please enter a valid full name (at least 2 letters, letters only, no numbers)">
               </div>
               <div class="col-md-6">
-                <input type="email" class="form-control" placeholder="Your Email" required>
+                <input type="email" id="comment-email" class="form-control" placeholder="Your Email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address with a domain (e.g. name@example.com)">
               </div>
               <div class="col-12">
                 <textarea class="form-control" rows="3" placeholder="Share your reflection on countryside living..."
@@ -236,7 +236,7 @@
             <form class="footer-newsletter-form d-flex gap-2">
               <div class="input-group">
                 <span class="input-group-text footer-input-icon"><i class="bi bi-envelope"></i></span>
-                <input type="email" class="form-control" placeholder="Enter your email address" required>
+                <input type="email" class="form-control" placeholder="Enter your email address" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address with a domain (e.g. name@example.com)">
                 <button class="btn btn-verdant px-3 fw-semibold" type="submit">
                   <i class="bi bi-send-fill me-1"></i> Subscribe
                 </button>

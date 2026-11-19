@@ -52,17 +52,17 @@
 
     <main class="dashboard-main">
 
-            <!-- Topbar -->
+      <!-- Topbar -->
       <header class="dashboard-topbar">
         <div class="d-flex align-items-center gap-2 dashboard-topbar-left min-w-0">
-          <button class="btn btn-sm btn-light border d-lg-none dashboard-sidebar-toggle" onclick="toggleDashboardSidebar()" aria-label="Toggle Navigation"><i
-              class="bi bi-list fs-5"></i></button>
+          <button class="btn btn-sm btn-light border d-lg-none dashboard-sidebar-toggle"
+            onclick="toggleDashboardSidebar()" aria-label="Toggle Navigation"><i class="bi bi-list fs-5"></i></button>
           <h5 class="mb-0 font-serif fw-bold dashboard-topbar-title text-truncate">
             <span class="d-none d-sm-inline">Guest </span>Profile
           </h5>
         </div>
         <div class="d-flex align-items-center gap-2 dashboard-topbar-right flex-shrink-0">
-          <button class="rtl-toggle-btn d-none d-sm-inline-flex" title="Toggle RTL"><i class="bi bi-arrow-left-right"></i></button>
+          <button class="rtl-toggle-btn d-none d-sm-inline-flex" title="Toggle RTL">RTL</button>
           <button class="theme-toggle-btn" title="Toggle Theme"><i class="bi bi-moon-stars-fill"></i></button>
         </div>
       </header>
@@ -83,7 +83,9 @@
                 <div class="row g-3">
                   <div class="col-md-6">
                     <label class="form-label">Full Name</label>
-                    <input type="text" id="profile-name" class="form-control" required>
+                    <input type="text" id="profile-name" class="form-control" required minlength="2" maxlength="60"
+                      pattern="^[A-Za-zÀ-ÖØ-öø-ÿĀ-ž'’.\-\s]{2,60}$"
+                      title="Please enter a valid full name (at least 2 letters, letters only, no numbers)">
                   </div>
                   <div class="col-md-6">
                     <label class="form-label">Email Address (Read-only)</label>
@@ -91,7 +93,11 @@
                   </div>
                   <div class="col-md-6">
                     <label class="form-label">Phone Number</label>
-                    <input type="tel" id="profile-phone" class="form-control">
+                    <input type="tel" id="profile-phone" class="form-control" placeholder="+1 (555) 000-0000"
+                      pattern="^\+?[0-9\s\-()]{7,20}$" inputmode="tel"
+                      title="Please enter a valid phone number (digits only, minimum 7 digits, e.g. +1 (555) 000-0000)"
+                      onkeydown="if(event.key && event.key.length===1 && !/^[0-9\+\-\(\)\s]$/.test(event.key)){event.preventDefault();}"
+                      oninput="this.value=this.value.replace(/[a-zA-Z]/g,'')">
                   </div>
                   <div class="col-md-6">
                     <label class="form-label">Country of Residence</label>
@@ -131,7 +137,7 @@
                     <input type="password" class="form-control" placeholder="••••••••" required>
                   </div>
                   <div class="col-12">
-                    <button type="submit" class="btn btn-outline-secondary btn-sm">Update Password</button>
+                    <button type="submit" class="btn btn-verdant btn-sm px-4 py-2">Update Password</button>
                   </div>
                 </div>
               </form>
@@ -150,7 +156,7 @@
               <span class="badge bg-success-subtle text-success mb-3"><i class="bi bi-patch-check-fill me-1"></i>
                 Verified Countryside Traveler</span>
               <input type="file" id="profile-photo-input" accept="image/*" class="d-none">
-              <button type="button" class="btn btn-outline-secondary btn-sm w-100"
+              <button type="button" class="btn btn-verdant-outline btn-sm w-100"
                 onclick="document.getElementById('profile-photo-input').click();">
                 <i class="bi bi-camera me-1"></i> Upload New Photo
               </button>

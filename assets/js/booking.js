@@ -64,17 +64,17 @@ function initBookingCheckout() {
   const childrenSelect = document.getElementById('book-children');
 
   if (checkinInput) {
-    checkinInput.value = params.get('checkin') || formatDate(defIn);
+    checkinInput.value = params.get('checkin') || params.get('checkIn') || formatDate(defIn);
     checkinInput.min = formatDate(today);
     checkinInput.addEventListener('change', recalculateBooking);
   }
   if (checkoutInput) {
-    checkoutInput.value = params.get('checkout') || formatDate(defOut);
+    checkoutInput.value = params.get('checkout') || params.get('checkOut') || formatDate(defOut);
     checkoutInput.min = formatDate(today);
     checkoutInput.addEventListener('change', recalculateBooking);
   }
   if (adultsSelect) {
-    adultsSelect.value = params.get('guests') || '2';
+    adultsSelect.value = params.get('guests') || params.get('adults') || '2';
     adultsSelect.addEventListener('change', recalculateBooking);
   }
   if (childrenSelect) {
@@ -303,8 +303,8 @@ window.updateBookingAuthState = function () {
     }
     if (submitBtn) {
       submitBtn.innerHTML = `<i class="bi bi-person-lock me-1"></i> Sign In to Complete Reservation`;
-      submitBtn.classList.remove('btn-verdant');
-      submitBtn.classList.add('btn-warning');
+      submitBtn.classList.remove('btn-warning');
+      submitBtn.classList.add('btn-verdant');
     }
   }
 };
@@ -323,6 +323,11 @@ function handleBookingSubmit(e) {
   }
 
   const guestName = document.getElementById('guest-name')?.value.trim() || currentUser.name;
+  if (!isValidFullName(guestName)) {
+    showToast('Please enter a valid guest full name (at least 2 letters, letters only, no numbers).', 'warning', 'Invalid Guest Name');
+    document.getElementById('guest-name')?.focus();
+    return;
+  }
   const guestEmail = currentUser.email || document.getElementById('guest-email')?.value.trim();
   const guestPhone = document.getElementById('guest-phone')?.value.trim() || currentUser.phone || '';
   const specialRequests = document.getElementById('special-requests')?.value.trim() || '';
@@ -332,6 +337,12 @@ function handleBookingSubmit(e) {
 
   if (!guestPhone) {
     showToast('Please provide a contact phone number for check-in coordination.', 'warning', 'Phone Number Required');
+    document.getElementById('guest-phone')?.focus();
+    return;
+  }
+
+  if (typeof isValidPhone === 'function' && !isValidPhone(guestPhone)) {
+    showToast('Please enter a valid phone number (digits only, minimum 7 digits, e.g. +1 (555) 000-0000).', 'warning', 'Invalid Phone Number');
     document.getElementById('guest-phone')?.focus();
     return;
   }

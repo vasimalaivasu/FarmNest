@@ -537,6 +537,29 @@ body.dark-mode .verdant-navbar.scrolled {
   border-color: var(--primary-forest-light);
 }
 
+.rtl-toggle-btn {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  text-transform: uppercase;
+  direction: ltr !important;
+  user-select: none;
+}
+
+.rtl-toggle-btn.active {
+  background: var(--primary-forest);
+  color: #ffffff;
+  border-color: var(--primary-forest);
+}
+
+.rtl-toggle-btn.active:hover {
+  background: var(--primary-forest-light);
+  color: #ffffff;
+  border-color: var(--primary-forest-light);
+}
+
 .badge-counter {
   position: absolute;
   top: -4px;
@@ -689,6 +712,15 @@ body.dark-mode .verdant-navbar.scrolled {
   box-shadow: 0 6px 18px rgba(27, 67, 50, 0.3);
 }
 
+.btn-verdant:active,
+.btn-verdant:focus,
+.btn-verdant:focus-visible {
+  background-color: var(--primary-forest-dark) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.35) !important;
+}
+
 .btn-verdant-outline {
   background-color: transparent;
   color: var(--primary-forest);
@@ -707,6 +739,127 @@ body.dark-mode .verdant-navbar.scrolled {
   background-color: var(--primary-forest);
   color: #ffffff;
   transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(27, 67, 50, 0.2);
+}
+
+.btn-verdant-outline:active,
+.btn-verdant-outline:focus,
+.btn-verdant-outline:focus-visible {
+  background-color: var(--primary-forest) !important;
+  color: #ffffff !important;
+  border-color: var(--primary-forest) !important;
+  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.25) !important;
+}
+
+/* Global Brand Consistency for Bootstrap Button Classes */
+.btn-primary,
+.btn-success {
+  background-color: var(--primary-forest) !important;
+  border-color: var(--primary-forest) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(27, 67, 50, 0.2);
+  transition: all var(--transition-fast);
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active {
+  background-color: var(--primary-forest-dark) !important;
+  border-color: var(--primary-forest-dark) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(27, 67, 50, 0.3) !important;
+}
+
+.btn-outline-primary,
+.btn-outline-success {
+  background-color: transparent !important;
+  color: var(--primary-forest) !important;
+  border: 1.5px solid var(--primary-forest) !important;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
+.btn-outline-success:hover,
+.btn-outline-success:focus,
+.btn-outline-success:active {
+  background-color: var(--primary-forest) !important;
+  border-color: var(--primary-forest) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+}
+
+/* Filter Tabs & Category Pills Consistency */
+.activity-cat-btn,
+.booking-filter-tab {
+  background-color: var(--bg-surface) !important;
+  border: 1.5px solid var(--border-color) !important;
+  color: var(--text-muted) !important;
+  font-weight: 600 !important;
+  border-radius: var(--radius-pill) !important;
+  padding: 6px 16px !important;
+  transition: all var(--transition-fast) !important;
+}
+
+.activity-cat-btn:hover,
+.booking-filter-tab:hover {
+  background-color: var(--bg-cream-surface) !important;
+  border-color: var(--primary-forest-light) !important;
+  color: var(--primary-forest) !important;
+  transform: translateY(-1px);
+}
+
+.activity-cat-btn.active,
+.booking-filter-tab.active,
+.activity-cat-btn.active:hover,
+.booking-filter-tab.active:hover {
+  background-color: var(--primary-forest) !important;
+  border-color: var(--primary-forest) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(27, 67, 50, 0.22) !important;
+  transform: translateY(-1px);
+}
+
+/* Stays Toolbar View Toggle (Grid / List) */
+.stays-toolbar .btn-group .btn-outline-secondary {
+  border-color: var(--border-color);
+  color: var(--text-muted);
+  background: var(--bg-surface);
+  transition: all var(--transition-fast);
+}
+
+.stays-toolbar .btn-group .btn-outline-secondary:hover {
+  background-color: var(--bg-cream-surface);
+  color: var(--primary-forest);
+  border-color: var(--primary-forest-light);
+}
+
+.stays-toolbar .btn-group .btn-outline-secondary.active {
+  background-color: var(--primary-forest) !important;
+  border-color: var(--primary-forest) !important;
+  color: #ffffff !important;
+}
+
+.banner-claim-btn {
+  background-color: #ffffff !important;
+  color: var(--primary-forest) !important;
+  border: 1.5px solid #ffffff !important;
+  transition: all var(--transition-fast) !important;
+}
+
+.banner-claim-btn:hover {
+  background-color: var(--bg-warm-cream) !important;
+  color: var(--primary-forest-dark) !important;
+  border-color: var(--bg-warm-cream) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25) !important;
 }
 
 .btn-terracotta {
@@ -942,6 +1095,155 @@ body.dark-mode .verdant-navbar.scrolled {
   color: var(--text-muted);
   font-size: 1.05rem;
   max-width: 650px;
+}
+
+/* ===================================================================
+   STANDARDIZED INNER PAGE HERO SECTION
+   Consistent Height, Balanced Padding & Center-Aligned Typography
+=================================================================== */
+.inner-page-hero {
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 0;
+  background-color: var(--bg-warm-cream);
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+
+.inner-page-hero .container {
+  width: 100%;
+  text-align: center;
+}
+
+.inner-hero-content {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.inner-hero-content .breadcrumb {
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.inner-hero-content .breadcrumb-item,
+.inner-hero-content .breadcrumb-item a {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.inner-hero-content .breadcrumb-item a {
+  color: var(--primary-forest);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.inner-hero-content .breadcrumb-item a:hover {
+  color: var(--accent-sage);
+  text-decoration: underline;
+}
+
+.inner-hero-content .breadcrumb-item.active {
+  color: var(--text-muted);
+}
+
+.inner-hero-content .section-subtitle {
+  display: inline-block;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.inner-hero-content .section-title,
+.inner-hero-content h1 {
+  font-family: var(--font-heading);
+  color: var(--text-heading);
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: clamp(1.85rem, 3.2vw, 2.35rem);
+  line-height: 1.25;
+}
+
+.inner-hero-content p,
+.inner-hero-content .lead {
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.activities-toolbar {
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+}
+
+/* ===================================================================
+   ABOUT US IMAGE CONTAINERS & ASPECT RATIO NORMALIZATION
+=================================================================== */
+.about-story-img-wrap {
+  width: 100%;
+  height: 100%;
+  min-height: 440px;
+  max-height: 540px;
+  position: relative;
+  border-radius: var(--radius-lg, 16px);
+  overflow: hidden;
+  background-color: var(--bg-cream-surface);
+}
+
+.about-story-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+}
+
+.about-story-badge {
+  background-color: var(--bg-surface, #ffffff);
+  border-color: var(--border-color, #e5ded3) !important;
+  max-width: calc(100% - 2rem);
+  backdrop-filter: blur(10px);
+  z-index: 2;
+}
+
+.about-host-card {
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.about-host-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09) !important;
+}
+
+.about-host-img-wrap {
+  width: 100%;
+  height: 230px;
+  overflow: hidden;
+  position: relative;
+  background-color: var(--bg-cream-surface);
+}
+
+.about-host-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  display: block !important;
+  transition: transform 0.4s ease;
+}
+
+.about-host-card:hover .about-host-img {
+  transform: scale(1.04);
 }
 
 /* Semantic Theme Backgrounds & Typography */
@@ -2036,6 +2338,8 @@ body.dark-mode .verdant-navbar.scrolled {
 
   .guest-profile-actions .btn {
     height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
     padding: 0 16px !important;
     font-size: 13.5px !important;
     font-weight: 600 !important;
@@ -2046,9 +2350,11 @@ body.dark-mode .verdant-navbar.scrolled {
     gap: 6px !important;
     white-space: nowrap !important;
     box-sizing: border-box !important;
-    line-height: 1 !important;
+    line-height: 35px !important;
     min-width: 104px !important;
     box-shadow: none !important;
+    border-width: 1.5px !important;
+    border-style: solid !important;
     transition: all var(--transition-fast) !important;
   }
 

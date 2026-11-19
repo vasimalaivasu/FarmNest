@@ -31,18 +31,24 @@ function initFooterNewsletter() {
       const email = input?.value.trim();
       if (!email) return;
 
+      if (typeof isValidEmail === 'function' && !isValidEmail(email)) {
+        showToast('Please enter a valid email address with a domain (e.g. name@example.com).', 'warning', 'Invalid Email');
+        input?.focus();
+        return;
+      }
+
       try {
         const subs = JSON.parse(localStorage.getItem('verdant_subscribers') || '[]');
         if (!subs.includes(email)) {
           subs.push(email);
           localStorage.setItem('verdant_subscribers', JSON.stringify(subs));
         }
-      } catch (err) {}
+    } catch (err) { }
 
-      showToast('Thank you for subscribing to The Verdant Journal! Check your inbox for your $30 welcome voucher.', 'success', 'Newsletter Subscription');
-      if (input) input.value = '';
-    });
+    showToast('Thank you for subscribing to The Verdant Journal! Check your inbox for your $30 welcome voucher.', 'success', 'Newsletter Subscription');
+    if (input) input.value = '';
   });
+});
 }
 
 /* ==========================================
@@ -100,9 +106,11 @@ function applyRTL(dir) {
   document.querySelectorAll('.rtl-toggle-btn').forEach(btn => {
     btn.setAttribute('title', dir === 'rtl' ? 'Switch to LTR Layout' : 'Switch to RTL Layout');
     btn.setAttribute('aria-label', dir === 'rtl' ? 'Switch to LTR Layout' : 'Switch to RTL Layout');
-    const icon = btn.querySelector('i');
-    if (icon) {
-      icon.className = 'bi bi-arrow-left-right';
+    btn.textContent = 'RTL';
+    if (dir === 'rtl') {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
     }
   });
 }
@@ -418,13 +426,13 @@ function renderAuthDrawer(activeTab = 'signin') {
             <label class="form-label small fw-semibold">Email Address</label>
             <div class="input-group">
               <span class="input-group-text bg-transparent text-muted"><i class="bi bi-envelope"></i></span>
-              <input type="email" class="form-control" id="drawer-login-email" placeholder="name@example.com" required autocomplete="email">
+              <input type="email" class="form-control" id="drawer-login-email" placeholder="name@example.com" required autocomplete="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address with a domain (e.g. name@example.com)">
             </div>
           </div>
           <div class="mb-3">
             <div class="d-flex justify-content-between align-items-center mb-1">
               <label class="form-label small fw-semibold mb-0">Password</label>
-              <a href="${relPrefix}auth/forgot-password.html" class="small text-success text-decoration-none" style="font-size: 12px;">Forgot?</a>
+              <a href="${relPrefix}auth/forgot-password.html" class="small text-success text-decoration-none" style="font-size: 12px;">Forgot Password?</a>
             </div>
             <div class="input-group">
               <span class="input-group-text bg-transparent text-muted"><i class="bi bi-lock"></i></span>
@@ -473,21 +481,21 @@ function renderAuthDrawer(activeTab = 'signin') {
             <label class="form-label small fw-semibold">Full Name</label>
             <div class="input-group">
               <span class="input-group-text bg-transparent text-muted"><i class="bi bi-person"></i></span>
-              <input type="text" class="form-control" id="drawer-reg-name" placeholder="John Doe" required>
+              <input type="text" class="form-control" id="drawer-reg-name" placeholder="John Doe" required minlength="2" maxlength="60" pattern="^[A-Za-zÀ-ÖØ-öø-ÿĀ-ž'’.\-\s]{2,60}$" title="Please enter a valid full name (at least 2 letters, letters only, no numbers)">
             </div>
           </div>
           <div class="mb-2">
             <label class="form-label small fw-semibold">Email Address</label>
             <div class="input-group">
               <span class="input-group-text bg-transparent text-muted"><i class="bi bi-envelope"></i></span>
-              <input type="email" class="form-control" id="drawer-reg-email" placeholder="name@example.com" required>
+              <input type="email" class="form-control" id="drawer-reg-email" placeholder="name@example.com" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address with a domain (e.g. name@example.com)">
             </div>
           </div>
           <div class="mb-2">
             <label class="form-label small fw-semibold">Phone Number</label>
             <div class="input-group">
               <span class="input-group-text bg-transparent text-muted"><i class="bi bi-telephone"></i></span>
-              <input type="tel" class="form-control" id="drawer-reg-phone" placeholder="+1 (555) 000-0000">
+              <input type="tel" class="form-control" id="drawer-reg-phone" placeholder="+1 (555) 000-0000" required pattern="^\+?[0-9\s\-()]{7,20}$" inputmode="tel" title="Please enter a valid phone number (digits only, minimum 7 digits, e.g. +1 (555) 000-0000)" onkeydown="if(event.key && event.key.length===1 && !/^[0-9\+\-\(\)\s]$/.test(event.key)){event.preventDefault();}" oninput="this.value=this.value.replace(/[a-zA-Z]/g,'')">
             </div>
           </div>
           <div class="mb-3">
@@ -577,6 +585,12 @@ function renderAuthDrawer(activeTab = 'signin') {
       const pass = container.querySelector('#drawer-login-pass')?.value;
       if (!window.VerdantDB) return;
 
+      if (typeof isValidEmail === 'function' && !isValidEmail(email)) {
+        showToast('Please enter a valid email address with a domain (e.g. name@example.com).', 'warning', 'Invalid Email');
+        container.querySelector('#drawer-login-email')?.focus();
+        return;
+      }
+
       const res = VerdantDB.login(email, pass);
       if (res.success) {
         showToast(`Welcome back, ${res.user.name}!`, 'success', 'Signed In');
@@ -603,35 +617,53 @@ function renderAuthDrawer(activeTab = 'signin') {
       const pass = container.querySelector('#drawer-reg-pass')?.value;
       const terms = container.querySelector('#drawer-reg-terms')?.checked;
 
-      if (!terms) {
-        showToast('Please accept the Terms & Conditions.', 'warning', 'Agreement Required');
+      if (!isValidFullName(name)) {
+        showToast('Please enter a valid full name (at least 2 letters, letters only, no numbers).', 'warning', 'Invalid Name');
+        container.querySelector('#drawer-reg-name')?.focus();
         return;
       }
-      if (!window.VerdantDB) return;
 
-      const res = VerdantDB.register({
-        name,
-        email,
-        phone,
-        password: pass,
-        role: 'guest'
-      });
-
-      if (res.success) {
-        showToast(`Account created! Welcome to Verdant Haven, ${res.user.name}.`, 'success', 'Registered');
-        initNavbarAuth();
-        renderAuthDrawer();
-        closeAuthDrawer();
-        if (typeof window.updateBookingAuthState === 'function') {
-          window.updateBookingAuthState();
-        }
-        if (typeof window.refreshGuestDashboardState === 'function') {
-          window.refreshGuestDashboardState();
-        }
-      } else {
-        showToast(res.message || 'Could not complete registration.', 'danger', 'Registration Error');
+      if (typeof isValidEmail === 'function' && !isValidEmail(email)) {
+        showToast('Please enter a valid email address with a domain (e.g. name@example.com).', 'warning', 'Invalid Email');
+        container.querySelector('#drawer-reg-email')?.focus();
+        return;
       }
-    });
+
+        if (!phone || (typeof isValidPhone === 'function' && !isValidPhone(phone))) {
+          showToast('Please enter a valid phone number (digits only, minimum 7 digits, e.g. +1 (555) 000-0000).', 'warning', 'Invalid Phone Number');
+          container.querySelector('#drawer-reg-phone')?.focus();
+          return;
+        }
+
+        if (!terms) {
+          showToast('Please accept the Terms & Conditions.', 'warning', 'Agreement Required');
+          return;
+        }
+        if (!window.VerdantDB) return;
+
+        const res = VerdantDB.register({
+          name,
+          email,
+          phone,
+          password: pass,
+          role: 'guest'
+        });
+
+        if (res.success) {
+          showToast(`Account created! Welcome to Verdant Haven, ${res.user.name}.`, 'success', 'Registered');
+          initNavbarAuth();
+          renderAuthDrawer();
+          closeAuthDrawer();
+          if (typeof window.updateBookingAuthState === 'function') {
+            window.updateBookingAuthState();
+          }
+          if (typeof window.refreshGuestDashboardState === 'function') {
+            window.refreshGuestDashboardState();
+          }
+        } else {
+          showToast(res.message || 'Could not complete registration.', 'danger', 'Registration Error');
+        }
+      });
   }
 }
 
@@ -640,8 +672,8 @@ function handleDrawerSocialAuth(provider) {
   const inputEmail = prompt(`Please enter your ${provider} account email address to continue:`);
   if (!inputEmail) return;
   const cleanEmail = inputEmail.trim().toLowerCase();
-  if (!cleanEmail.includes('@') || !cleanEmail.includes('.')) {
-    showToast('Please enter a valid email address.', 'warning', 'Social Sign-In');
+  if (typeof isValidEmail === 'function' ? !isValidEmail(cleanEmail) : (!cleanEmail.includes('@') || !cleanEmail.includes('.'))) {
+    showToast('Please enter a valid email address with a domain (e.g. name@example.com).', 'warning', 'Social Sign-In');
     return;
   }
 
@@ -894,125 +926,138 @@ function initNavbarAuth() {
       openAuthDrawer('signin');
     });
   }
+
+  // Ensure Dashboard nav item is also accessible in hamburger menu on smaller viewports
+  const navList = document.querySelector('#navbarMain .navbar-nav');
+  if (navList && !navList.querySelector('.nav-dashboard-link-item')) {
+    const dashLi = document.createElement('li');
+    dashLi.className = 'nav-item nav-dashboard-link-item d-lg-none';
+    dashLi.innerHTML = `
+      <a class="nav-link" href="${relPrefix}guest/dashboard.html">
+        <i class="bi bi-speedometer2 me-2 text-success"></i>Guest Dashboard
+      </a>
+    `;
+    navList.appendChild(dashLi);
+  }
 }
 
-  function escapeHTML(str) {
-    return String(str || '').replace(/[&<>'"]/g, tag => ({
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      "'": '&#39;',
-      '"': '&quot;'
-    }[tag] || tag));
-  }
+function escapeHTML(str) {
+  return String(str || '').replace(/[&<>'"]/g, tag => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    "'": '&#39;',
+    '"': '&quot;'
+  }[tag] || tag));
+}
 
-  /* ==========================================
-     ACTIVE NAVIGATION HIGHLIGHT
-  ========================================== */
-  function highlightActiveNav() {
-    const currentPath = window.location.pathname.toLowerCase();
-    document.querySelectorAll('.nav-link, .sidebar-link').forEach(link => {
-      const href = (link.getAttribute('href') || '').toLowerCase();
-      if (href && (currentPath.endsWith(href) || (href === 'index.html' && (currentPath.endsWith('/') || currentPath.endsWith('index.html'))))) {
-        link.classList.add('active');
-      }
-    });
-  }
+/* ==========================================
+   ACTIVE NAVIGATION HIGHLIGHT
+========================================== */
+function highlightActiveNav() {
+  const currentPath = window.location.pathname.toLowerCase();
+  document.querySelectorAll('.nav-link, .sidebar-link').forEach(link => {
+    const href = (link.getAttribute('href') || '').toLowerCase();
+    if (href && (currentPath.endsWith(href) || (href === 'index.html' && (currentPath.endsWith('/') || currentPath.endsWith('index.html'))))) {
+      link.classList.add('active');
+    }
+  });
+}
 
-  /* ==========================================
-     WISHLIST HANDLERS & BADGE
-  ========================================== */
-  function updateWishlistBadge() {
-    if (!window.VerdantDB) return;
-    const list = VerdantDB.getWishlist();
-    document.querySelectorAll('.wishlist-counter').forEach(el => {
-      el.textContent = list.length;
-      el.style.display = list.length > 0 ? 'flex' : 'none';
-    });
-    const drawerCount = document.getElementById('wishlist-drawer-count');
-    if (drawerCount) drawerCount.textContent = list.length;
-  }
+/* ==========================================
+   WISHLIST HANDLERS & BADGE
+========================================== */
+function updateWishlistBadge() {
+  if (!window.VerdantDB) return;
+  const list = VerdantDB.getWishlist();
+  document.querySelectorAll('.wishlist-counter').forEach(el => {
+    el.textContent = list.length;
+    el.style.display = list.length > 0 ? 'flex' : 'none';
+  });
+  const drawerCount = document.getElementById('wishlist-drawer-count');
+  if (drawerCount) drawerCount.textContent = list.length;
+}
 
-  function syncAllWishlistButtons() {
-    if (!window.VerdantDB) return;
-    const list = VerdantDB.getWishlist();
-    document.querySelectorAll('.property-wishlist-btn').forEach(btn => {
-      const propId = btn.getAttribute('data-property-id') || btn.closest('[data-property-id]')?.getAttribute('data-property-id');
-      if (propId) {
-        const isWish = list.includes(propId);
-        btn.classList.toggle('active', isWish);
-        const icon = btn.querySelector('i');
-        if (icon) {
-          icon.className = isWish ? 'bi bi-heart-fill text-danger' : 'bi bi-heart';
-        }
-      }
-    });
-  }
+      function syncAllWishlistButtons() {
+        if (!window.VerdantDB) return;
+        const list = VerdantDB.getWishlist();
+        document.querySelectorAll('.property-wishlist-btn').forEach(btn => {
+          const propId = btn.getAttribute('data-property-id') || btn.closest('[data-property-id]')?.getAttribute('data-property-id');
+          if (propId) {
+            const isWish = list.includes(propId);
+            btn.classList.toggle('active', isWish);
+            const icon = btn.querySelector('i');
+            if (icon) {
+              icon.className = isWish ? 'bi bi-heart-fill text-danger' : 'bi bi-heart';
+            }
+    }
+  });
+}
 
-  function setupGlobalWishlistTriggers() {
-    document.addEventListener('click', (e) => {
-      // 1. Intercept navbar & footer wishlist triggers -> pop RIGHT drawer (right to left)
-      const wishlistTrigger = e.target.closest('.wishlist-nav-btn, .footer-wishlist-trigger, [data-drawer="wishlist"], .verdant-footer a[href*="wishlist.html"]');
-      if (wishlistTrigger) {
-        e.preventDefault();
-        e.stopPropagation();
-        openWishlistDrawer();
-        return;
-      }
-
-      // 2. Intercept property card wishlist buttons (Save item button)
-      const btn = e.target.closest('.property-wishlist-btn');
-      if (btn) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        const currentUser = window.VerdantDB ? VerdantDB.getCurrentUser() : null;
-        if (!currentUser) {
-          showToast('Please sign in to save stays and rooms to your wishlist.', 'info', 'Sign In Required');
-          openAuthDrawer('signin');
-          return;
-        }
-
-        const propId = btn.getAttribute('data-property-id') || btn.closest('[data-property-id]')?.getAttribute('data-property-id');
-        if (propId && window.VerdantDB) {
-          // Toggle in DB
-          const isAdded = VerdantDB.toggleWishlist(propId);
-
-          // Sync buttons on page
-          syncAllWishlistButtons();
-
-          // Sync detail page button if present
-          const detailBtn = document.getElementById('detail-wishlist-btn');
-          if (detailBtn) {
-            detailBtn.classList.toggle('active', isAdded);
-            detailBtn.innerHTML = isAdded
-              ? `<i class="bi bi-heart-fill text-danger me-1"></i> Saved to Wishlist`
-              : `<i class="bi bi-heart me-1"></i> Add to Wishlist`;
+      function setupGlobalWishlistTriggers() {
+        document.addEventListener('click', (e) => {
+          // 1. Intercept navbar & footer wishlist triggers -> pop RIGHT drawer (right to left)
+          const wishlistTrigger = e.target.closest('.wishlist-nav-btn, .footer-wishlist-trigger, [data-drawer="wishlist"], .verdant-footer a[href*="wishlist.html"]');
+          if (wishlistTrigger) {
+            e.preventDefault();
+            e.stopPropagation();
+            openWishlistDrawer();
+            return;
           }
 
-          updateWishlistBadge();
-          const prop = VerdantDB.getProperty(propId);
-          const propTitle = prop ? prop.name : 'Stay';
+          // 2. Intercept property card wishlist buttons (Save item button)
+          const btn = e.target.closest('.property-wishlist-btn');
+          if (btn) {
+            e.preventDefault();
+            e.stopPropagation();
 
-          showToast(
-            isAdded
-              ? `Saved "${propTitle}" to your collection. Click the heart icon in the navigation bar to view saved stays.`
-              : `Removed "${propTitle}" from your collection.`,
-            isAdded ? 'success' : 'info',
-            isAdded ? 'Saved Stays' : 'Wishlist'
-          );
+            const currentUser = window.VerdantDB ? VerdantDB.getCurrentUser() : null;
+            if (!currentUser) {
+              showToast('Please sign in to save stays and rooms to your wishlist.', 'info', 'Sign In Required');
+              openAuthDrawer('signin');
+              return;
+            }
 
-          // Re-render full page wishlist if currently on guest/wishlist.html
-          if (typeof renderWishlistPage === 'function') {
-            renderWishlistPage();
-          }
+              const propId = btn.getAttribute('data-property-id') || btn.closest('[data-property-id]')?.getAttribute('data-property-id');
+              if (propId && window.VerdantDB) {
+                // Toggle in DB
+                const isAdded = VerdantDB.toggleWishlist(propId);
 
-          // Do NOT pop out the drawer automatically:
-          // User can first select/save all their desired rooms & stays,
-          // then navigate to saved items whenever ready via the navbar heart icon.
-        }
-        return;
-      }
+                  // Sync buttons on page
+                  syncAllWishlistButtons();
+
+                  // Sync detail page button if present
+                  const detailBtn = document.getElementById('detail-wishlist-btn');
+                  if (detailBtn) {
+                    detailBtn.classList.toggle('active', isAdded);
+                    detailBtn.innerHTML = isAdded
+                      ? `<i class="bi bi-heart-fill text-danger me-1"></i> Saved to Wishlist`
+                      : `<i class="bi bi-heart me-1"></i> Add to Wishlist`;
+                  }
+
+                    updateWishlistBadge();
+                    const prop = VerdantDB.getProperty(propId);
+                    const propTitle = prop ? prop.name : 'Stay';
+
+                    showToast(
+                      isAdded
+                        ? `Saved "${propTitle}" to your collection. Click the heart icon in the navigation bar to view saved stays.`
+                        : `Removed "${propTitle}" from your collection.`,
+                      isAdded ? 'success' : 'info',
+                      isAdded ? 'Saved Stays' : 'Wishlist'
+                    );
+
+                    // Re-render full page wishlist if currently on guest/wishlist.html
+                    if (typeof renderWishlistPage === 'function') {
+                      renderWishlistPage();
+                    }
+
+                    // Do NOT pop out the drawer automatically:
+                    // User can first select/save all their desired rooms & stays,
+                    // then navigate to saved items whenever ready via the navbar heart icon.
+                  }
+                  return;
+                }
 
       // 3. Intercept Sign In button click in navbar -> pop LEFT drawer
       const navSignInBtn = e.target.closest('.nav-signin-btn, #nav-signin-trigger');
@@ -1023,41 +1068,41 @@ function initNavbarAuth() {
         return;
       }
 
-      // 4. Intercept Sign In and Register links in footer or anywhere with auth attributes -> pop LEFT drawer
-      const authTrigger = e.target.closest('.footer-auth-trigger, [data-auth-tab], .verdant-footer a[href*="auth/login.html"], .verdant-footer a[href*="auth/register.html"]');
-      if (authTrigger) {
-        e.preventDefault();
-        e.stopPropagation();
-        const explicitTab = authTrigger.getAttribute('data-auth-tab');
-        const href = (authTrigger.getAttribute('href') || '').toLowerCase();
-        const tab = explicitTab || (href.includes('register') ? 'signup' : 'signin');
-        openAuthDrawer(tab);
-        return;
-      }
-    });
+          // 4. Intercept Sign In and Register links in footer or anywhere with auth attributes -> pop LEFT drawer
+          const authTrigger = e.target.closest('.footer-auth-trigger, [data-auth-tab], .verdant-footer a[href*="auth/login.html"], .verdant-footer a[href*="auth/register.html"]');
+          if (authTrigger) {
+            e.preventDefault();
+            e.stopPropagation();
+            const explicitTab = authTrigger.getAttribute('data-auth-tab');
+            const href = (authTrigger.getAttribute('href') || '').toLowerCase();
+            const tab = explicitTab || (href.includes('register') ? 'signup' : 'signin');
+            openAuthDrawer(tab);
+            return;
+          }
+        });
+}
+
+/* ==========================================
+   TOAST NOTIFICATION ENGINE
+========================================== */
+function showToast(message, type = 'info', title = 'Verdant Haven') {
+  let container = document.getElementById('verdant-toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'verdant-toast-container';
+    document.body.appendChild(container);
   }
 
-  /* ==========================================
-     TOAST NOTIFICATION ENGINE
-  ========================================== */
-  function showToast(message, type = 'info', title = 'Verdant Haven') {
-    let container = document.getElementById('verdant-toast-container');
-    if (!container) {
-      container = document.createElement('div');
-      container.id = 'verdant-toast-container';
-      document.body.appendChild(container);
-    }
+  const toast = document.createElement('div');
+  toast.className = `verdant-toast toast-${type}`;
 
-    const toast = document.createElement('div');
-    toast.className = `verdant-toast toast-${type}`;
+  let iconClass = 'bi-info-circle-fill text-primary';
+  if (type === 'success') iconClass = 'bi-check-circle-fill text-success';
+  if (type === 'warning') iconClass = 'bi-exclamation-triangle-fill text-warning';
+  if (type === 'danger') iconClass = 'bi-x-circle-fill text-danger';
 
-    let iconClass = 'bi-info-circle-fill text-primary';
-    if (type === 'success') iconClass = 'bi-check-circle-fill text-success';
-    if (type === 'warning') iconClass = 'bi-exclamation-triangle-fill text-warning';
-    if (type === 'danger') iconClass = 'bi-x-circle-fill text-danger';
-
-    toast.innerHTML = `
-    <i class="bi ${iconClass} fs-5 mt-1"></i>
+  toast.innerHTML = `
+    < i class="bi ${iconClass} fs-5 mt-1" ></i >
     <div class="flex-grow-1">
       <div class="verdant-toast-title">${title}</div>
       <div class="verdant-toast-msg">${message}</div>
@@ -1065,87 +1110,268 @@ function initNavbarAuth() {
     <button type="button" class="btn-close ms-2" style="font-size: 11px;" aria-label="Close"></button>
   `;
 
-    const closeBtn = toast.querySelector('.btn-close');
-    closeBtn.addEventListener('click', () => {
-      toast.remove();
+  const closeBtn = toast.querySelector('.btn-close');
+  closeBtn.addEventListener('click', () => {
+    toast.remove();
+  });
+
+  container.appendChild(toast);
+
+  // Auto dismiss after 4 seconds
+  setTimeout(() => {
+    if (toast.parentNode) {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(10px)';
+      toast.style.transition = 'all 0.3s ease';
+      setTimeout(() => toast.remove(), 300);
+    }
+  }, 4000);
+}
+
+/* ==========================================
+   DATE INPUT INITIALIZERS
+========================================== */
+function setupDateInputsDefaults() {
+  const checkinInput = document.querySelector('input[name="checkin"], #hero-checkin, #booking-checkin');
+  const checkoutInput = document.querySelector('input[name="checkout"], #hero-checkout, #booking-checkout');
+
+  const today = new Date();
+  const nextWeek = new Date();
+  nextWeek.setDate(today.getDate() + 5);
+  const checkoutDate = new Date();
+  checkoutDate.setDate(today.getDate() + 8);
+
+  const formatDate = (d) => d.toISOString().split('T')[0];
+
+  if (checkinInput && !checkinInput.value) {
+    checkinInput.value = formatDate(nextWeek);
+    checkinInput.min = formatDate(today);
+  }
+  if (checkoutInput && !checkoutInput.value) {
+    checkoutInput.value = formatDate(checkoutDate);
+    checkoutInput.min = formatDate(today);
+  }
+}
+
+/* ==========================================
+   HERO / MAIN SEARCH FORM
+========================================== */
+function setupSearchForms() {
+  const searchForm = document.querySelector('#hero-search-form, .main-search-form');
+  if (searchForm) {
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const destination = (searchForm.querySelector('[name="destination"]')?.value || '').trim();
+      const checkin = searchForm.querySelector('[name="checkin"]')?.value || '';
+      const checkout = searchForm.querySelector('[name="checkout"]')?.value || '';
+      const guests = searchForm.querySelector('[name="guests"]')?.value || '2';
+      const category = searchForm.querySelector('[name="category"]')?.value || '';
+
+      const params = new URLSearchParams();
+      if (destination) params.set('location', destination);
+      if (checkin) params.set('checkin', checkin);
+      if (checkout) params.set('checkout', checkout);
+      if (guests) params.set('guests', guests);
+      if (category) params.set('category', category);
+
+      // Check current path to determine relative redirect to stays.html
+      const currentPath = window.location.pathname;
+      const isSubdir = currentPath.includes('/guest/') || currentPath.includes('/booking/') || currentPath.includes('/auth/') || currentPath.includes('/blog/') || currentPath.includes('/errors/');
+      const prefix = isSubdir ? '../' : '';
+
+      window.location.href = `${ prefix } stays.html ? ${ params.toString() } `;
     });
+  }
+}
 
-    container.appendChild(toast);
+/* ==========================================
+   DASHBOARD MOBILE SIDEBAR TOGGLE
+========================================== */
+function toggleDashboardSidebar() {
+  const sidebar = document.querySelector('.dashboard-sidebar');
+  if (sidebar) {
+    sidebar.classList.toggle('show');
+  }
+}
 
-    // Auto dismiss after 4 seconds
-    setTimeout(() => {
-      if (toast.parentNode) {
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateY(10px)';
-        toast.style.transition = 'all 0.3s ease';
-        setTimeout(() => toast.remove(), 300);
+/* ==========================================
+   GLOBAL NAME VALIDATION & REAL-TIME SANITIZATION
+   Prevents single letter inputs and rejects digits in all name fields.
+========================================== */
+function isTargetNameField(target) {
+  if (!target || target.tagName !== 'INPUT' || (target.type !== 'text' && target.type !== '')) return false;
+  const id = (target.id || '').toLowerCase();
+  const name = (target.name || '').toLowerCase();
+  const placeholder = (target.placeholder || '').toLowerCase();
+
+  if (id.includes('email') || name.includes('email') || placeholder.includes('email')) return false;
+  if (id.includes('user') && !id.includes('name')) return false;
+
+  return target.matches('#drawer-reg-name, #reg-name, #profile-name, #guest-name, #contact-name, #review-author, #comment-author, .name-input') ||
+    id.includes('name') ||
+    name.includes('name') ||
+    placeholder.includes('full name') ||
+    placeholder.includes('your name');
+}
+
+// Strip numbers in real-time if typed or pasted
+document.addEventListener('input', (e) => {
+  const target = e.target;
+  if (isTargetNameField(target)) {
+    if (/\d/.test(target.value)) {
+      target.value = target.value.replace(/\d/g, '');
+      if (typeof showToast === 'function') {
+        showToast('Numbers are not permitted in name fields.', 'warning', 'Invalid Character');
       }
-    }, 4000);
-  }
-
-  /* ==========================================
-     DATE INPUT INITIALIZERS
-  ========================================== */
-  function setupDateInputsDefaults() {
-    const checkinInput = document.querySelector('input[name="checkin"], #hero-checkin, #booking-checkin');
-    const checkoutInput = document.querySelector('input[name="checkout"], #hero-checkout, #booking-checkout');
-
-    const today = new Date();
-    const nextWeek = new Date();
-    nextWeek.setDate(today.getDate() + 5);
-    const checkoutDate = new Date();
-    checkoutDate.setDate(today.getDate() + 8);
-
-    const formatDate = (d) => d.toISOString().split('T')[0];
-
-    if (checkinInput && !checkinInput.value) {
-      checkinInput.value = formatDate(nextWeek);
-      checkinInput.min = formatDate(today);
     }
-    if (checkoutInput && !checkoutInput.value) {
-      checkoutInput.value = formatDate(checkoutDate);
-      checkoutInput.min = formatDate(today);
+  }
+});
+
+// Validate length and format when user leaves the field
+document.addEventListener('blur', (e) => {
+  const target = e.target;
+  if (isTargetNameField(target)) {
+    const val = target.value.trim();
+    if (val.length > 0 && typeof isValidFullName === 'function' && !isValidFullName(val)) {
+      target.classList.add('is-invalid');
+      if (typeof showToast === 'function') {
+        showToast('Please enter a valid full name (at least 2 letters, letters only, no numbers).', 'warning', 'Invalid Name');
+      }
+    } else {
+      target.classList.remove('is-invalid');
     }
   }
 
-  /* ==========================================
-     HERO / MAIN SEARCH FORM
-  ========================================== */
-  function setupSearchForms() {
-    const searchForm = document.querySelector('#hero-search-form, .main-search-form');
-    if (searchForm) {
-      searchForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const destination = (searchForm.querySelector('[name="destination"]')?.value || '').trim();
-        const checkin = searchForm.querySelector('[name="checkin"]')?.value || '';
-        const checkout = searchForm.querySelector('[name="checkout"]')?.value || '';
-        const guests = searchForm.querySelector('[name="guests"]')?.value || '2';
-        const category = searchForm.querySelector('[name="category"]')?.value || '';
-
-        const params = new URLSearchParams();
-        if (destination) params.set('location', destination);
-        if (checkin) params.set('checkin', checkin);
-        if (checkout) params.set('checkout', checkout);
-        if (guests) params.set('guests', guests);
-        if (category) params.set('category', category);
-
-        // Check current path to determine relative redirect to stays.html
-        const currentPath = window.location.pathname;
-        const isSubdir = currentPath.includes('/guest/') || currentPath.includes('/booking/') || currentPath.includes('/auth/') || currentPath.includes('/blog/') || currentPath.includes('/errors/');
-        const prefix = isSubdir ? '../' : '';
-
-        window.location.href = `${prefix}stays.html?${params.toString()}`;
-      });
+  // Validate email format and domain when user leaves any email field
+  if (target && target.tagName === 'INPUT' && target.type === 'email') {
+    const val = target.value.trim();
+    if (val.length > 0 && typeof isValidEmail === 'function' && !isValidEmail(val)) {
+      target.classList.add('is-invalid');
+      if (typeof showToast === 'function') {
+        showToast('Please enter a valid email address with a domain (e.g. name@example.com).', 'warning', 'Invalid Email');
+      }
+    } else {
+      target.classList.remove('is-invalid');
     }
   }
 
-  /* ==========================================
-     DASHBOARD MOBILE SIDEBAR TOGGLE
-  ========================================== */
-  function toggleDashboardSidebar() {
-    const sidebar = document.querySelector('.dashboard-sidebar');
-    if (sidebar) {
-      sidebar.classList.toggle('show');
+  // Validate phone format when user leaves any phone field
+  if (isTargetPhoneField(target)) {
+    const val = target.value.trim();
+    if (val.length > 0 && typeof isValidPhone === 'function' && !isValidPhone(val)) {
+      target.classList.add('is-invalid');
+      if (typeof showToast === 'function') {
+        showToast('Please enter a valid phone number (digits only, minimum 7 digits, e.g. +1 (555) 000-0000).', 'warning', 'Invalid Phone Number');
+      }
+    } else {
+      target.classList.remove('is-invalid');
     }
   }
+}, true);
+
+/* ==========================================
+   UNIVERSAL PHONE INPUT REAL-TIME FILTER
+   Prevents alphabets and non-phone characters in all phone fields.
+========================================== */
+function isTargetPhoneField(target) {
+  if (!target || target.tagName !== 'INPUT') return false;
+  const type = (target.type || '').toLowerCase();
+  const id = (target.id || '').toLowerCase();
+  const name = (target.name || '').toLowerCase();
+  const placeholder = (target.placeholder || '').toLowerCase();
+  const autocomplete = (target.autocomplete || '').toLowerCase();
+
+  return type === 'tel' ||
+    target.matches('#drawer-reg-phone, #reg-phone, #profile-phone, #guest-phone, #contact-phone, .phone-input') ||
+    autocomplete.includes('tel') ||
+    id.includes('phone') ||
+    name.includes('phone') ||
+    placeholder.includes('phone') ||
+    id.includes('tel') ||
+    name.includes('tel');
+}
+
+let lastPhoneToastTime = 0;
+function notifyPhoneAlphabetBlocked() {
+  const now = Date.now();
+  if (now - lastPhoneToastTime > 1500) {
+    lastPhoneToastTime = now;
+    if (typeof showToast === 'function') {
+      showToast('Alphabets are not allowed in phone number fields. Numbers only.', 'warning', 'Invalid Input');
+    }
+  }
+}
+
+// 1. Block alphabetic and non-phone keystrokes in capture phase BEFORE they reach the input
+document.addEventListener('keydown', (e) => {
+  const target = e.target;
+  if (!isTargetPhoneField(target)) return;
+
+  // Allow essential control, editing, and navigation keys
+  if (e.key === 'Backspace' || e.key === 'Delete' || e.key === 'Tab' ||
+    e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown' ||
+    e.key === 'Home' || e.key === 'End' || e.key === 'Enter' || e.key === 'Escape' ||
+    e.ctrlKey || e.metaKey || e.altKey) {
+    return;
+  }
+
+  // Block any key that is an alphabet letter (A-Z, a-z, or unicode letters)
+  if (e.key && e.key.length === 1) {
+    if (/[a-zA-Z\p{L}]/u.test(e.key)) {
+      e.preventDefault();
+      e.stopPropagation();
+      notifyPhoneAlphabetBlocked();
+      return;
+    }
+    // Also block invalid special characters (allow digits 0-9, +, -, (, ), space)
+    if (!/^[0-9\+\-\(\)\s]$/.test(e.key)) {
+      e.preventDefault();
+      e.stopPropagation();
+      notifyPhoneAlphabetBlocked();
+      return;
+    }
+  }
+}, true);
+
+// 2. Intercept beforeinput (mobile virtual keyboards, autofill, IME composition)
+document.addEventListener('beforeinput', (e) => {
+  const target = e.target;
+  if (isTargetPhoneField(target) && e.data) {
+    if (/[a-zA-Z\p{L}]/u.test(e.data)) {
+      e.preventDefault();
+      e.stopPropagation();
+      notifyPhoneAlphabetBlocked();
+    }
+  }
+}, true);
+
+// 3. Intercept paste to strip any alphabetic characters immediately
+document.addEventListener('paste', (e) => {
+  const target = e.target;
+  if (isTargetPhoneField(target)) {
+    const text = (e.clipboardData ? (e.clipboardData.getData('text/plain') || e.clipboardData.getData('text')) : (window.clipboardData ? window.clipboardData.getData('Text') : '')) || '';
+    if (/[a-zA-Z\p{L}]/u.test(text)) {
+      e.preventDefault();
+      e.stopPropagation();
+      const sanitized = text.replace(/[a-zA-Z\p{L}]/gu, '');
+      const start = target.selectionStart || 0;
+      const end = target.selectionEnd || 0;
+      target.value = target.value.slice(0, start) + sanitized + target.value.slice(end);
+      target.selectionStart = target.selectionEnd = start + sanitized.length;
+      target.dispatchEvent(new Event('input', { bubbles: true }));
+      notifyPhoneAlphabetBlocked();
+    }
+  }
+}, true);
+
+// 4. Real-time input listener (failsafe: purges any alphabets immediately)
+document.addEventListener('input', (e) => {
+  const target = e.target;
+  if (isTargetPhoneField(target)) {
+    if (/[a-zA-Z\p{L}]/u.test(target.value)) {
+      target.value = target.value.replace(/[a-zA-Z\p{L}]/gu, '');
+      notifyPhoneAlphabetBlocked();
+    }
+  }
+}, true);
 
